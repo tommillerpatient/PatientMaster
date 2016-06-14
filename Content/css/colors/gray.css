@@ -1,0 +1,483 @@
+.patient-protal .noo-main-menu .navbar-nav li.current-menu-item > a, 
+.patient-protal .noo-main-menu .navbar-nav li:hover > a,
+.patient-protal .noo-nav-header4 .noo-nav-wrap .noo-main-menu .navbar-nav > li:hover > a,
+.patient-protal .noo-main-menu .navbar-nav li > .sub-menu li a:hover {
+	color: #4c4b4b;
+}
+.patient-protal .noo-onepage .noo-wrap-menu .noo-main-menu .navbar-nav li.current-menu-item > a, 
+.patient-protal .noo-onepage .noo-wrap-menu .noo-main-menu .navbar-nav li:hover > a, 
+.patient-protal .noo-onepage .noo-wrap-menu .noo-main-menu .navbar-nav li.current > a,
+.header-2 .noo-wrap-menu .noo-main-menu .navbar-nav > li.current-menu-item > a, 
+.header-2 .noo-wrap-menu .noo-main-menu .navbar-nav > li:hover > a,
+.patient-protal .header-2 .noo-wrap-menu .noo-main-menu .navbar-nav > li:hover > a {
+	color: #e8e555;
+}
+.patient-protal .header-2.header-style2 .noo-main-menu .navbar-nav li > .sub-menu li a:hover,
+.patient-protal .noo-left-menu .cate-name, 
+.patient-protal .noo-left-menu .menu-categories li a:hover,
+.patient-protal .widget_noo_services ul li a:hover,
+.patient-protal .noo-custom-menu ul li a:hover {
+	color: #e8e555;
+}
+.header-4 .noo-nav-header4 .noo-nav-wrap .noo-main-menu .navbar-nav > li.current-menu-item > a, 
+.header-4 .noo-nav-header4 .noo-nav-wrap .noo-main-menu .navbar-nav > li:hover > a {
+	color: #4c4b4b;
+}
+.patient-protal .noo-onepage .noo-wrap-menu .noo-main-menu .navbar-nav li.current-menu-item > a:before, 
+.patient-protal .noo-onepage .noo-wrap-menu .noo-main-menu .navbar-nav li:hover > a:before, 
+.patient-protal .noo-onepage .noo-wrap-menu .noo-main-menu .navbar-nav li.current > a:before,
+.header-2 .noo-wrap-menu .noo-main-menu .navbar-nav > li.current-menu-item > a:before, 
+.header-2 .noo-wrap-menu .noo-main-menu .navbar-nav > li:hover > a:before,
+.patient-protal .header-2 .noo-wrap-menu .noo-main-menu .navbar-nav > li:hover > a:before {
+	background: #e8e555;
+}
+.patient-protal .noo-main-menu .navbar-nav li > a:before {
+	background: #e8e555;
+}
+.patient-protal .noo-main-menu .navbar-nav li#nav-menu-item-simple-cart > a span em,
+.patient-protal .noo-onepage .noo-wrap-menu .noo-main-menu .navbar-nav li#nav-menu-item-simple-cart > a span em {
+	color: #000;
+    background: #e8e555;
+}
+.patient-protal .noo-main-menu .navbar-nav li#nav-menu-item-simple-cart > a:hover,
+.patient-protal .noo-onepage .noo-wrap-menu .noo-main-menu .navbar-nav li#nav-menu-item-simple-cart > a:hover,
+.header-4 .noo-nav-header4 .noo-nav-wrap .noo-main-menu .navbar-nav li#nav-menu-item-simple-cart > a:hover {
+	color: #e8e555;
+}
+.book-form .book-content-style2 input[type="submit"],
+.patient-protal .wpcf7-form input[type="submit"] {
+	background: #4c4b4b;
+}
+.book-form .book-content-style2 input[type="submit"]:hover,
+.patient-protal .wpcf7-form input[type="submit"]:hover {
+	background: #e8e555;
+}
+.patient-protal .ui-datepicker .ui-datepicker-header, 
+.patient-protal .ui-widget-header, 
+.patient-protal .ui-datepicker-calendar tr td:hover {
+	background: #4c4b4b;
+}
+.patient-protal .book-form {
+	background: #e8e555;
+}
+.patient-protal .noo-title {
+	color: #e8e555;
+}
+.patient-protal .project-item .project-inner .project-bk:before {
+	background: rgba(76,75,75,0.80);
+}
+.patient-protal ul.owl-theme .owl-controls .owl-page.active span, 
+.patient-protal ul.owl-theme .owl-controls .owl-page:hover span {
+	background: #4c4b4b;
+}
+.patient-protal ul.owl-theme .owl-controls .owl-page.active:before, 
+.patient-protal ul.owl-theme .owl-controls .owl-page:hover:before,
+.patient-protal ul.owl-theme .owl-controls .owl-page.active:after, 
+.patient-protal ul.owl-theme .owl-controls .owl-page:hover:after,
+.patient-protal ul.owl-theme .owl-controls .owl-page.active span:before, 
+.patient-protal ul.owl-theme .owl-controls .owl-page:hover span:before,
+.patient-protal ul.owl-theme .owl-controls .owl-page.active span:after, 
+.patient-protal ul.owl-theme .owl-controls .owl-page:hover span:after,
+.patient-protal ul.owl-theme .owl-controls .owl-page span {
+	background: rgba(76,75,75,0.60);
+}
+.patient-protal ul.owl-theme .owl-controls .owl-page.active, 
+.patient-protal ul.owl-theme .owl-controls .owl-page:hover {
+	border-color: rgba(76,75,75,0.60);
+}
+.patient-protal .money-icon,
+.patient-protal .money-icon:after {
+    background: #4c4b4b;
+}
+.patient-protal .money-icon:before {
+	border-left-color: #4c4b4b;
+}
+.patient-protal .money-icon span:before,
+.patient-protal .money-icon span:after {
+    border-left-color: #666464;
+}
+.patient-protal .money-icon span:after {
+	border-right-color: #666464;
+}
+.patient-protal .money-icon span {
+	background: #666464;
+}
+.patient-protal .money-content .money-title {
+	color: #000;
+}
+.patient-protal .noo-sh-button span {
+	border-color: #4c4b4b;
+    color: #4c4b4b;
+}
+.patient-protal .noo-sh-button,
+.patient-protal a:hover, 
+.patient-protal a:focus {
+	color: #4c4b4b;
+}
+.patient-protal .noo_testimonial_one li .noo_testimonial_name,
+.patient-protal .noo_testimonial_one li .noo_testimonial_position {
+	color: #000;
+}
+.patient-protal .noo_testimonial_one.owl-theme .owl-controls .owl-page span {
+	background: rgba(76,75,75,0.60);
+}
+.patient-protal .noo_testimonial_one.owl-theme .owl-controls .owl-page.active span, 
+.patient-protal .noo_testimonial_one.owl-theme .owl-controls .owl-page:hover span {
+    background: #4c4b4b;
+}
+.patient-protal .noo_testimonial_one.owl-theme .owl-controls .owl-page.active:after, 
+.patient-protal .noo_testimonial_one.owl-theme .owl-controls .owl-page:hover:after,
+.patient-protal .noo_testimonial_one.owl-theme .owl-controls .owl-page.active:before, 
+.patient-protal .noo_testimonial_one.owl-theme .owl-controls .owl-page:hover:before,
+.patient-protal .noo_testimonial_one.owl-theme .owl-controls .owl-page.active span:before, 
+.patient-protal .noo_testimonial_one.owl-theme .owl-controls .owl-page:hover span:before,
+.patient-protal .noo_testimonial_one.owl-theme .owl-controls .owl-page.active span:after, 
+.patient-protal .noo_testimonial_one.owl-theme .owl-controls .owl-page:hover span:after {
+	background: rgba(76,75,75,0.60);
+}
+.patient-protal .noo_testimonial_one.owl-theme .owl-controls .owl-page.active, 
+.patient-protal .noo_testimonial_one.owl-theme .owl-controls .owl-page:hover {
+    border-color: rgba(76,75,75,0.60);
+}
+.patient-protal .noo-list a:hover,
+.patient-protal .blog-item-default .blog-sh-right .date {
+	color: #4c4b4b;
+}
+.patient-protal .blog-item-default:before {
+    background: #e8e555;
+}
+.patient-protal .widget_noo_infomation .noo-infomation-attr li span.fa,
+.patient-protal .widget_noo_infomation .noo-info-footer i {
+	color: #4c4b4b;
+}
+.patient-protal .recent-tweets li .twitter_user .twitter_username,
+.patient-protal .social-all a:hover {
+	color: #e8e555;
+}
+.patient-protal .noo-newsltter-form button {
+	background: #4c4b4b;
+}
+.patient-protal .noo-newsltter-form button:hover {
+	background: #e8e555;
+}
+.patient-protal .social-all {
+    background: #4c4b4b;
+}
+.patient-protal .whychooseus.choose_style3 .choose-icon {
+	background: #4c4b4b;
+}
+.patient-protal .whychooseus.choose_style3 .choose-icon:before {
+	border-bottom-color: #4c4b4b;
+}
+.patient-protal .whychooseus.choose_style3 .choose-icon:after {
+	border-top-color: #4c4b4b;
+}
+.patient-protal .whychooseus.choose_style3 .choose-icon .background-line:before,
+.patient-protal .whychooseus.choose_style3 .choose-icon .background-line:after,
+.patient-protal .whychooseus.choose_style3 .choose-icon .background-line .background-line-bottom:before,
+.patient-protal .whychooseus.choose_style3 .choose-icon .background-line .background-line-bottom:after {
+	background: #666464;
+}
+.patient-protal .whychooseus.choose_style3 .choose-icon .background-line {
+	border-left-color: #666464;
+	border-right-color: #666464;
+}
+.patient-protal .whychooseus.choose_style3:hover .choose-icon {
+	background: rgba(232,229,85,0.30);
+}
+.patient-protal .whychooseus.choose_style3:hover .choose-icon:before {
+    border-bottom-color: rgba(232,229,85,0.30);
+}
+.patient-protal .whychooseus.choose_style3:hover .choose-icon:after {
+	border-top-color: rgba(232,229,85,0.30);
+}
+.patient-protal .whychooseus.choose_style3:hover .choose-icon .background-line {
+    background: #e8e555;
+}
+.patient-protal .whychooseus.choose_style3:hover .choose-icon .background-line:before {
+	border-bottom-color: #e8e555;
+}
+.patient-protal .whychooseus.choose_style3:hover .choose-icon .background-line:after {
+	border-top-color: #e8e555;
+}
+.patient-protal .masonry-filters-project .project-filters li a.selected, 
+.patient-protal .masonry-filters-project .project-filters li a:hover {
+	color: #4c4b4b;
+}
+.patient-protal .masonry-filters-project .project-filters li a.selected:before, 
+.patient-protal .masonry-filters-project .project-filters li a:hover:before {
+	background: #e8e555;
+}
+.patient-protal .your-money2 .money-right .noo-button:hover {
+	background: #e8e555;
+}
+.product-tab .nav-tabs>li.active>a, 
+.product-tab .nav-tabs>li.active>a:hover, 
+.product-tab .nav-tabs>li>a:hover {
+	color: #e8e555;
+}
+.product-tab .nav-tabs>li.active>a:before, 
+.product-tab .nav-tabs>li>a:hover:before {
+	background: #4c4b4b;
+}
+.patient-protal .woo-thumbnail .bk {
+	background: rgba(76,75,75,0.80);
+}
+.noo-product-inner:hover .woo-thumbnail .noo-product-meta .rating .star-rating:before,
+.woo-thumbnail .noo-product-meta .rating {
+	color: #e8e555;
+}
+.patient-protal .woo-thumbnail .noo-product-meta .entry-cart-meta a.add_to_cart_button:hover, .patient-protal .woo-thumbnail .noo-product-meta .entry-cart-meta .yith-wcwl-wishlistexistsbrowse a:hover, .patient-protal .woo-thumbnail .noo-product-meta .entry-cart-meta .yith-wcwl-wishlistaddedbrowse a:hover, .patient-protal .woo-thumbnail .noo-product-meta .entry-cart-meta .yith-wcwl-add-to-wishlist .add_to_wishlist:hover, .patient-protal .cart-collaterals .cart_totals .car_totals_wrap .wc-proceed-to-checkout a:hover {
+	background: #e8e555;
+}
+.patient-protal .noo_testimonial_two li .testimonial_wrap .testimonial-content .noo-quote-icon {
+	color: #e8e555;
+}
+.patient-protal .noo_testimonial_two li:before {
+	background: #e8e555;
+}
+.patient-protal .blog-title.style2 button:hover i {
+	color: #e8e555;
+}
+.patient-protal .our-blog-item .blog-item .blog-hover .sh-entry-blog2 .cat a,
+.patient-protal .our-blog-item .blog-item .sh-entry-blog .cat a {
+	color: #4c4b4b;
+}
+.patient-protal .our-blog-item .blog-item:before {
+	background: #e8e555;
+}
+.patient-protal .noo-information i {
+	color: #4c4b4b;
+}
+.patient-protal .onepage-footer .widget_noo_infomation_onpage .onepage-social a:hover,
+.patient-protal .onepage-footer .widget_noo_infomation_onpage .noo-one-footer i {
+	color: #e8e555;
+}
+.patient-protal .noo-infomation-cart ul li.phone i, 
+.patient-protal .noo-infomation-cart ul li.noo-menu-item-cart .cart-button .cart-item .icon-shopping {
+	color: #e8e555;
+}
+.patient-protal .header-5 .noo-wrap-menu {
+	background: #4c4b4b;
+}
+.patient-protal .header-5 .noo-wrap-menu .icon-search2 {
+	background: #666464;
+}
+.patient-protal .search-header5 form input[type='submit'] {
+	background: #4c4b4b;
+}
+.patient-protal .noo-page-heading .page-title {
+	text-shadow: 3px 0 #e8e555;
+    -moz-text-shadow: 3px 0 #e8e555;
+    -webkit-text-shadow: 3px 0 #e8e555;
+    -o-text-shadow: 3px 0 #e8e555;
+    color: #fff;
+}
+.patient-protal .noo-page-heading:before {
+	background: rgba(76,75,75,0.80);
+}
+.patient-protal .noo-portfolio-list .noo-list-content .noo-cat a {
+	color: #4c4b4b;
+}
+.patient-protal .pagination .page-numbers.current, 
+.patient-protal .pagination a.page-numbers:hover {
+	background: #4c4b4b;
+    border-color: #4c4b4b;
+}
+.patient-protal .noo-sidebar-wrap .widget_search,
+.patient-protal .noo-sidebar-wrap .widget-title {
+	background: #e8e555;
+}
+.patient-protal .noo-sidebar-wrap .widget_categories ul li a:hover, 
+.patient-protal .noo-sidebar-wrap .widget_recent_entries ul li a:hover,
+.patient-protal .widget_noo_best_services .best_services li h4 a:hover {
+	color: #4c4b4b;
+}
+.patient-protal .single-author-project .author-description .project-icon {
+	color: #e8e555;
+}
+.patient-protal .single-author-project .author-description strong a {
+	color: #4c4b4b;
+}
+.patient-protal .project-title:before {
+	background: #e8e555;
+}
+.patient-protal .project-sidebar-title {
+	background: #e8e555;
+	color: #000;
+}
+.patient-protal .services-cat-title {
+	background: rgba(232,229,85,0.70);
+}
+.patient-protal .services-cat-title .cat-title-first {
+	background: rgba(232,229,85,0.50);
+}
+.patient-protal .services-cat-title .cat-title-first:before {
+	border-right-color: rgba(232,229,85,0.50);
+}
+.patient-protal .services-cat-title .cat-title-first:after {
+	border-left-color: rgba(232,229,85,0.50);
+}
+.patient-protal .services-cat-title .cat-title-first .cat-title-last {
+	background: #e8e555;
+}
+.patient-protal .services-cat-title .cat-title-first .cat-title-last:before {
+	border-right-color: #e8e555;
+}
+.patient-protal .services-cat-title .cat-title-first .cat-title-last:after {
+	border-left-color: #e8e555;
+}
+.patient-protal .services-content .services-entry {
+	background: rgba(255, 255, 255, 0.8);
+}
+.patient-protal .services-content .services-entry a {
+	background: #4c4b4b;
+}
+.patient-protal .services-content .services-entry a:hover {
+	background: #e8e555;
+	color: #fff;
+}
+.patient-protal .services-content .services-entry strong {
+	color: #4c4b4b;
+}
+.patient-protal .services-content .services-entry p {
+	color: #696969;
+}
+.patient-protal .masonry-filters-services .services-filters li a.selected, 
+.patient-protal .masonry-filters-services .services-filters li a:hover {
+	color: #e8e555;
+}
+.patient-protal .masonry-filters-services .services-filters li a.selected:before, 
+.patient-protal .masonry-filters-services .services-filters li a:hover:before {
+    background: #4c4b4b;
+}
+.patient-protal .noo-services-item h3 a {
+	color: #4c4b4b;
+}
+.noo-service-header {
+	background: #e8e555;
+}
+.patient-protal .noo_testimonial_three li .testimonial-header .testimonial-name .noo_testimonial_name {
+	color: #4c4b4b;
+}
+.patient-protal .noo_testimonial_three li:before {
+	background: #e8e555;
+}
+.patient-protal .clients .next-client:hover, 
+.patient-protal .clients .prev-client:hover {
+	background: #4c4b4b;
+}
+.patient-protal .noo_team li .noo-team-item:hover .noo-team-info h4 {
+	color: #4c4b4b;
+}
+.patient-protal .noo_team li .noo-team-item .noo-team-info:before {
+	background: #e8e555;
+}
+.patient-protal .team-title .noo-team-control button:hover i {
+	color: #e8e555;
+}
+.patient-protal .noo-team-content .team-contact ul li i {
+	color: #4c4b4b;
+}
+.patient-protal .noo-team-content .team-title:before {
+	background: #e8e555;
+}
+.patient-protal .noo_pricing .pricing_header:before {
+	border-top-color: #e8e555;
+}
+.patient-protal .noo_pricing .pricing_header {
+	background: #e8e555;
+}
+.patient-protal .noo_pricing .pricing_footer a {
+	background: #4c4b4b;
+}
+.patient-protal .noo_pricing .pricing_footer a:hover {
+	background: #e8e555;
+	color: #fff;
+}
+.patient-protal .book-creative .book-form2 input[type="submit"] {
+	background: #4c4b4b;
+}
+.book-creative .book-form2 input[type="submit"]:hover {
+	background: #e8e555;
+}
+.patient-protal .author-avatar h5:before {
+	background: #4c4b4b;
+}
+.patient-protal .hentry .entry-content-wrap .entry-content .cat a,
+.patient-protal .single-cat a, 
+.patient-protal .single-meta .single-meta-right a:hover {
+	color: #4c4b4b;
+}
+.patient-protal blockquote:before {
+	color: #4c4b4b;
+}
+#comments .comments-title:before {
+	background: #e8e555;
+}
+.patient-protal #comments ol li .comment-wrap .comment-block .comment-header .comment-author, 
+.patient-protal #comments ul li .comment-wrap .comment-block .comment-header .comment-author {
+	color: #4c4b4b;
+}
+.patient-protal #comments #respond .comment-reply-title:before, 
+.patient-protal #comments #respond .form-submit input {
+    background: #e8e555;
+}
+.patient-protal #comments #respond .comment-reply-title:before, 
+.patient-protal #comments #respond .form-submit input {
+	background: #4c4b4b;
+}
+.patient-protal #comments #respond .form-submit input:hover {
+	background: #e8e555;
+}
+.patient-protal .noo-product-footer .price span {
+	color: #e8e555;
+}
+.patient-protal .widget_price_filter .ui-slider .ui-slider-range, 
+.patient-protal .widget_price_filter .price_slider_amount .button {
+    background: #4c4b4b;
+}
+.commerce .widget_price_filter .price_slider_amount .button:hover {
+	background: #e8e555;
+}
+.patient-protal .commerce ul.product_list_widget li .amount {
+	color: #4c4b4b;
+}
+.patient-protal .amount {
+	color: #e8e555;
+}
+.single-product div.product div.summary .cart .button,
+.single-product div.product div.summary .yith-wcwl-add-to-wishlist .add_to_wishlist,
+.patient-protal table.wishlist_table td.product-add-to-cart a,
+.patient-protal .commerce .cart input.button,
+.patient-protal .cart-collaterals .cart_totals .car_totals_wrap .wc-proceed-to-checkout a,
+.patient-protal form.login .button,
+.commerce-account input.button {
+	background: #4c4b4b;
+}
+.single-product div.product div.summary .cart .button:hover,
+.single-product div.product div.summary .yith-wcwl-add-to-wishlist .add_to_wishlist:hover,
+.commerce table.wishlist_table td.product-add-to-cart a:hover,
+.patient-protal .commerce .cart input.button:hover,
+.patient-protal .cart-collaterals .cart_totals .car_totals_wrap .wc-proceed-to-checkout a:hover,
+.patient-protal form.login .button:hover,
+.commerce-account input.button:hover, 
+.commerce-account input.button:focus {
+	background: #e8e555;
+}
+.patient-protal .noo-infomation-cart ul li.noo-menu-item-cart .cart-button .cart-item .count {
+	background: #4c4b4b;
+}
+.patient-protal .noo-portfolio-list .noo-list-content .read-more:hover,
+.patient-protal .noo-checklist li:before,
+.patient-protal .single-navigation span:hover a, 
+.patient-protal .single-navigation span:hover i {
+	color: #4c4b4b;
+}
+.patient-protal .blog-item-default .blog-sh-right .default-blog-footer a:hover, 
+.patient-protal .our-blog-item .blog-item .blog-hover .entry-sh-footer a:hover:hover {
+	color: #4c4b4b;
+}
+.patient-protal .noo_testimonial_two li .testimonial_wrap .testimonial-content .testi-meta .noo_testimonial_name {
+    color: #000;
+}

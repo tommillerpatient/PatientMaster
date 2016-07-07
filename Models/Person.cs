@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using DB_con;
 
 namespace PatientMaster.Models
+
+
 {
     public class PersonCLS : IDisposable
     {
@@ -23,9 +25,6 @@ namespace PatientMaster.Models
 
         private string _passwordhash = string.Empty;
 
-        private string _passwordold = string.Empty;
-
-
         private string _sessiontoken = string.Empty;
 
         private string _firstname = string.Empty;
@@ -34,7 +33,7 @@ namespace PatientMaster.Models
 
         private string _lastname = string.Empty;
 
-        private DateTime _dateofbirth = Convert.ToDateTime("01/01/1900");
+        private DateTime _dateofbirth = DateTime.Now;
 
         private Int16 _gender = 0;
 
@@ -51,7 +50,6 @@ namespace PatientMaster.Models
         private bool _acknowledgednoticeofprivacy = false;
 
         private string _address = string.Empty;
-        private string _address1 = string.Empty;
 
         private Int16 _zipcode = 0;
 
@@ -61,11 +59,11 @@ namespace PatientMaster.Models
 
         private string _procedure = string.Empty;
 
-        private DateTime _proceduredate = Convert.ToDateTime("01/01/1900");
+        private DateTime _proceduredate = DateTime.Now;
 
         private string _insurancecompanyname = string.Empty;
 
-        private DateTime _insuranceeffectivedate = Convert.ToDateTime("01/01/1900");
+        private DateTime _insuranceeffectivedate = DateTime.Now;
 
         private string _guarantor = string.Empty;
 
@@ -85,13 +83,7 @@ namespace PatientMaster.Models
 
         private string _pharmacystate = string.Empty;
 
-        private Boolean _ConfirmedByEmail = false;
 
-        private Int32 _CareGiver = 0;
-
-        private Int32 _HasCareGiver = 0;
-
-        private string _ActiveCode = "";
 
         #endregion
 
@@ -120,14 +112,6 @@ namespace PatientMaster.Models
             get { return _passwordhash; }
 
             set { _passwordhash = value; }
-
-        }
-        public string passwordold
-        {
-
-            get { return _passwordold; }
-
-            set { _passwordold = value; }
 
         }
 
@@ -245,14 +229,6 @@ namespace PatientMaster.Models
             get { return _address; }
 
             set { _address = value; }
-
-        }
-        public string address1
-        {
-
-            get { return _address1; }
-
-            set { _address1 = value; }
 
         }
 
@@ -399,29 +375,7 @@ namespace PatientMaster.Models
             set { _pharmacystate = value; }
 
         }
-        public Boolean ConfirmedByEmail
-        {
-            get { return _ConfirmedByEmail; }
 
-            set { _ConfirmedByEmail = value; }
-
-        }
-
-        public Int32 CareGiver
-        {
-            get { return _CareGiver; }
-            set { _CareGiver = value; }
-        }
-
-        public Int32 HasCareGiver {
-            get { return _HasCareGiver; }
-            set { _HasCareGiver = value; }
-        }
-
-        public string ActiveCode {
-            get { return _ActiveCode; }
-            set { _ActiveCode = value; }
-        }
 
         #endregion
 
@@ -473,8 +427,6 @@ namespace PatientMaster.Models
                     _pharmacyaddress2 = Convert.ToString(dt.Rows[0]["pharmacyaddress2"]);
                     _pharmacycity = Convert.ToString(dt.Rows[0]["pharmacycity"]);
                     _pharmacystate = Convert.ToString(dt.Rows[0]["pharmacystate"]);
-                    _ConfirmedByEmail = Convert.ToBoolean(dt.Rows[0]["ConfirmedByEmail"]);
-                    _CareGiver = Convert.ToInt32(dt.Rows[0]["CareGiver"]);
 
                 }
             }
@@ -512,95 +464,14 @@ namespace PatientMaster.Models
                 obj_con.clearParameter();
                 createParameter(obj, DBTrans.Update);
                 obj_con.BeginTransaction();
-                obj_con.ExecuteNoneQuery("sp_Person_update", CommandType.StoredProcedure);
+                obj_con.ExecuteNoneQuery("AI_sp_Person_update", CommandType.StoredProcedure);
                 obj_con.CommitTransaction();
                 return obj.id = Convert.ToInt64(obj_con.getValue("@id"));
             }
             catch (Exception ex)
             {
                 obj_con.RollbackTransaction();
-                throw new Exception("sp_Person_update");
-            }
-        }
-
-        public long updateCareGiverProfile(PersonCLS obj)
-        {
-            try
-            {
-                obj_con.clearParameter();
-                obj_con.addParameter("@FirstName", obj.firstname);
-                obj_con.addParameter("@LastName", obj.lastname);
-                obj_con.addParameter("@Address", obj.address);
-                obj_con.addParameter("@City", obj.city);
-                obj_con.addParameter("@State", obj.state);
-                obj_con.addParameter("@ZipCode", obj.zipcode);
-                obj_con.addParameter("@id", obj.id, DBTrans.Update);
-                obj_con.BeginTransaction();
-                obj_con.ExecuteNoneQuery("sp_Person_updateCareGiverProfile", CommandType.StoredProcedure);
-                obj_con.CommitTransaction();
-                return obj.id = Convert.ToInt64(obj_con.getValue("@id"));
-            }catch (Exception ex){
-                obj_con.RollbackTransaction();
-                throw new Exception("sp_Person_updateCareGiverProfile");
-            }
-        }
-
-        //CheckOldPassword
-
-        public long CheckOldPassword(PersonCLS obj)
-        {
-            try
-            {
-                obj_con.clearParameter();
-                obj_con.addParameter("@retVal", 0, DBTrans.Insert);
-                obj_con.addParameter("@id", obj.id);
-                obj_con.addParameter("@passwordold", obj.passwordold);
-                obj_con.BeginTransaction();
-                obj_con.ExecuteNoneQuery("sp_Person_CheckOldPassword", CommandType.StoredProcedure);
-                obj_con.CommitTransaction();
-                return Convert.ToInt64(obj_con.getValue("@retVal"));
-            }
-            catch (Exception ex)
-            {
-                obj_con.RollbackTransaction();
-                throw new Exception("sp_Person_updatepassword");
-            }
-        }
-        //update Password
-
-        public long UpdatePassword(PersonCLS obj)
-        {
-            try
-            {
-                obj_con.clearParameter();
-                obj_con.addParameter("@id", obj.id);
-                obj_con.addParameter("@passwordhash", obj.@passwordhash);
-                obj_con.BeginTransaction();
-                obj_con.ExecuteNoneQuery("sp_Person_updatepassword", CommandType.StoredProcedure);
-                obj_con.CommitTransaction();
-                return obj.id = Convert.ToInt64(obj_con.getValue("@id"));
-            }
-            catch (Exception ex)
-            {
-                obj_con.RollbackTransaction();
-                throw new Exception("sp_Person_updatepassword");
-            }
-        }
-        //update  Reset Password
-
-        public DataTable UpdateResetPassword(PersonCLS obj, string guid)
-        {
-            try
-            {
-                obj_con.clearParameter();
-                obj_con.addParameter("@passwordhash", obj.@passwordhash);
-                obj_con.addParameter("@Guid", guid);
-                return ConvertDatareadertoDataTable(obj_con.ExecuteReader("sp_Person_updateresetpassword", CommandType.StoredProcedure));
-            }
-            catch (Exception ex)
-            {
-                obj_con.RollbackTransaction();
-                throw new Exception("sp_Person_updateresetpassword");
+                throw new Exception("AI_sp_Person_update");
             }
         }
 
@@ -612,106 +483,42 @@ namespace PatientMaster.Models
                 obj_con.clearParameter();
                 obj_con.BeginTransaction();
                 obj_con.addParameter("@id", id);
-                obj_con.ExecuteNoneQuery("sp_Person_delete", CommandType.StoredProcedure);
+                obj_con.ExecuteNoneQuery("AI_sp_Person_delete", CommandType.StoredProcedure);
                 obj_con.CommitTransaction();
             }
             catch (Exception ex)
             {
                 obj_con.RollbackTransaction();
-                throw new Exception("sp_Person_delete");
-            }
-        }
-
-
-        //check email
-
-        //insert data into database 
-        public Int32 CheckEmail(PersonCLS obj)
-        {
-            try
-            {
-                obj_con.clearParameter();
-                obj_con.addParameter("@retVal", 0, DBTrans.Insert);
-                obj_con.addParameter("@emailid", obj.email);
-                obj_con.BeginTransaction();
-                obj_con.ExecuteNoneQuery("sp_Person_CheckEmail", CommandType.StoredProcedure);
-                obj_con.CommitTransaction();
-                return Convert.ToInt32(obj_con.getValue("@retVal"));
-            }catch (Exception ex){
-                obj_con.RollbackTransaction();
-                throw new Exception("sp_Person_insert");
-            }
-        }
-        // get password
-        public DataTable getpassword(PersonCLS obj)
-        {
-            try
-            {
-
-                obj_con.clearParameter();
-                obj_con.addParameter("@emailid", obj.email);
-                return ConvertDatareadertoDataTable(obj_con.ExecuteReader("sp_Person_getpassword", CommandType.StoredProcedure));
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("sp_Person_getpassword");
+                throw new Exception("AI_sp_Person_delete");
             }
         }
 
         //select all data from database 
-        public DataTable getAll()
+        public List<PersonCLS> getAll()
         {
             try
             {
                 obj_con.clearParameter();
-                return ConvertDatareadertoDataTable(obj_con.ExecuteReader("sp_Person_selectall", CommandType.StoredProcedure));
+                return ConvertToList(ConvertDatareadertoDataTable(obj_con.ExecuteReader("AI_sp_Person_selectall", CommandType.StoredProcedure)));
             }
             catch (Exception ex)
             {
-                throw new Exception("sp_Person_selectall");
+                throw new Exception("AI_sp_Person_selectall");
             }
         }
 
         //select data from database as list
-        public DataTable selectlist(Int64 id)
+        public List<PersonCLS> selectlist(Int64 id)
         {
             try
             {
                 obj_con.clearParameter();
                 obj_con.addParameter("@id", id);
-                return ConvertDatareadertoDataTable(obj_con.ExecuteReader("sp_Person_select", CommandType.StoredProcedure));
+                return ConvertToList(ConvertDatareadertoDataTable(obj_con.ExecuteReader("AI_sp_Person_select", CommandType.StoredProcedure)));
             }
             catch (Exception ex)
             {
-                throw new Exception("sp_Person_select");
-            }
-        }
-
-        public DataTable getMyCareGivers(Int64 id)
-        {
-            try
-            {
-                obj_con.clearParameter();
-                obj_con.addParameter("@id", id);
-                return ConvertDatareadertoDataTable(obj_con.ExecuteReader("sp_Person_getMyCareGivers", CommandType.StoredProcedure));
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("sp_Person_getMyCareGivers");
-            }
-        }
-
-        public DataTable selectlistByGuid(string guid)
-        {
-            try
-            {
-                obj_con.clearParameter();
-                obj_con.addParameter("@GUID", guid);
-                return ConvertDatareadertoDataTable(obj_con.ExecuteReader("sp_Person_selectByGuid", CommandType.StoredProcedure));
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("sp_Person_selectByGuid");
+                throw new Exception("AI_sp_Person_select");
             }
         }
 
@@ -757,81 +564,31 @@ namespace PatientMaster.Models
         {
             try
             {
-                if (obj.username == null)
+                if (obj.username==null)
+                {
                     obj.username = string.Empty;
 
+                }
                 if (obj.passwordhash == null)
+                {
                     obj.passwordhash = string.Empty;
 
+                }
                 if (obj.sessiontoken == null)
+                {
                     obj.sessiontoken = string.Empty;
 
+                }
                 if (obj.middlename == null)
+                {
                     obj.middlename = string.Empty;
 
+                }
                 if (obj.guarantor == null)
+                {
                     obj.guarantor = string.Empty;
 
-                if (obj.address1 == null)
-                    obj.address1 = string.Empty;
-
-                if (obj.pharmacyaddress2 == null)
-                    obj.pharmacyaddress2 = string.Empty;
-
-                if (obj.procedure == null)
-                    obj.procedure = string.Empty;
-
-                if (obj.proceduredate == null)
-                    obj.proceduredate = Convert.ToDateTime("01/01/1900");
-
-                if (obj.insurancecompanyname == null)
-                    obj.insurancecompanyname = string.Empty;
-
-                if (obj.insuranceeffectivedate == null)
-                    obj.insuranceeffectivedate = Convert.ToDateTime("01/01/1900");
-
-                if (obj.guarantor == null)
-                    obj.guarantor = string.Empty;
-
-                if (obj.policynumber == null)
-                    obj.policynumber = string.Empty;
-
-                if (obj.groupnumber == null)
-                    obj.groupnumber = string.Empty;
-
-                if (obj.CareGiver == null)
-                    obj.CareGiver = 0;
-
-                if (obj.address == null)
-                    obj.address = "";
-
-                if (obj.city == null)
-                    obj.city = "";
-
-                if (obj.state == null)
-                    obj.state = "";
-
-                if (obj.firstname == null)
-                    obj.firstname = "";
-
-                if (obj.lastname == null)
-                    obj.lastname = "";
-
-                if (obj.pharmacyaddress1 == null)
-                    obj.pharmacyaddress1 = "";
-
-                if (obj.pharmacycity == null)
-                    obj.pharmacycity = "";
-
-                if (obj.pharmacyphone == null)
-                    obj.pharmacyphone = "";
-
-                if (obj.pharmacystate == null)
-                    obj.pharmacystate = "";
-
-                if (obj.preferredpharmacy == null)
-                    obj.preferredpharmacy = "";
-
+                }
                 obj_con.addParameter("@username", obj.username);
                 obj_con.addParameter("@passwordhash", obj.passwordhash);
                 obj_con.addParameter("@sessiontoken", obj.sessiontoken);
@@ -857,33 +614,12 @@ namespace PatientMaster.Models
                 obj_con.addParameter("@guarantor", obj.guarantor);
                 obj_con.addParameter("@groupnumber", obj.groupnumber);
                 obj_con.addParameter("@policynumber", obj.policynumber);
-                if (obj.preferredpharmacy != null)
-                    obj_con.addParameter("@preferredpharmacy", obj.preferredpharmacy);
-                else
-                    obj_con.addParameter("@preferredpharmacy", "");
-                if (obj.pharmacyphone != null)
-                    obj_con.addParameter("@pharmacyphone", obj.pharmacyphone);
-                else
-                    obj_con.addParameter("@pharmacyphone", "");
-                if (obj.pharmacyaddress1 != null)
-                    obj_con.addParameter("@pharmacyaddress1", obj.pharmacyaddress1);
-                else
-                    obj_con.addParameter("@pharmacyaddress1", "");
-                if (obj.pharmacyaddress2 != null)
-                    obj_con.addParameter("@pharmacyaddress2", obj.pharmacyaddress2);
-                else
-                    obj_con.addParameter("@pharmacyaddress2", "");
-                if (obj.pharmacycity != null)
-                    obj_con.addParameter("@pharmacycity", obj.pharmacycity);
-                else
-                    obj_con.addParameter("@pharmacycity", "");
-                if (obj.pharmacystate != null)
-                    obj_con.addParameter("@pharmacystate", obj.pharmacystate);
-                else
-                    obj_con.addParameter("@pharmacystate", "");
-                obj_con.addParameter("@ConfirmedByEmail", obj.ConfirmedByEmail);
-                obj_con.addParameter("@address1", obj.address1);
-                obj_con.addParameter("@caregiver", obj.CareGiver);
+                obj_con.addParameter("@preferredpharmacy", obj.preferredpharmacy);
+                obj_con.addParameter("@pharmacyphone", obj.pharmacyphone);
+                obj_con.addParameter("@pharmacyaddress1", obj.pharmacyaddress1);
+                obj_con.addParameter("@pharmacyaddress2", obj.pharmacyaddress2);
+                obj_con.addParameter("@pharmacycity", obj.pharmacycity);
+                obj_con.addParameter("@pharmacystate", obj.pharmacystate);
                 obj_con.addParameter("@id", obj.id, trans);
             }
             catch (Exception ex)
@@ -945,146 +681,13 @@ namespace PatientMaster.Models
                     obj_Person.pharmacyaddress2 = Convert.ToString(dt.Rows[i]["pharmacyaddress2"]);
                     obj_Person.pharmacycity = Convert.ToString(dt.Rows[i]["pharmacycity"]);
                     obj_Person.pharmacystate = Convert.ToString(dt.Rows[i]["pharmacystate"]);
-                    obj_Person.ConfirmedByEmail = Convert.ToBoolean(dt.Rows[i]["ConfirmedByEmail"]);
-                    obj_Person.CareGiver = Convert.ToInt32(dt.Rows[i]["CareGiver"]);
-                    try
-                    {
-                        obj_Person.HasCareGiver = Convert.ToInt32(dt.Rows[i]["HasCareGiver"]);
-                    }
-                    catch (Exception ex)
-                    {
-                    }
-
                     Personlist.Add(obj_Person);
                 }
             }
             return Personlist;
         }
 
-        public DataTable ActiveAccount(PersonCLS obj)
-        {
-            try
-            {
-                obj_con.clearParameter();
-                obj_con.BeginTransaction();
-                obj_con.addParameter("@id", obj.id);
-                obj_con.addParameter("@code", obj.ActiveCode);
-                return ConvertDatareadertoDataTable(obj_con.ExecuteReader("sp_Person_ActiveAccount", CommandType.StoredProcedure));
-                //obj_con.ExecuteNoneQuery("sp_UserLogin_CheckUserNamePass", CommandType.StoredProcedure);
-                //obj_con.CommitTransaction();
-                //return ConvertDatareadertoDataTable(obj_con.ExecuteReader("sp_UserLogin_CheckUserNamePass", CommandType.StoredProcedure));
-            }
-            catch (Exception ex)
-            {
-                obj_con.RollbackTransaction();
-                throw new Exception("sp_Person_ActiveAccount");
-            }
-        }
 
         #endregion
     }
-
-
-    public class person : IDisposable
-    {
-        #region "variables"
-
-        ConnectionCls obj_con = null;
-        private Int64 _id = 0;
-
-        private string _username = string.Empty;
-
-        private string _firstname = string.Empty;
-
-        private string _middlename = string.Empty;
-
-        private string _lastname = string.Empty;
-
-
-        private string _email = string.Empty;
-
-
-
-
-
-        #endregion
-
-        #region "properties"
-        public Int64 id
-        {
-
-            get { return _id; }
-
-            set { _id = value; }
-
-        }
-
-        public string username
-        {
-
-            get { return _username; }
-
-            set { _username = value; }
-
-        }
-
-
-        public string firstname
-        {
-
-            get { return _firstname; }
-
-            set { _firstname = value; }
-
-        }
-
-        public string middlename
-        {
-
-            get { return _middlename; }
-
-            set { _middlename = value; }
-
-        }
-
-        public string lastname
-        {
-
-            get { return _lastname; }
-
-            set { _lastname = value; }
-
-        }
-
-
-        public string email
-        {
-
-            get { return _email; }
-
-            set { _email = value; }
-
-        }
-
-
-
-
-
-
-        #endregion
-
-        //disposble method
-        void IDisposable.Dispose()
-        {
-            System.GC.SuppressFinalize(this);
-        }
-    }
-
-
-
-
-
 }
-
-
-

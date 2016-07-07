@@ -1,0 +1,51 @@
+﻿@{
+    Layout = null;
+}
+
+
+<html>
+<head>
+   <title></title> 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <script>
+        $(function () {
+            $("#dialog_CareGiver").dialog({
+                resizable: false,
+                height: 180,
+                modal: true,
+                autoOpen: true,
+
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dialog_CareGiver').parent('div').css('position', 'relative');
+        });
+
+    </script>
+
+</head>
+<body>
+    <div id="dialog_CareGiver" title="Delete" style="display:none;">
+        <div class="addedit-box">
+            <input type="hidden" id="hiddenVal" value="0" />
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure want to Delete?</p>
+            <div class="Buttons" style="padding-top:50px;">
+                <input type="button" class="delete-button" id="btnDelete" value="Ok" data-bind="click: $root.deleterec" style="margin-right:12px;" />
+                <input type="button" class="cancel-button" id="btnCancel" value="Cancel" data-bind="click: $root.Canceldelpopup" />
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+</body>
+</html>
+
+
+
+

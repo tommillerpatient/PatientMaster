@@ -7,21 +7,125 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     $scope.personData = null;
     // Fetching records from the factory created at the bottom of the script file
     ///get all record
-    //personService.GetAllRecords().then(function (d) {
-    //    $scope.personData = d.data; // Success
-    //}, function () {
-    //    alert('Error Occured !!!'); // Failed
-    //});
 
-    // Calculate Total of Price After Initialization
-    $scope.total = function () {
-        var total = 0;
-        angular.forEach($scope.personData, function (item) {
-            total += item.Price;
-        })
-        return total;
-    }
+    personService.GetAllRecords().then(function (d) {
+        $scope.personData = d.data; // Success
+       
+      
+        $scope.person = {
+            Id: $scope.personData[0].id,
+            FirstName: $scope.personData[0].firstname,
+            LastName: $scope.personData[0].lastname,
+             DateOfBirth: new Date(parseInt($scope.personData[0].dateofbirth.replace(/(^.*\()|([+-].*$)/g, ''))),
+            Gender: "" + $scope.personData[0].gender,
+            Phone1: $scope.personData[0].phone1,
+            Address: $scope.personData[0].address,
+            Address1: $scope.personData[0].address1,
+            State: $scope.personData[0].state,
+            City: $scope.personData[0].city,
+            ZipCode: $scope.personData[0].zipcode,
+            Procedure: $scope.personData[0].procedure,
+            ProcedureDate: new Date(parseInt($scope.personData[0].proceduredate.replace(/(^.*\()|([+-].*$)/g, ''))),
+            InsuranceCompanyName: $scope.personData[0].insurancecompanyname,
+            InsuranceEffectiveDate: new Date(parseInt($scope.personData[0].insuranceeffectivedate.replace(/(^.*\()|([+-].*$)/g, ''))),
+            Guarantor:""+$scope.personData[0].guarantor,
+            GroupNumber: $scope.personData[0].groupnumber,
+            PolicyNumber: parseInt($scope.personData[0].policynumber),
+            PreferredPharmacy: $scope.personData[0].preferredpharmacy,
+            PharmacyPhone: $scope.personData[0].pharmacyphone.trim(), //parseInt($scope.personData[0].pharmacyphone.trim().replace('(', '').replace(')', '').replace('-', '').replace(' ', '')),
+            PharmacyAddress1: $scope.personData[0].pharmacyaddress1,
+            PharmacyAddress2: $scope.personData[0].pharmacyaddress2,
+            PharmacyCity: $scope.personData[0].pharmacycity,
+            PharmacyState: $scope.personData[0].pharmacystate,
+            CareGiver: $scope.personData[0].CareGiver,
+            
 
+        };
+       
+        if ($scope.person.ZipCode == '0') {
+            $scope.person.ZipCode = '';
+        }
+        if ($scope.person.phone1 == '0') {
+            $scope.person.phone1 = '';
+        }
+        if ($scope.person.Phone1 == '0') {
+            $scope.person.Phone1 = '';
+        }
+        if ($scope.person.Phone2 == '0') {
+            $scope.person.Phone = '';
+        }
+        if ($scope.person.Phone3 == '0') {
+            $scope.person.Phone3 = '';
+        }
+        //if ($scope.person.DateOfBirth.indexOf("01/01/1900") < 1) {
+        //    $scope.person.DateOfBirth = '';
+        //}
+        //if ($scope.person.InsuranceEffectiveDate.indexOf("01/01/1900") < 1) {
+        //    $scope.person.InsuranceEffectiveDate = '';
+        //}
+        if ($("#DateOfBirth").attr('type') == 'text') {
+            if ($scope.personData[0].dateofbirth.replace(/(^.*\()|([+-].*$)/g, '') == '') {
+                $scope.person.DateOfBirth = null;// new Date('01/01/1900').toLocaleDateString();
+            } else
+                $scope.person.DateOfBirth = new Date($scope.person.DateOfBirth).toLocaleDateString();
+        } else
+            $scope.person.DateOfBirth = new Date($scope.person.DateOfBirth).toLocaleDateString();
+
+        //if ($("#DateOfBirth").attr('type') == 'text') {
+        //    $scope.person.DateOfBirth = new Date($scope.person.DateOfBirth).toLocaleDateString();           
+        //}
+        
+        if ($("#ProcedureDate").attr('type') == 'text') {            
+            if ($scope.personData[0].proceduredate.replace(/(^.*\()|([+-].*$)/g, '') == '') {            
+                $scope.person.ProcedureDate = null;// new Date('01/01/1900').toLocaleDateString();
+            }else
+                $scope.person.ProcedureDate = new Date($scope.person.ProcedureDate).toLocaleDateString();
+        } else
+            $scope.person.ProcedureDate = new Date($scope.person.ProcedureDate).toLocaleDateString();
+
+        if ($("#InsuranceEffectiveDate").attr('type') == 'text') {
+            if ($scope.personData[0].insuranceeffectivedate.replace(/(^.*\()|([+-].*$)/g, '') == '') {            
+                $scope.person.InsuranceEffectiveDate = null;// new Date('01/01/1900').toLocaleDateString();
+            }else
+                $scope.person.InsuranceEffectiveDate = new Date($scope.person.InsuranceEffectiveDate).toLocaleDateString();
+        } else
+           {
+            $scope.person.InsuranceEffectiveDate = new Date($scope.person.InsuranceEffectiveDate).toLocaleDateString();
+        }
+
+        //$('#PreferredPharmacy').val(pharm);
+        //$('#PharmacyAddress1').val(addr.split(',')[0]);
+        //$('#PharmacyCity').val(addr.split(',')[1]);
+        //$('#PharmacyState').val(addr.split(',')[2].trim().split(' ')[0]);
+        $('#PharmacyPhone').val($scope.personData[0].pharmacyphone.trim());//$scope.personData[0].pharmacyphone.trim().replace('(', '').replace(')', '').replace('-', '').replace(' ', '')
+       // alert($scope.personData[0].pharmacyphone + ' == ' + $('#PharmacyPhone').val() + '  == ' + $scope.person.PharmacyPhone);
+        $('#lblPharmacy').text($scope.personData[0].preferredpharmacy);
+        $('#lblPhone').text($scope.personData[0].pharmacyphone.trim());
+        $('#lblAddress').text($scope.person.PharmacyAddress1 + ', ' + $scope.person.PharmacyCity + ', ' + $scope.person.PharmacyState);
+
+        if ($scope.personData[0].preferredpharmacy.trim() == '') {
+            $('#tblPharmacy').hide();
+        } else {
+            $('#tblPharmacy').show();
+        }
+
+        //$('#Procedure').removeClass('ng-empty');
+        //$('#Procedure').removeClass('ng-invalid');
+        //$('#Procedure').removeClass('ng-invalid-required');
+
+        //$('#Procedure').addClass('ng-not-empty')
+        //$('#Procedure').addClass('ng-dirty')
+        //$('#Procedure').addClass('ng-valid-parse')
+        //$('#Procedure').addClass('ng-valid ')
+        //$('#Procedure').addClass('ng-valid-required')
+        $('#Procedure').removeAttr('required');
+
+        //alert($scope.person.DateOfBirth + ' - ' + $scope.person.dateofbirth + ' - ' + $scope.personData[0].dateofbirth);
+        
+    }, function () {
+        alert('Error Occured !!!'); // Failed
+    });
+    
     $scope.person = {
         Id: '',
         UserName: '',
@@ -39,6 +143,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
      personIsPatient: '',
      AcknowledgedNoticeOfPrivacy: '',
      Address: '',
+     Address1: '',
      ZipCode: '',
      State: '',
      City: '',
@@ -59,7 +164,8 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     MessageSuccess:'',
     Error: false,
     Success: false,
-   
+    CareGiver: 0,
+        ActiveCode:'',
     };
 
 
@@ -91,6 +197,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         $('#ProcedureDate').removeClass('ng-invalid-date');
 
     }
+
     $scope.keypress = function () {
 
         $('#DateOfBirth').removeClass('ng-dirty');
@@ -105,6 +212,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
         $('#ProcedureDate').removeClass('ng-invalid-date');
     }
+
     // Reset person details
     $scope.clear = function () {
         $scope.person.Id = '';
@@ -122,7 +230,8 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
          $scope.person.Phone3= '';
          $scope.person.personIsPatient= '';
          $scope.person.AcknowledgedNoticeOfPrivacy= '';
-         $scope.person.Address= '';
+         $scope.person.Address = '';
+         $scope.person.Address1 = '';
          $scope.person.ZipCode= '';
          $scope.person.State= '';
          $scope.person.City= '';
@@ -138,39 +247,53 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
          $scope.person.PharmacyAddress1= '';
          $scope.person.PharmacyAddress2= '';
          $scope.person.PharmacyCity= '';
-         $scope.person.PharmacyState= '';
+         $scope.person.PharmacyState = '';
+         $scope.person.CareGiver = 0;
     }
 
     //Add New Item
     $scope.SignUp = function () {
+       
         $scope.person.Error = false;
-        if (CheckValidation()) {
-  
+        $scope.person.ProcedureDate = $('#ProcedureDate').val();
+        $scope.person.InsuranceEffectiveDate = $('#InsuranceEffectiveDate').val();
+
+        if (CheckValidation()) {          
+            $('#signupbtn').addClass('submitLoader');
             $http({
                 method: 'POST',
                 url: '/Account/SignUpJson/',
                 data: $scope.person
-            }).then(function successCallback(response) {
-              
-                $scope.clear();
-              
-                window.location.href = "../Account/WelcomeBack";
+            }).then(function successCallback(response) {          
+                if (response.data == ""){
+                    $scope.person.MessageError = "<br/> -This email address is already registered with us.";
+                    $scope.person.Error = true;
+                    document.location.href = "#Profile1";
+                    $('#errorStrong').hide();
+                    $('#signupbtn').removeClass('submitLoader');
+                } else {
+                    $scope.clear();
+                    //window.location.href = "../Account/SignIn?msg=submited";
+                    $('#Profile1').slideToggle("slow");
+                    $('#Profile2').slideToggle("slow");
+                }
             }, function errorCallback(response) {
-            
+                $('#signupbtn').removeClass('submitLoader');
             });
-        }
-        else {
- 		
+        }else { 		
             $scope.person.MessageError =  $scope.person.MessageError+"<br> -Please fix validations.";
             $scope.person.Error = true;
-          
-        }
-      
+            document.location.href = "#Profile1";          
+        }      
     };
 
     //Login
     $scope.SignIn = function () {
 
+        $scope.person.Error = false;
+        $('#mesegid').hide();
+        $('#PasswordSendid').hide();
+        $('#ResetPassMesegid').hide();
         if ($scope.person.Email != "" && $scope.person.PasswordHash != "")
         {
             $http({
@@ -179,13 +302,20 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
                 url: '/Account/CheckUserPass',
                 data: $scope.person
             }).then(function successCallback(response) {
-
                 if (response.data =="") {
                     $scope.person.MessageError = "<br/> -Email-Id or Password is incorrect.";
                     $scope.person.Error = true;
+
                     $scope.clear();
                     return;
-
+                }
+                else if (parseInt(response.data.indexOf('Not Active')) >= 0) {
+                    var myid = (response.data.split(',')[1]).trim();
+                    window.location.href = '/Account/ActivateAccount/';
+                    //$scope.person.MessageError = "<br/> -Please active your account from registered email.";
+                    //$scope.person.Error = true;
+                    $scope.clear();
+                    return;
                 }
                 else {
                     window.location.href = "../Account/WelcomeBack";
@@ -211,253 +341,669 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         
 
     };
-    function CheckValidation()
 
-    {
-        
-        var IsError = true;
-        $scope.person.MessageError = '';
-     
-        if ($scope.person.FirstName=="")
-        {
+    $scope.ActivateAccount = function () {
 
-            $('#FirstName').addClass('ng-dirty');
-            $('#FirstName').addClass('ng-invalid');
-           
-            IsError = false;
-        }
-        if ($scope.person.LastName == "") {
-            $('#LastName').addClass('ng-dirty');
-            $('#LastName').addClass('ng-invalid');
-       
-            IsError = false;
-        }
-        if ($scope.person.Phone1 == "") {
-            $('#Phone1').addClass('ng-dirty');
-            $('#Phone1').addClass('ng-invalid');
-         
-            IsError = false;
-        }
-        if ($('#DateOfBirth').val() == "") {
-           
-            $('#DateOfBirth').addClass('ng-dirty');
-            $('#DateOfBirth').addClass('ng-invalid');
-            IsError = false;
-        }
-        else
-        {
-            $('#DateOfBirth').removeClass('ng-dirty');
-            $('#DateOfBirth').removeClass('ng-invalid');
-
-        }
-        if ($scope.person.Email == "") {
-
-            $('#Email').addClass('ng-dirty');
-            $('#Email').addClass('ng-invalid');
-            IsError = false;
-        }
-        else 
-
-		{
-
-		if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test( $('#Email').val()))
-		{
-  
-      
-    
-		}
-		else
-		{
- 		$scope.person.MessageError = $scope.person.MessageError + "<br> -Email is invalid.";
- 		 IsError = false;
-		}
-
-
-            if ($scope.person.Email != $('#ConfirmEmail').val()) {
-                $('#Email').addClass('ng-dirty');
-                $('#Email').addClass('ng-invalid');
-                $('#ConfirmEmail').addClass('ng-dirty');
-                $('#ConfirmEmail').addClass('ng-invalid');
-                $scope.person.MessageError = $scope.person.MessageError + "<br> -Email and confirm Email doesnot match.";
-                IsError = false;
-            }
-        }
-
-
-        if ($('#ConfirmEmail').val()=="")
-        {
-            $('#ConfirmEmail').addClass('ng-dirty');
-            $('#ConfirmEmail').addClass('ng-invalid');
-            IsError = false;
-        }
-      
-        if ($('#Gender').val() == "") {
-            $('#Gender').addClass('ng-dirty');
-            $('#Gender').addClass('ng-invalid');
-            IsError = false;
-
-        }
-        if ($scope.person.PasswordHash == "") {
-            $('#PasswordHash').addClass('ng-dirty');
-            $('#PasswordHash').addClass('ng-invalid');
-            IsError = false;
-
-        }
-        else
-        {
-            if ($scope.person.PasswordHash != $('#ConfirmPassword').val())
-            {
-                $('#PasswordHash').addClass('ng-dirty');
-                $('#PasswordHash').addClass('ng-invalid');
-                $('#ConfirmPassword').addClass('ng-dirty');
-                $('#ConfirmPassword').addClass('ng-invalid');
-                $scope.person.MessageError = $scope.person.MessageError + "<br> -Password and confirm password doesnot match.";
-                IsError = false;
-            }
-        }
-
-        if ($('#ConfirmPassword').val()=="")
-        {
-            $('#ConfirmPassword').addClass('ng-dirty');
-            $('#ConfirmPassword').addClass('ng-invalid');
-              IsError = false;
-        }
-
-        if ($scope.person.Address == "") {
-            $('#Address').addClass('ng-dirty');
-            $('#Address').addClass('ng-invalid');
-         
-            IsError = false;
-        }
-        if ($('#State').val() == "") {
-
-            $('#State').addClass('ng-dirty');
-            $('#State').addClass('ng-invalid');
-            IsError = false;
-        }
-        if ($('#City').val() == "") {
-            $('#City').addClass('ng-dirty');
-            $('#City').addClass('ng-invalid');
-            IsError = false;
-
-        }
-        if ($scope.person.ZipCode == "") {
-
-            $('#ZipCode').addClass('ng-dirty');
-            $('#ZipCode').addClass('ng-invalid');
-            IsError = false;
-        }
-        if ($('#Procedure').val() == "") {
-            $('#Procedure').addClass('ng-dirty');
-            $('#Procedure').addClass('ng-invalid');
-            IsError = false;
-
-        }
-        if ($scope.person.InsuranceCompanyName == "") {
-
-            $('#InsuranceCompanyName').addClass('ng-dirty');
-            $('#InsuranceCompanyName').addClass('ng-invalid');
-            IsError = false;
-        }
-        if ($scope.person.GroupNumber == "") {
-            $('#GroupNumber').addClass('ng-dirty');
-            $('#GroupNumber').addClass('ng-invalid');
-            IsError = false;
-
-        }
- 
-        if ($('#ProcedureDate').val() == "") {
-         
-            $('#ProcedureDate').addClass('ng-dirty');
-            $('#ProcedureDate').addClass('ng-invalid');
-          
-            IsError = false;
-        }
-        else
-        {
-            $('#ProcedureDate').removeClass('ng-dirty');
-            $('#ProcedureDate').removeClass('ng-invalid');
-        }
-        if ($('#InsuranceEffectiveDate').val() == "") {
-          
-            $('#InsuranceEffectiveDate').addClass('ng-dirty');
-            $('#InsuranceEffectiveDate').addClass('ng-invalid');
-         
-            IsError = false;
+        $scope.person.Error = false;
+        $('#mesegid').hide();
+        $('#PasswordSendid').hide();
+        $('#ResetPassMesegid').hide();
+        if ($scope.person.ActiveCode != "" ) {
+            $('#activatebtn').addClass('submitLoader');
+            $http({
+                method: 'POST',
+                url: '/Account/ActiveUser',
+                data: $scope.person
+            }).then(function successCallback(response) {
+                $('#activatebtn').removeClass('submitLoader');
+                if (parseInt(response.data.indexOf('Exception')) >= 0) {
+                    $scope.person.MessageError = "<br/> - "+response.data;
+                    $scope.person.Error = true;
+                    $scope.clear();
+                    return;
+                }
+                else if (parseInt(response.data.indexOf('Success')) >= 0) {
+                    window.location.href = "/Account/UserProfile";
+                }
+                else if (parseInt(response.data.indexOf('Invalie code')) >= 0) {
+                    $scope.person.MessageError = "<br/> - " + response.data;
+                    $scope.person.Error = true;
+                    $scope.clear();
+                    return;
+                }
+            }, function errorCallback(response) {
+                $('#activatebtn').removeClass('submitLoader');
+                alert("Error : " + response.data.ExceptionMessage);
+            });
         }
         else {
-            $('#InsuranceEffectiveDate').removeClass('ng-dirty');
-            $('#InsuranceEffectiveDate').removeClass('ng-invalid');
+            $scope.person.MessageError = "<br/> - Code is required.";
+            $scope.person.Error = true;
+            $scope.clear();
         }
-        
-        if ($scope.person.PolicyNumber == "") {
-            $('#PolicyNumber').addClass('ng-dirty');
-            $('#PolicyNumber').addClass('ng-invalid');
-          
-            IsError = false;
+    };
+
+    //Update  Item
+    $scope.Update = function () {
+
+        $scope.person.phone1 = $('#Phone1').val();
+
+        $scope.person.DateOfBirth = $('#DateOfBirth').val();
+
+        $scope.person.PreferredPharmacy = $('#PreferredPharmacy').val();
+        $scope.person.PharmacyAddress1 = $('#PharmacyAddress1').val();
+        $scope.person.PharmacyCity = $('#PharmacyCity').val();
+        $scope.person.PharmacyState = $('#PharmacyState').val();
+        $scope.person.PharmacyPhone = $('#PharmacyPhone').val().trim(); //($('#PharmacyPhone').val().trim().replace('(', '').replace(')', '').replace('-', '').replace(' ', ''));
+        //alert($scope.person.PharmacyPhone);
+
+        $scope.person.ProcedureDate = $('#ProcedureDate').val();
+        $scope.person.InsuranceEffectiveDate = $('#InsuranceEffectiveDate').val();
+        //alert($('#ProcedureDate').val());
+        //alert($scope.person.ProcedureDate);
+        $scope.person.Error = false;
+        //var valFlag = CheckValidation();
+        if (CheckValidation()) {
+            $.ajax({
+                method: 'POST',
+                url: '/Account/Update/',
+                data: $scope.person
+            }).then(function successCallback(response) {
+
+                $scope.clear();
+
+                window.location.href = "../Account/WelcomeBack";
+            }, function errorCallback(response) {
+
+            });
+        }
+        else {
+
+            $scope.person.MessageError = $scope.person.MessageError + "<br> -Please fix validations.";
+            $scope.person.Error = true;
+            document.location.href = "#UpdateProfile1";
         }
 
-        if ($scope.person.Guarantor == "") {
+    };
 
-            $('#Guarantor').addClass('ng-dirty');
-            $('#Guarantor').addClass('ng-invalid');
-            IsError = false;
+    //Forgot Password
+    $scope.GetPassword = function () {
+
+        $scope.person.MessageError = "";
+        $scope.person.Error = false;
+        if (CheckEmailValid()) {
+
+            $http({
+                method: 'POST',
+                url: '/Account/GetPassword/',
+                data: $scope.person
+            }).then(function successCallback(response) {
+                if (response.data == "")
+                {
+                    $scope.person.MessageError = $scope.person.MessageError + "<br> -This Email address is not registered with us.";
+                    $scope.person.Error = true;
+
+                }
+                else {
+                    $scope.clear();
+
+                    window.location.href = "../Account/SignIn";
+                }
+               
+            }, function errorCallback(response) {
+
+            });
         }
-        if ($scope.person.PreferredPharmacy == "") {
+        else {
 
-            $('#PreferredPharmacy').addClass('ng-dirty');
-            $('#PreferredPharmacy').addClass('ng-invalid');
-            IsError = false;
-        }
-
-        if ($scope.person.PharmacyAddress1 == "") {
-            $('#PharmacyAddress1').addClass('ng-dirty');
-            $('#PharmacyAddress1').addClass('ng-invalid');
            
-            IsError = false;
-        }
-
-        if ($scope.person.PharmacyCity == "") {
-
-            $('#PharmacyCity').addClass('ng-dirty');
-            $('#PharmacyCity').addClass('ng-invalid');
-            IsError = false;
-        }
-        if ($scope.person.PharmacyPhone == "") {
-            $('#PharmacyPhone').addClass('ng-dirty');
-            $('#PharmacyPhone').addClass('ng-invalid');
-            IsError = false;
-
-        }
-        if ($scope.person.PharmacyAddress2 == "") {
-            $('#PharmacyAddress2').addClass('ng-dirty');
-            $('#PharmacyAddress2').addClass('ng-invalid');
-            IsError = false;
+            $scope.person.Error = true;
 
         }
 
-        if ($scope.person.PharmacyState == "") {
-            $('#PharmacyState').addClass('ng-dirty');
-            $('#PharmacyState').addClass('ng-invalid');
+    };
+    
+    //Forgot Password
+    $scope.ResetPassword = function () {
+
+
+        $scope.person.Error = false;
+        if (checkValidPass()) {
+
+            $http({
+                method: 'POST',
+                url: '/Account/ResetUpdatePassword/',
+                data: $scope.person
+            }).then(function successCallback(response) {
+               
+
+                    window.location.href = "../Account/SignIn";
+                
+            }, function errorCallback(response) {
+
+            });
+        }
+        else {
+
+            $scope.person.MessageError = $scope.person.MessageError + "<br> -Please Fix Validations.";
+            $scope.person.Error = true;
+
+        }
+
+    };
+    
+    $scope.fetchPharmasies = function () {
+
+        getLatLng();
+
+
+    }
+
+    function checkValidPass() {
+
+        var IsError = true;
+        $scope.person.MessageError = '';
+
+       
+        if ($scope.person.PasswordHash == "")
+        {
+                
+                IsError = false;
+
+            }
+            else
+            {
+                if ($scope.person.PasswordHash != $('#ConfirmPass').val())
+                {
+
+                    $scope.person.MessageError = $scope.person.MessageError + "<br> -Password and confirm password doesnot match.";
+                    IsError = false;
+                }
+            }
+
+
+        if ($('#ConfirmPass').val() == "")
+        {
+            
+                IsError = false;
+            }
+
+        return IsError;
+
+    }
+    
+    function CheckEmailValid()
+    {
+        var IsError = true;
+        $scope.person.MessageError = '';
+        if ($scope.person.Email=="")
+        {
+            $scope.person.MessageError = $scope.person.MessageError + "<br> -Email is required.";
             IsError = false;
 
         }
-      
-      
+        else
+        {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+         
+            if (re.test($('#Email').val()))
+            {
+
+
+
+            }
+            else
+            {
+                $scope.person.MessageError = $scope.person.MessageError + "<br> -Email is invalid.";
+                IsError = false;
+            }
+
+        }
+       
+        return IsError;
+
+    }
+
+    function CheckValidation()
+    {       
+        var IsError = true;
+        var ErrorForMap = true;
+        $scope.person.MessageError = '';
+        //alert(parseInt(window.location.href.toLowerCase().indexOf("/userprofile")));
+        if (parseInt(window.location.href.toLowerCase().indexOf("/userprofile")) > 0) {
+            if ($scope.person.FirstName == "") {
+                $('#FirstName').addClass('ng-dirty');
+                $('#FirstName').addClass('ng-invalid');
+                IsError = false;
+            }
+            if ($scope.person.LastName == "") {
+                $('#LastName').addClass('ng-dirty');
+                $('#LastName').addClass('ng-invalid');
+                IsError = false;
+            }
+            if ($scope.person.Phone1 == "") {
+                $('#Phone1').addClass('ng-dirty');
+                $('#Phone1').addClass('ng-invalid');
+                IsError = false;
+            }
+            if ($('#DateOfBirth').val() == "") {
+                $('#DateOfBirth').addClass('ng-dirty');
+                $('#DateOfBirth').addClass('ng-invalid');
+                IsError = false;
+            }
+            else {
+                $('#DateOfBirth').removeClass('ng-dirty');
+                $('#DateOfBirth').removeClass('ng-invalid');
+            }
+
+            if ($('#Gender').val() == "") {
+                $('#Gender').addClass('ng-dirty');
+                $('#Gender').addClass('ng-invalid');
+                IsError = false;
+            }
+
+            if ($scope.person.Address == "") {
+                $('#Address').addClass('ng-dirty');
+                $('#Address').addClass('ng-invalid');
+                IsError = false;
+            }
+            if ($('#State').val() == "") {
+                $('#State').addClass('ng-dirty');
+                $('#State').addClass('ng-invalid');
+                IsError = false;
+            }
+            if ($('#City').val() == "") {
+                $('#City').addClass('ng-dirty');
+                $('#City').addClass('ng-invalid');
+                IsError = false;
+            }
+            if ($scope.person.ZipCode == "") {
+                $('#ZipCode').addClass('ng-dirty');
+                $('#ZipCode').addClass('ng-invalid');
+                IsError = false;
+            }
+            if ($scope.person.PreferredPharmacy == "") {
+                $('#PreferredPharmacy').addClass('ng-dirty');
+                $('#PreferredPharmacy').addClass('ng-invalid');
+                IsError = false;
+                ErrorForMap = false;
+            }
+
+            if ($scope.person.PharmacyAddress1 == "") {
+                $('#PharmacyAddress1').addClass('ng-dirty');
+                $('#PharmacyAddress1').addClass('ng-invalid');
+                ErrorForMap = false;
+                IsError = false;
+            }
+
+            if ($scope.person.PharmacyCity == "") {
+                $('#PharmacyCity').addClass('ng-dirty');
+                $('#PharmacyCity').addClass('ng-invalid');
+                ErrorForMap = false;
+                IsError = false;
+            }
+            if ($scope.person.PharmacyPhone == "") {
+                $('#PharmacyPhone').addClass('ng-dirty');
+                $('#PharmacyPhone').addClass('ng-invalid');
+                ErrorForMap = false;
+                IsError = false;
+            }
+            if ($scope.person.PharmacyState == "") {
+                $('#PharmacyState').addClass('ng-dirty');
+                $('#PharmacyState').addClass('ng-invalid');
+                ErrorForMap = false;
+                IsError = false;
+            }
+        }
+     
+        if (parseInt(window.location.href.toLowerCase().indexOf("/userprofile")) == -1) {
+            if ($scope.person.Email == "") {
+                $('#Email').addClass('ng-dirty');
+                $('#Email').addClass('ng-invalid');
+                IsError = false;
+            }
+            else {
+                var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if (re.test($('#Email').val())) {
+                }
+                else {
+                    $scope.person.MessageError = $scope.person.MessageError + "<br> -Email is invalid.";
+                    IsError = false;
+                }
+
+                if ($scope.person.Email != $('#ConfirmEmail').val()) {
+                    $('#Email').addClass('ng-dirty');
+                    $('#Email').addClass('ng-invalid');
+                    $('#ConfirmEmail').addClass('ng-dirty');
+                    $('#ConfirmEmail').addClass('ng-invalid');
+                    $scope.person.MessageError = $scope.person.MessageError + "<br> -Email and confirm Email doesnot match.";
+                    IsError = false;
+                }
+            }
+            if ($('#ConfirmEmail').val() == "") {
+                $('#ConfirmEmail').addClass('ng-dirty');
+                $('#ConfirmEmail').addClass('ng-invalid');
+                IsError = false;
+            }
+            if ($scope.person.PasswordHash == "") {
+                $('#PasswordHash').addClass('ng-dirty');
+                $('#PasswordHash').addClass('ng-invalid');
+                IsError = false;
+            }
+            else {
+                if ($scope.person.PasswordHash != $('#ConfirmPassword').val()) {
+                    $('#PasswordHash').addClass('ng-dirty');
+                    $('#PasswordHash').addClass('ng-invalid');
+                    $('#ConfirmPassword').addClass('ng-dirty');
+                    $('#ConfirmPassword').addClass('ng-invalid');
+                    $scope.person.MessageError = $scope.person.MessageError + "<br> -Password and confirm password doesnot match.";
+                    IsError = false;
+                }
+            }
+
+            if ($('#ConfirmPassword').val() == "") {
+                $('#ConfirmPassword').addClass('ng-dirty');
+                $('#ConfirmPassword').addClass('ng-invalid');
+                IsError = false;
+            }
+        }
+
+
+        //if ($('#Procedure').val() == "") {
+        //    $('#Procedure').addClass('ng-dirty');
+        //    $('#Procedure').addClass('ng-invalid');
+        //    IsError = false;
+
+        //}
+        //if ($scope.person.InsuranceCompanyName == "") {
+
+        //    $('#InsuranceCompanyName').addClass('ng-dirty');
+        //    $('#InsuranceCompanyName').addClass('ng-invalid');
+        //    IsError = false;
+        //}
+        //if ($scope.person.GroupNumber == "") {
+        //    $('#GroupNumber').addClass('ng-dirty');
+        //    $('#GroupNumber').addClass('ng-invalid');
+        //    IsError = false;
+
+        //}
+ 
+        //if ($('#ProcedureDate').val() == "") {
+         
+        //    $('#ProcedureDate').addClass('ng-dirty');
+        //    $('#ProcedureDate').addClass('ng-invalid');
+          
+        //    IsError = false;
+        //}
+        //else
+        //{
+        //    $('#ProcedureDate').removeClass('ng-dirty');
+        //    $('#ProcedureDate').removeClass('ng-invalid');
+        //}
+        //if ($('#InsuranceEffectiveDate').val() == "") {
+          
+        //    $('#InsuranceEffectiveDate').addClass('ng-dirty');
+        //    $('#InsuranceEffectiveDate').addClass('ng-invalid');
+         
+        //    IsError = false;
+        //}
+        //else {
+        //    $('#InsuranceEffectiveDate').removeClass('ng-dirty');
+        //    $('#InsuranceEffectiveDate').removeClass('ng-invalid');
+        //}
+        
+        //if ($scope.person.PolicyNumber == "") {
+        //    $('#PolicyNumber').addClass('ng-dirty');
+        //    $('#PolicyNumber').addClass('ng-invalid');
+          
+        //    IsError = false;
+        //}
+
+        //if ($('#Guarantor').val() == "") {
+
+        //    $('#Guarantor').addClass('ng-dirty');
+        //    $('#Guarantor').addClass('ng-invalid');
+        //    IsError = false;
+        //}
+        
+        //if ($scope.person.PharmacyAddress2 == "") {
+        //    $('#PharmacyAddress2').addClass('ng-dirty');
+        //    $('#PharmacyAddress2').addClass('ng-invalid');
+        //    IsError = false;
+
+        //}
+
+        if (ErrorForMap == false)
+        {
+            $scope.person.MessageError = $scope.person.MessageError + "<br> - Please select pharmacy from map.";
+        }
+
+
         return IsError;
 
     }
 
 
 
+
 });
 
+
+
+var map;
+var infoWindow;
+var service;
+var addrInfo;
+
+var txtPharmacy;
+var txtStreet;
+var txtCity;
+var txtState;
+var txtCountry;
+var txtZip;
+var txtPhone;
+//default value
+var lat = '32.7846762';
+var lng = '-96.80274639';
+var zoomLevel = 15;
+
+function getLatLng() {
+
+    var address = $('#PharmacyZipcode').val();
+
+    zoomLevel = 15;
+
+    //test:
+    var foundZip = false;
+    var zipTxt = '';
+    $.ajax({
+        url: "/Content/ziplatlng.txt",
+        async: false,
+        dataType: "text",
+        success: function (data) {
+            zipTxt = data;
+        },
+        error: function (e) {
+            console.log(e);
+            alert('Error: ' + e);
+        }
+    });
+
+    if (zipTxt != '') {
+        var start_pos = zipTxt.indexOf('|' + address) + 7;
+        if (start_pos >= 7) {
+            var end_pos = zipTxt.indexOf('|', start_pos);
+            var zipInfo = zipTxt.substring(start_pos, end_pos)
+            var aryZip = zipInfo.split(',');
+            lat = aryZip[0].trim();
+            lng = aryZip[1].trim();
+            if (lat != '' && lng != '') {
+                foundZip = true;
+                initialize();
+                return;
+            }
+        }
+    }
+
+    if (!foundZip) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                lat = results[0].geometry.location.lat();
+                lng = results[0].geometry.location.lng();
+                initialize();
+            }
+            else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+                setTimeout(function () {
+                    GeocodeFind(address);
+                }, 500);
+            }
+            else {
+                alert("Geocode was not successful for the following reason:" + status);
+            }
+        });
+    }
+}
+
+function initialize() {
+    $("#dialog-confirm").parent().css('z-index', '99999');
+    $("#dialog-confirm").dialog("open");
+
+    var myLatlng = new google.maps.LatLng(lat, lng);
+    //alert(myLatlng);
+    map = new google.maps.Map(document.getElementById('map-canvas'), {
+        center: myLatlng,
+        zoom: zoomLevel,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    infoWindow = new google.maps.InfoWindow();
+    service = new google.maps.places.PlacesService(map);
+
+    google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
+    google.maps.event.addListenerOnce(map, 'zoom_changed', performSearch);
+}
+
+function performSearch() {
+    var request = {
+        bounds: map.getBounds(),
+        keyword: 'pharmacy',
+        type: ['pharmacy']
+    };
+    service.radarSearch(request, callback);
+}
+
+function callback(results, status) {
+    if (status != google.maps.places.PlacesServiceStatus.OK
+            && zoomLevel == 11) {
+        alert('No results found');
+        //var txt = $('#nearZip').text() + ': No results found.';
+        //$('#nearZip').text(txt);
+        return;
+    }
+    else if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+        zoomLevel = (zoomLevel == 15 ? 13 : 11);
+        initialize();
+        return;
+    }
+
+    for (var i = 0, result; result = results[i]; i++) {
+        createMarker(result);
+    }
+}
+
+function removeApostrophe(str) {
+    if (typeof str != "string") return str;
+    return str.replace("'", "");
+}
+
+function removeUnitedStates(str) {
+    if (typeof str != "string") return str;
+    return str.slice(0, str.lastIndexOf(", United States"))
+}
+
+function createMarker(place) {
+    var addrFormatted;
+    var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png'
+    });
+
+    google.maps.event.addListener(marker, 'click', function () {
+        service.getDetails(place, function (result, status) {
+
+            if (status != google.maps.places.PlacesServiceStatus.OK) {
+                alert(status);
+                return;
+            }
+
+            txtPharmacy = removeApostrophe(result.name);
+            txtPhone = result.formatted_phone_number;
+            addrFormatted = removeApostrophe(result.formatted_address);
+            addrFormatted = removeUnitedStates(addrFormatted);
+
+
+            var addrContent = '<div><strong>' + txtPharmacy + '</strong><br />' +
+                    addrFormatted + '<br />' + txtPhone + '<br />' +
+                    '<button type="button" class="btn zn_sub_button btn-fullcolor btn-xs" style="padding: 1px 1px !important;" onclick="showInfo(\'' + txtPharmacy + '\',\'' + txtPhone + '\',\'' + addrFormatted + '\',\'' + result + '\');">SELECT</button>';
+
+            infoWindow.setContent(addrContent);
+            infoWindow.open(map, marker);
+        });
+    });
+}
+
+
+function GeocodeFind(address) {
+    var geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({ 'address': address }, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+            lat = results[0].geometry.location.lat();
+            lng = results[0].geometry.location.lng();
+        }
+        else if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+            setTimeout(function () {
+                GeocodeFind(address);
+            }, 500);
+        }
+        else {
+            alert("Geocode was not successful for the following reason:" + status);
+        }
+    });
+}
+
+function showInfo(pharm, phone, addr, result) {
+    //alert((addr.split(',')[2]).split('')[0]);
+    $('#PreferredPharmacy').val(pharm);
+    $('#PharmacyAddress1').val(addr.split(',')[0]);
+    $('#PharmacyCity').val(addr.split(',')[1]);
+    $('#PharmacyState').val(addr.split(',')[2].trim().split(' ')[0]);
+    $('#PharmacyPhone').val(phone.trim());//phone.trim().replace('(', '').replace(')', '').replace('-', '').replace(' ', '')
+
+    $('#lblPharmacy').text(pharm);
+    $('#lblPhone').text(phone);
+    $('#lblAddress').text(addr);
+    //$('#divPharmacy').hide();
+    infoWindow.close();
+    $("#dialog-confirm").dialog("close");
+
+    $('#tblPharmacy').show();
+
+    //$('#PharmacyName').text(pharm);
+    //$('#PharmacyNumber').text(phone);
+    //$('#PharmacyAddress').text(addr);
+    //$('#preferred-pharmacy-information').show('slow');
+    //$("#modal-content, #modal-background").toggleClass("active");
+}
 // Here I have created a factory which is a populer way to create and configure services. You may also create the factories in another script file which is best practice.
 // You can also write above codes for POST,PUT,DELETE in this factory instead of controller, so that our controller will look clean and exhibits proper Separation of Concern.
+
 app.factory('personService', function ($http) {
     var fac = {};
     fac.GetAllRecords = function () {
-        return $http.get('api/person/GetAllperson');
+        return $http.get('/Account/GetRecordById');
     }
     return fac;
 });

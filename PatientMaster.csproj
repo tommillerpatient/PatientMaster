@@ -182,9 +182,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\XpanelAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConfirmedEmail.cs" />
     <Compile Include="Models\ConnectionCls.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -230,6 +232,7 @@
     <Content Include="Content\assets\timerdot.png" />
     <Content Include="Content\assets\transparent.jpg" />
     <Content Include="Content\assets\white50.png" />
+    <Content Include="Content\css\bootstrap-table.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\colors\blue.css" />
     <Content Include="Content\css\colors\cyan.css" />
@@ -242,6 +245,7 @@
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\jquery.selectBox.css" />
     <Content Include="Content\css\jquery.ui.timepicker.css" />
+    <Content Include="Content\css\loader.css" />
     <Content Include="Content\css\magnific-popup.css" />
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.theme.css" />
@@ -251,7 +255,9 @@
     <Content Include="Content\css\responsive-slider.css" />
     <Content Include="Content\css\settings.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\styles123.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\revicons.svg" />
     <Content Include="Content\fonts\star.svg" />
     <Content Include="Content\fonts\WooCommerce.svg" />
@@ -308,6 +314,7 @@
     <Content Include="Content\img\html5.png" />
     <Content Include="Content\img\image-bg.jpg" />
     <Content Include="Content\img\jquery.png" />
+    <Content Include="Content\img\MapFlag.png" />
     <Content Include="Content\img\openhand.cur.bmp" />
     <Content Include="Content\img\openhand.cur.gif" />
     <Content Include="Content\img\paypal-logo.png" />
@@ -317,6 +324,7 @@
     <Content Include="Content\img\slide-4.jpg" />
     <Content Include="Content\img\slider-bg.jpg" />
     <Content Include="Content\img\twitter.png" />
+    <Content Include="Content\js\bootstrap-table.js" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\core.min.js" />
@@ -343,6 +351,7 @@
     <Content Include="Content\js\extensions\source\revolution.extension.video.js" />
     <Content Include="Content\js\imagesloaded.pkgd.min.js" />
     <Content Include="Content\js\isotope.pkgd.min.js" />
+    <Content Include="Content\js\jquery-1.11.1.min.js" />
     <Content Include="Content\js\jquery-migrate.min.js" />
     <Content Include="Content\js\jquery-ui.js" />
     <Content Include="Content\js\jquery.appear.js" />
@@ -424,6 +433,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\ziplatlng.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\assets\arrows.psd" />
@@ -454,7 +464,11 @@
     <Content Include="Content\js\extensions\index.php" />
     <Content Include="Content\js\extensions\source\index.php" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\GetAllPerson.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-sanitize.js" />
@@ -479,10 +493,19 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\MyCaregivers.js" />
+    <Content Include="Scripts\NewCareGiver.js" />
     <Content Include="Scripts\PersonAngular.js" />
+    <Content Include="Scripts\PersonCareGiver.js" />
+    <Content Include="Scripts\PharmacyMap.js" />
+    <Content Include="Scripts\ProfileAngular.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Scripts\SettingsAngular.js" />
+    <Content Include="Scripts\SignupCareGiver.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -512,6 +535,20 @@
     <Content Include="Views\Account\SignIn.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Account\WelcomeBack.cshtml" />
+    <Content Include="Views\Account\UserProfile.cshtml" />
+    <Content Include="Views\Account\ShowMessage.cshtml" />
+    <Content Include="Views\Account\Settings.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\XpanelAdmin\Index.cshtml" />
+    <Content Include="Views\XpanelAdmin\UserList.cshtml" />
+    <Content Include="Views\XpanelAdmin\View2.cshtml" />
+    <Content Include="Views\Account\DialogDemo.cshtml" />
+    <Content Include="Views\Account\CareGiverRegister.cshtml" />
+    <Content Include="Views\Account\SignupCareGiver.cshtml" />
+    <Content Include="Views\Account\CareGiverProfile.cshtml" />
+    <Content Include="Views\Account\MyCareGivers.cshtml" />
+    <Content Include="Views\Account\ActivateAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

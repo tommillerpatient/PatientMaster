@@ -68,7 +68,7 @@
                                 <nav class="pull-right noo-main-menu">
                                     <ul class="nav-collapse navbar-nav">
                                         <li class="menu-item-has-children" id="loginlink">
-                                            <a href="Account/SignIn">Login</a>
+                                            <a href="../Account/SignIn">Login</a>
                                         </li>
                                         <li class="menu-item-has-children">
                                             <a href="#">Nav Link 2</a>
@@ -113,10 +113,7 @@
             <!-- Begin The loop -->
             <div class="container-fluid">
                 <div class="row row-fluid">
-
-
                     <div class="col-sm-12">
-
                         <div class="responsive-slider" data-spy="responsive-slider" data-autoplay="true">
                             <div class="slides" data-group="slides">
                                 <ul>
@@ -124,29 +121,10 @@
                                         <div class="slide-body" data-group="slide">
                                             <img src="~/Content/images/slider/slider2_1920x1280.jpg">
                                             <div class="caption header" data-animate="slideAppearRightToLeft" data-delay="500" data-length="300" style="width:100%;">
-                                                <h2 style="width:87%; text-align:center" class="welcome1">    WELCOME TO THE <span style="color:#1493f8;">L.O.B.</span> PATIENT PORTAL</h2>
-                                                <p class="welcome2" style="font-size:20px; border-width: 0;
-    color: #1493f8;
-    width:90%;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    line-height: 24px;
-    margin: 0;
-    padding: 0;
-    transition: none 0s ease 0s ; text-align:center; color:#f1f1f1; font-weight:bold;">
-                                                    With the all new <span style="color:#1493f8;">L.O.B.</span> Patient Portal you can now scehdual visits, see your health record, <br>
-                                                    appoint a caregiver, or join one of our many health communities.
-                                                </p>
-
-
                                                 <div class="button_div">
-
-                                                      <input type="button" value="CREATE YOUR PROFILE" class="btn btn-secondary pro" id="btncretaeprof">
-
+                                                    <a href="#Profile1"><input type="button" value="CREATE YOUR PROFILE" class="btn btn-secondary pro" id="btncretaeprof"></a>
                                                     <a href="~/Account/SignIn">     <input type="button" value="LOGIN NOW" class="btn btn-primary login1"></a>
 </div>
-
                                             </div>
 
                                         </div>
@@ -154,12 +132,13 @@
                                     <li>
                                         <div class="slide-body" data-group="slide">
                                             <img src="~/Content/images/slider/slider3_1920x1280.jpg">
-                                            <div class="caption header" data-animate="slideAppearRightToLeft" data-delay="500" data-length="300" style="width:90%;">
-                                                <h2 class="line1">  Share tips, offer support, and live healthier!</h2>
-                                                <h2 class="line2"> Join our online health and wellness community today!</h2>
-                                                <div class="caption sub" data-animate="slideAppearLeftToRight" data-delay="800" data-length="300"></div>
+                                            <div class="caption header" data-animate="slideAppearRightToLeft" data-delay="500" data-length="300" style="width:100%;">
+                                                <div class="button_div">
+                                                    <a href="#Profile1"><input type="button" value="CREATE YOUR PROFILE" class="btn btn-secondary pro" id="btncretaeprof"></a>
+                                                    <a href="~/Account/SignIn">     <input type="button" value="LOGIN NOW" class="btn btn-primary login1"></a>
+                                                </div>
                                             </div>
-
+                                            
                                         </div>
                                     </li>
 
@@ -167,12 +146,7 @@
                             </div>
                             <a class="slider-control left" href="#" data-jump="prev"><img src="~/Content/images/arrow.jpg"></a>
                             <a class="slider-control right" href="#" data-jump="next"><img src="~/Content/images/arrow1.jpg"></a>
-
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -183,130 +157,49 @@
                         <div class="noo-customform">
                             <div class="container">
                                 <div class="book-form ">
-                                    <div class="book-content-style2">
+                                    <div class="book-content-style2" ng-controller="demoCtrl">
+                                        <div class="profile" id="Profile1">
+                                            <h2 class="book-title" id="reg">Create Your Patient Profile</h2>
+                                            <p style="text-align:center; padding-bottom:15px;">Please enter your email, and password.</p>
 
-
-
-
-                                        <div class="profile">
-                                            <h2 class="book-title" id="reg">Create YOUR Patient Profile</h2>
-                                            <p style="text-align:center; padding-bottom:15px;">Please enter your name, DOB, phone, email, and gender.</p>
-
-                                            <div class="css-form"
-                                                 name="signUpForm"
-                                                 novalidate ng-controller="demoCtrl">
-
-
+                                            <div class="css-form" name="signUpForm" novalidate >
                                                 <div class="alert alert-danger" id="diverror" ng-show="person.Error">
-                                                    <strong>Error!</strong><span ng-bind-html="person.MessageError"></span>
+                                                    <strong id="errorStrong">Error!</strong><span ng-bind-html="person.MessageError"></span>
                                                 </div>
-                                                <div class="noo-form">
+                                                <div class="noo-form"  style="padding: 0px 7%;">
 
                                                     <div class="row">
-
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-name">
-                                                                <input type="text" name="first-name"
-                                                                       ng-maxlength="20" ng-minlength="2" ng-required="true" required
-                                                                       ng-model="person.FirstName" size="40"
-                                                                       class="wpcf7-form-control" placeholder="First Name" id="FirstName" tabindex=1 autofocus />
-                                                            </span>
-                                                        </div>
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-name">
-                                                                <input type="text"
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       name="last-name" ng-model="person.LastName"
-                                                                       size="40" class="wpcf7-form-control" placeholder="Last Name" id="LastName" tabindex=2 />
-                                                            </span>
-                                                        </div>
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-date">
-                                                                <input type="date" name="patient-portal-date"
-                                                                       ng-model="person.DateOfBirth"
-                                                                       size="40" class="wpcf7-form-control"
-                                                                       id="DateOfBirth" placeholder="Date Of Birth mm/dd/yyyy" tabindex=3 ng-keypress="keypress()" ng-keydown="keydown()" ng-change="change()" />
-                                                            </span>
-
-                                                        </div>
+                                                        
                                                     </div>
 
                                                     <div class="row">
-
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-phone">
-                                                                <input type="number" name="patient-portal-phone"
-                                                                       ng-maxlength="20" ng-minlength="4" required
-                                                                       ng-model="person.Phone1" size="40" class="wpcf7-form-control" placeholder="Phone number" id="Phone1" tabindex=4 />
-                                                            </span>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-
+                                                        <div class="col-md-6">
                                                             <span class="wpcf7-form-control-wrap patient-portal-email">
                                                                 <input type="email" name="patient-portal-email"
                                                                        ng-maxlength="30" ng-minlength="6" required
                                                                        ng-model="person.Email"
                                                                        size="40" class="wpcf7-form-control" placeholder="Email" id="Email" tabindex=5 />
                                                             </span>
-
-
                                                         </div>
-
-
-
-
-
-
-
-                                                        <div class="col-md-4">
-
+                                                        <div class="col-md-6">
                                                             <span class="wpcf7-form-control-wrap patient-portal-email">
                                                                 <input type="email" name="patient-portal-emailrm-confi" ng-model="person.ConfirmEmail"
                                                                        ng-maxlength="30" ng-minlength="6" required
                                                                        size="40" class="wpcf7-form-control" placeholder="Confirm Email" id="ConfirmEmail" tabindex=6 />
                                                             </span>
-
                                                         </div>
-
                                                     </div>
 
-
                                                     <div class="row">
-                                                        <div class="col-md-4">
-                                                            <span class="wpcf7-form-control-wrap car">
-                                                                <select name="sex" required class="wpcf7-form-control" ng-model="person.Gender" id="Gender" tabindex=7>
-                                                                    <option value="">Gender</option>
-                                                                    <option value="0">Male</option>
-                                                                    <option value="1">Female</option>
-                                                                    <option value="2">Transgender</option>
-                                                                </select>
-                                                            </span>
-                                                        </div>
-                                                        <div class="col-md-4">
-
+                                                        <div class="col-md-6">
                                                             <span class="wpcf7-form-control-wrap patient-portal-email">
                                                                 <input type="password"
                                                                        required
                                                                        name="patient-portal-emailrm-confi" ng-model="person.PasswordHash"
                                                                        size="40" class="wpcf7-form-control" placeholder="Password" id="PasswordHash" tabindex=8 />
                                                             </span>
-
                                                         </div>
-
-
-
-
-
-                                                        <div class="col-md-4">
-
-
-
-
+                                                        <div class="col-md-6">
                                                             <span class="wpcf7-form-control-wrap patient-portal-email">
                                                                 <input type="password"
                                                                        ng-maxlength="30" ng-minlength="2" required
@@ -314,350 +207,62 @@
                                                                        name="patient-portal-emailrm-confi"
                                                                        size="40" class="wpcf7-form-control" placeholder="Confirm Password" id="ConfirmPassword" tabindex=9 />
                                                             </span>
-
                                                         </div>
                                                     </div>
-
-                                                    <!--flag-->
+                                                    
                                                     <div class="row">
-                                                        <p style="text-align:center; padding-top:15px; padding-bottom:15px;">Please enter your address.</p>
-
-                                                        <div class="col-md-4">
-                                                            <span class="wpcf7-form-control-wrap patient-portal-name">
-                                                                <input type="text" name="street" value=""
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       ng-model="person.Address"
-                                                                       size="40" class="wpcf7-form-control" placeholder="Address" id="Address" tabindex=10 />
-                                                            </span>
-
-                                                        </div>
-
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap car">
-                                                                <select name="sex" class="wpcf7-form-control" required ng-model="person.State" id="State" tabindex=11>
-                                                                    <option value="">State</option>
-                                                                    <option value="AL">Alabama</option>
-                                                                    <option value="AK">Alaska</option>
-                                                                    <option value="AZ">Arizona</option>
-                                                                    <option value="AR">Arkansas</option>
-                                                                    <option value="CA">California</option>
-                                                                    <option value="CO">Colorado</option>
-                                                                    <option value="CT">Connecticut</option>
-                                                                    <option value="DE">Delaware</option>
-                                                                    <option value="DC">District Of Columbia</option>
-                                                                    <option value="FL">Florida</option>
-                                                                    <option value="GA">Georgia</option>
-                                                                    <option value="HI">Hawaii</option>
-                                                                    <option value="ID">Idaho</option>
-                                                                    <option value="IL">Illinois</option>
-                                                                    <option value="IN">Indiana</option>
-                                                                    <option value="IA">Iowa</option>
-                                                                    <option value="KS">Kansas</option>
-                                                                    <option value="KY">Kentucky</option>
-                                                                    <option value="LA">Louisiana</option>
-                                                                    <option value="ME">Maine</option>
-                                                                    <option value="MD">Maryland</option>
-                                                                    <option value="MA">Massachusetts</option>
-                                                                    <option value="MI">Michigan</option>
-                                                                    <option value="MN">Minnesota</option>
-                                                                    <option value="MS">Mississippi</option>
-                                                                    <option value="MO">Missouri</option>
-                                                                    <option value="MT">Montana</option>
-                                                                    <option value="NE">Nebraska</option>
-                                                                    <option value="NV">Nevada</option>
-                                                                    <option value="NH">New Hampshire</option>
-                                                                    <option value="NJ">New Jersey</option>
-                                                                    <option value="NM">New Mexico</option>
-                                                                    <option value="NY">New York</option>
-                                                                    <option value="NC">North Carolina</option>
-                                                                    <option value="ND">North Dakota</option>
-                                                                    <option value="OH">Ohio</option>
-                                                                    <option value="OK">Oklahoma</option>
-                                                                    <option value="OR">Oregon</option>
-                                                                    <option value="PA">Pennsylvania</option>
-                                                                    <option value="RI">Rhode Island</option>
-                                                                    <option value="SC">South Carolina</option>
-                                                                    <option value="SD">South Dakota</option>
-                                                                    <option value="TN">Tennessee</option>
-                                                                    <option value="TX">Texas</option>
-                                                                    <option value="UT">Utah</option>
-                                                                    <option value="VT">Vermont</option>
-                                                                    <option value="VA">Virginia</option>
-                                                                    <option value="WA">Washington</option>
-                                                                    <option value="WV">West Virginia</option>
-                                                                    <option value="WI">Wisconsin</option>
-                                                                    <option value="WY">Wyoming</option>
-                                                                </select>
-                                                            </span>
-
-                                                        </div>
-
-
-                                                        <div class="col-md-4">
-                                                            <span class="wpcf7-form-control-wrap patient-portal-name">
-                                                                <input type="text" name="cityperson" value=""
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       ng-model="person.City"
-                                                                       size="40" class="wpcf7-form-control" placeholder="City" id="City" tabindex=12 />
-
-                                                            </span>
-
-
-                                                        </div>
-
-                                                    </div>
-
-
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-email">
-                                                                <input type="number" name="patient-portal-zip-code" value="" size="40"
-                                                                       class="wpcf7-form-control" placeholder="Zip Code"
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       ng-model="person.ZipCode" id="ZipCode" tabindex=13 />
-                                                            </span>
-                                                        </div>
-                                                        <div class="col-md-4">
-
-                                                        </div>
-                                                        <div class="col-md-4">
-
-
-
-                                                        </div>
-                                                    </div>
-
-
-                                                    <!--start-->
-                                                    <div class="row">
-                                                        <p style="text-align:center; padding-top:15px; padding-bottom:15px;">
-                                                            Please enter your procedure and insurance information.
-                                                        </p>
-                                                        <div class="col-md-4">
-                                                            <span class="wpcf7-form-control-wrap car">
-                                                                <select name="sex" class="wpcf7-form-control" required ng-model="person.Procedure" id="Procedure" tabindex=14>
-                                                                    <option value="">Select Procedure</option>
-                                                                    <option value="Low BMI lap band">Low BMI lap band</option>
-                                                                    <option value="Gastric Bypass">Gastric Bypass</option>
-                                                                    <option value="Gastric Sleeve">Gastric Sleeve</option>
-                                                                    <option value="Duodenal Switch">Duodenal Switch</option>
-                                                                </select>
-                                                            </span>
-                                                        </div>
-
-
-
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-name">
-                                                                <input type="text" name="street" value="" size="40" class="wpcf7-form-control"
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       placeholder="Insurance Company Name" ng-model="person.InsuranceCompanyName" id="InsuranceCompanyName" tabindex=15 />
-                                                            </span>
-
-                                                        </div>
-
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-name">
-                                                                <input type="text" name="street" value="" size="40"
-                                                                       class="wpcf7-form-control"
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       placeholder="Group Number" ng-model="person.GroupNumber" id="GroupNumber" tabindex=16 />
-                                                            </span>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-date">
-                                                                <input type="text" name="patient-portal-date" size="40" class="wpcf7-form-control"
-                                                                       id="ProcedureDate" required placeholder="Procedure Date mm/dd/yyyy" ng-model="person.ProcedureDate" tabindex=17 ng-keypress="keypress()" ng-keydown="keydown()" ng-change="change()" />
-                                                            </span>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-date">
-                                                                <input type="text" name="patient-portal-date"
-                                                                       ng-model="person.InsuranceEffectiveDate"
-                                                                       required
-                                                                       size="40" class="wpcf7-form-control"
-                                                                       id="InsuranceEffectiveDate" placeholder="Insurance Effective Date mm/dd/yyyy)" tabindex=18 ng-keypress="keypress()" ng-keydown="keydown()" ng-change="change()" />
-                                                            </span>
-
-                                                        </div>
-
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-email">
-                                                                <input type="number" name="patient-portal-zip-code" value="" size="40"
-                                                                       class="wpcf7-form-control"
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       placeholder="Policy Number" ng-model="person.PolicyNumber" id="PolicyNumber" tabindex=19 />
-                                                            </span>
-
-
-                                                        </div>
-
-
-
-
-                                                    </div>
-
-
-
-                                                    <div class="row">
-
-
-
-                                                        <div class="col-md-4">
-
-
-                                                        </div>
-
-
-                                                        <div class="col-md-4">
-                                                            <span class="wpcf7-form-control-wrap patient-portal-email">
-                                                                <input type="number" name="patient-portal-zip-code" value="" size="40"
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       class="wpcf7-form-control" placeholder="Guarantor" ng-model="person.Guarantor" id="Guarantor" tabindex=20 />
-                                                            </span>
-
-                                                        </div>
-
-                                                        <div class="col-md-4">
-
-
-                                                        </div>
-
-                                                    </div>
-
-
-                                                    <div class="row">
-
-
-                                                        <p style="text-align:center; padding-top:15px; padding-bottom:15px;">
-                                                            Please enter your procedure and insurance information.
-                                                        </p>
-
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-date">
-                                                                <input type="text" name="patient-portal-date" value="" size="40" class="wpcf7-form-control"
-                                                                       id="PreferredPharmacy" placeholder="Preferred Pharmacy"
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       ng-model="person.PreferredPharmacy" tabindex=21 />
-                                                            </span>
-
-
-                                                        </div>
-
-
-                                                        <div class="col-md-4">
-
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-name">
-                                                                <input type="text" name="street" value="" size="40"
-                                                                       class="wpcf7-form-control" placeholder="Pharmacy Address 1"
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       ng-model="person.PharmacyAddress1" id="PharmacyAddress1" tabindex=22 />
-                                                            </span>
-                                                        </div>
-
-
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-name">
-                                                                <input type="text" name="street" value="" size="40"
-                                                                       class="wpcf7-form-control"
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       placeholder="Pharmacy City" ng-model="person.PharmacyCity" id="PharmacyCity" tabindex=23 />
-                                                            </span>
-
-                                                        </div>
-
-
-                                                    </div>
-
-
-
-
-
-
-
-
-                                                    <div class="row">
-
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-email">
-                                                                <input type="number" name="patient-portal-zip-code" value="" size="40"
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       class="wpcf7-form-control"
-                                                                       placeholder="Pharmacy Phone" ng-model="person.PharmacyPhone" id="PharmacyPhone" tabindex=24 />
-                                                            </span>
-
-                                                        </div>
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-email">
-                                                                <input type="text" name="patient-portal-zip-code" value="" size="40"
-                                                                       class="wpcf7-form-control"
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       placeholder="Pharmacy Address 2" ng-model="person.PharmacyAddress2" id="PharmacyAddress2" tabindex=25 />
-                                                            </span>
-                                                        </div>
-                                                        <div class="col-md-4">
-
-                                                            <span class="wpcf7-form-control-wrap patient-portal-email">
-                                                                <input type="text" name="patient-portal-zip-code" value="" size="40"
-                                                                       class="wpcf7-form-control"
-                                                                       ng-maxlength="20" ng-minlength="2" required
-                                                                       placeholder="Pharmacy State" ng-model="person.PharmacyState" id="PharmacyState" tabindex=26 />
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-
-
-
-
-
                                                         <div class="col-md-12">
-
                                                             <div class="col-md-5">
-
-
-
                                                             </div>
-
                                                             <div class="col-md-2">
                                                                 <div class="book-form-submit" id="submit1">
-                                                                    <input type="button" value="SUBMIT"
+                                                                    <input type="button" value="SUBMIT" id="signupbtn"
                                                                            class="wpcf7-form-control wpcf7-submit  sub_btn"
                                                                            data-ng-click="SignUp()" tabindex=27 />
-
                                                                 </div>
-
                                                             </div>
-
                                                             <div class="col-md-5">
-
-
-
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </div>
 
+                                            </div>
+                                        </div>
+                                        <div class="profile" id="Profile2" style="display:none;">
+                                            <h2 class="book-title" id="reg">Active YOUR Patient Profile</h2>
+                                            <div style="text-align:center"><small>A confirmation code has been sent to your email. Please check<br /> your email and enter the confirmation number here.<br /><br /></small></div>
+                                            <div class="css-form" name="signUpForm1" novalidate>
+                                                <div class="alert alert-danger" id="diverror" ng-show="person.Error">
+                                                    <strong id="errorStrong">Error!</strong><span ng-bind-html="person.MessageError"></span>
+                                                </div>
+
+                                                <div class="noo-form" id="DivActivate" style=" padding: 0px 7%;">
+                                                    <div class="row">
+                                                        <div class="col-md-4"></div>
+                                                        <div class="col-md-4">
+                                                            <span class="wpcf7-form-control-wrap patient-portal-name">
+                                                                <input type="text" name="activecode"
+                                                                       ng-maxlength="20" ng-minlength="2" ng-required="true" required
+                                                                       ng-model="person.ActiveCode" size="40"
+                                                                       class="wpcf7-form-control" placeholder="Code" id="ActiveCode" autofocus />
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-md-4"></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4"></div>
+                                                        <div class="col-md-4">
+                                                            <div class="book-form-submit  col-md-6" id="submit1">
+                                                                <input type="button" value="Continue" id="activatebtn"
+                                                                       class="wpcf7-form-control wpcf7-submit  sub_btn"
+                                                                       data-ng-click="ActivateAccount()" tabindex=27 />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4"></div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -810,22 +415,12 @@
     <script type='text/javascript' src='~/Content/js/jquery-ui.js'></script>
     <script type='text/javascript' src='~/Content/js/jquery.ui.timepicker.js'></script>
 
-
     <script src="~/Content/js/jquery.event.move.js"></script>
     <script src="~/Content/js/responsive-slider.js"></script>
-
 
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/PersonAngular.js"></script>
     <script src="~/Scripts/angular-sanitize.js"></script>
-
-
-
-
-
-
-
-
 
 
 
@@ -847,7 +442,13 @@
     input[type="date"]:valid:before {
         content: "";
     }
+
+    .submitLoader {
+    background: url("/content/assets/loader.gif") no-repeat scroll 0% 0% !important;
+    }
+
 </style>
+
 <script type="text/javascript">
 
     $('#accountlink').hide();
@@ -857,22 +458,29 @@
      
     });
 </script>
+
 <script>
     $(function () {
-        $("#DateOfBirth").datepicker({
-            dateFormat: 'mm/dd/yy'
-        }).datepicker();
-        $("#ProcedureDate").datepicker({
-            dateFormat: 'mm/dd/yy'
-        }).datepicker();
-        $("#InsuranceEffectiveDate").datepicker({
-            dateFormat: 'mm/dd/yy'
-        }).datepicker();
+        if (/Android|webOS|iPhone|iPad|iPod|pocket|psp|kindle|avantgo|blazer|midori|Tablet|Palm|maemo|plucker|phone|BlackBerry|symbian|IEMobile|mobile|ZuneWP7|Windows Phone|Opera Mini/i.test(navigator.userAgent)) {
+        }
+        else
+        {
+            $("#DateOfBirth").datepicker({
+                dateFormat: 'mm/dd/yy'
+            }).datepicker();
+            $("#ProcedureDate").datepicker({
+                dateFormat: 'mm/dd/yy'
+            }).datepicker();
+            $("#InsuranceEffectiveDate").datepicker({
+                dateFormat: 'mm/dd/yy'
+            }).datepicker();
+        }
+     
     });
 </script>
 
 <script type="text/javascript">
-    if (/Android|webOS|iPhone|iPad|iPod|pocket|psp|kindle|avantgo|blazer|midori|Tablet|Palm|maemo|plucker|phone|BlackBerry|symbian|IEMobile|mobile|ZuneWP7|Windows Phone|Opera Mini/i.test(navigator.userAgent)){
+    if (/Android|webOS|iPhone|iPad|iPod|pocket|psp|kindle|avantgo|blazer|midori|Tablet|Palm|maemo|plucker|phone|BlackBerry|symbian|IEMobile|mobile|ZuneWP7|Windows Phone|Opera Mini/i.test(navigator.userAgent)) {
 $("#DateOfBirth").attr('type','date');
 $("#ProcedureDate").attr('type','date');
 $("#InsuranceEffectiveDate").attr('type','date');

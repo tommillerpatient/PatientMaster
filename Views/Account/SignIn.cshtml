@@ -105,6 +105,8 @@
                 <h1 class="page-title">Patient Portal Login</h1>
             </div><!-- /.container-boxed -->
         </section>
+
+
         <div id="main" class="main-content container commerce-account">
             <!-- Begin The loop -->
             <div class="hentry">
@@ -116,11 +118,56 @@
                                 <div class="col-md-8">
                                     <div class="col-1">
                                         <form name="signInForm" class="login" ng-controller="demoCtrl" ng-submit="signIn()">
-
-
                                             <div class="alert alert-danger" ng-show="person.Error" id="diverror1">
                                                 <strong>Error!</strong><span ng-bind-html="person.MessageError"></span>
                                             </div>
+                                                @if (ViewBag.Message != null)
+                                                {
+                                                    <div class="alert alert-success" id="mesegid">
+                                                        <strong></strong><span>@ViewBag.Message.</span>
+                                                    </div>
+
+                                                }
+                                            @if (!string.IsNullOrEmpty(Convert.ToString(Session["PasswordSend"])))
+                                            {
+
+                                                <div class="alert alert-success" id="PasswordSendid">
+                                                    <strong></strong><span>@Session["PasswordSend"]</span>
+                                                </div>
+
+                                            }
+                                            @if (!string.IsNullOrEmpty(Convert.ToString(Session["ResetPassMeseg"])))
+                                            {
+
+                                                <div class="alert alert-success" id="ResetPassMesegid">
+                                                    <strong></strong><span>@Session["ResetPassMeseg"]</span>
+                                                </div>
+
+                                            }
+                                            @if (!string.IsNullOrEmpty(Convert.ToString(Session["InvalidURl"])))
+                                            {
+
+                                                <div class="alert alert-danger" id="ResetPassMesegid">
+                                                    <strong></strong><span>@Session["InvalidURl"]</span>
+                                                </div>
+
+                                            }
+                                            @if (!string.IsNullOrEmpty(Convert.ToString(Request["cg"])))
+                                            {
+
+                                                <div class="alert alert-danger" id="ResetPassMesegid">
+                                                    <strong></strong><span>Seems you have invalid link. Please check your link again.</span>
+                                                </div>
+
+                                            }
+                                            @{
+                                                
+                                                Session.Remove("PasswordSend");
+                                                Session.Remove("ResetPassMeseg");
+                                                 Session.Remove("InvalidURl");
+                                              
+                                            }
+                                          
                                             <div class="form-row form-row-wide">
                                                 <label for="username">
                                                     Username or email address
@@ -139,7 +186,7 @@
                                                 <input type="submit" class="button" name="login" value="Login" data-ng-click="SignIn()" />
                                             </div>
                                             <div class="lost_password">
-                                                <a href="#">Lost your password?</a>
+                                                <a href="../Account/ForgotPassword">Lost your password?</a>
                                             </div>
                                         </form>
                                     </div>
@@ -151,6 +198,8 @@
                 </div><!-- .entry-content -->
             </div>
         </div>
+
+
         <footer class="wrap-footer">
             <div class="colophon wigetized">
                 <div class="container">

@@ -64,7 +64,8 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 body {
-  margin: 0;
+  margin: 0 auto;
+ 
 }
 article,
 aside,
@@ -466,6 +467,16 @@ p {
 .single p strong {
   color: #333333;
 }
+
+
+
+
+
+.default {
+
+border:1px solid #ccc !important;
+}
+
 .single ul {
   padding-left: 18px;
   margin-bottom: 20px;
@@ -2037,6 +2048,11 @@ input[type="button"].btn-block {
 .dropup .btn-lg .caret {
   border-width: 0 5px 5px;
 }
+
+.title-center h2 {
+width:99%;
+}
+
 .btn-group-vertical > .btn,
 .btn-group-vertical > .btn-group,
 .btn-group-vertical > .btn-group > .btn {
@@ -4058,6 +4074,7 @@ body .header-5 .fixed_top_eff2 {
   position: relative;
   left: auto;
   top: auto;
+  width:95% !important;
 }
 .header-3 .noo-nav-header4 {
   background: #ffffff;
@@ -7356,6 +7373,12 @@ ul.owl-theme .owl-controls .owl-page span:after {
   .noo-clients-default-3 .noo-clients-default li {
     width: 50%;
   }
+   .change {
+
+
+width:100% ; margin:0 auto; 
+}
+
 }
 
 /* === 4.13. NEWSLETTER === */
@@ -7445,19 +7468,23 @@ ul.owl-theme .owl-controls .owl-page span:after {
 
 /* === 4.14. FORM === */
 
+.change {
+
+
+width:35% !important; margin:0 auto; 
+}
+
+
+
+
+
 .book-form {
-  width: 100%;
-  position: relative;
-  /*  FORM PADDING  */
-  /* padding: 0 15px 0 0; 
-  background: #e44a36;
-  /* 
-  /FORM PADDING AND COLOR  */
-  border: 2px;
-  border-color: #1493f8;
-  box-shadow: 5px 5px 15px 5px #888888;
-	
-  z-index: 99;
+    border: 2px none #1493f8;
+    box-shadow: 5px 10px 15px 0 #888888;
+    margin-bottom: 77px;
+    position: relative;
+    width: 100%;
+    z-index: 99;
 }
 .book-form .book-content-style2 {
   background: #ffffff;
@@ -12144,6 +12171,8 @@ background:#65d527 !important;
 .social-all {
   background: #fec601;
   padding: 18px 33px;
+  position:relative;
+  z-index:99999;
 }
 .social-all span {
   padding-right: 5px;
@@ -18034,8 +18063,11 @@ a.go-to-top:hover a.go-to-top:focus.on:hover {
 	
 	
 	@media only screen and (min-width :479px) and (max-width:765px){
-	
-	
+
+        .row {
+        
+        margin:0 !important;
+        }
 	.welcome1{ display:block;}
  .welcome2{display:block;}
  
@@ -18118,6 +18150,26 @@ display:block;
 	
 	
 	@media (min-width: 481px) and (max-width: 767px) {
+
+         .wpcf7-form-control-wrap patient-portal-date {
+        overflow:hidden;
+        
+        
+        }
+        .col-md-4 {
+        
+        padding:0 !important;
+        }
+
+        .title-center h2 {
+width:99%;
+margin:0 auto;
+}
+    .row {
+        
+        margin:0 !important;
+        }
+     
   .responsive-slider .slides ul li .slide-body .caption.sub {
     font-size: 11px;
     bottom: 0px;
@@ -18133,23 +18185,59 @@ display:block;
   .line1{ font-size:10px;}
   .welcome2{font-size:10px !important;}
   .welcome1{font-size:12px !important;}
+  
+        .container-fluid {
+            padding-right:0px !important;
+            padding-left:0px !important;
+        }
+ 
 }
  
 	
 	@media only screen and (min-width : 320px) and (max-width:480px){
+
+        .col-md-4 {
+        
+        padding:0 !important;
+        }
+        
+         
+
+         .title-center h2 {
+width:99%;
+margin:0 auto;
+}
+
+
+        .title-center {
+        
+        margin-right:15px;
+        margin-left:15px;
+        }
+
+            .row {
+        
+        margin:0 !important;
+        }
  
  .schedule{ margin-top:10px; margin-left:-1px; margin-top:10px;}
  .education{ margin-left:-1px; }
   .education ul li { list-style:none; padding:0;}
  .education ul { margin-left:30px; padding:0;}
  .wpb_single_image{ text-align:center;}
- .book-content-style2{ margin-top:0px !important;}
- 
+ .book-content-style2{ margin-top:30px !important; width:100%; !important;}
+        .book-form {
+        width:100%;
+       
+        
+        }
  .responsive-slider .slides ul li .slide-body .caption.header{  left:5% !important;}
+
+        .container-fluid {
+            padding-right:0px !important;
+            padding-left:0px !important;
+        }
  
- 
- .welcome1{ display:none;}
- .welcome2{display:none;}
  
  .pro
 {
@@ -18241,3 +18329,46 @@ width:87%;
 
 
 .button_div{ display:block;}
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+       
+     .col-md-4 {
+        
+        padding:0 !important;
+        }
+        .title-center {
+        
+        margin-right:15px;
+        margin-left:15px;
+        }
+     .row {
+        
+        margin:0 !important;
+        }
+  
+
+     .change {
+
+
+width:100%  !important; margin:0 auto; 
+}
+
+}
+
+
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+        .row {
+        
+        margin:0 !important;
+        }
+
+     .change {
+
+
+width:100%  !important; margin:0 auto; 
+}
+
+}

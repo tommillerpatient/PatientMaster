@@ -3,7 +3,7 @@
 }
 
 <!doctype html>
-<html lang="en-US">
+<html lang="en-US" ng-app="demoModule">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
@@ -23,6 +23,11 @@
     <link rel="stylesheet" href='~/Content/css/magnific-popup.css' type='text/css' media='all' />
     <link rel='stylesheet' href='~/Content/css/settings.css' type='text/css' media='all' />
     <link rel="stylesheet" href='~/Content/css/preloader.css' type='text/css' media='all' />
+
+
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/PersonCareGiver.js"></script>
+    <script src="~/Scripts/angular-sanitize.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -44,8 +49,14 @@
             border: 1px solid #0EAB55 !important;
         }
     </style>
+
+
+
+
+
 </head>
 <body>
+
     <div id="loading">
         <div id="loading-center">
             <div id="loading-center-absolute">
@@ -53,6 +64,22 @@
             </div>
         </div>
     </div>
+
+    <div id="dialog_CareGiver" title="Someone to support your journey" style="display:none;">
+        <div class="addedit-box" ng-controller="demoCtrl">
+            <br />
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Do you want to add a Care Giver?</p>
+            <div class="Buttons" style="padding-top:20px;" align="center">
+                <input type="button" class="delete-button" id="btnDelete" value="Yes" data-ng-click="Yes()" style="margin-right:12px;" />
+                <input type="button" class="cancel-button" id="btnCancel" value="No" data-ng-click="No()" />
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+
+
     <div class="site">
         <header class="noo-header header-2 header-style3">
             <div class="navbar-wrapper">
@@ -96,7 +123,7 @@
                                     </button>
                                     <a href="" class="navbar-brand">
                                         <img class="noo-logo-img noo-logo-normal" src="/Content/images/logo.png" alt=" ">
-                            
+
 
                                     </a>
 
@@ -300,7 +327,6 @@
                                     <i class="fa fa-bars icon-bars"></i>
                                     @if (!string.IsNullOrEmpty(Convert.ToString(Session["usernamesignin"])))
                                     {
-
                                         <span>@Convert.ToString(Session["usernamesignin"])</span>
                                     }
                                     else
@@ -308,11 +334,17 @@
                                         <span>@Convert.ToString(Session["usernamesignup"])</span>
                                     }
                                     <i class="fa fa-chevron-down pull-right"></i>
-                                  
+
                                 </span>
                                 <ul class="menu-categories">
-                                    <li><a href="">My Account</a></li>
-                                    <li><a href="">Messages</a></li>
+                                    @if (Convert.ToString(Session["IsCareGiver"]) == "0" || string.IsNullOrEmpty(Convert.ToString(Session["IsCareGiver"]))){
+                                    <li><a href="../Account/UserProfile">My Account</a></li>
+                                    <li><a href="../Account/MyCareGivers">My Caregivers</a></li>
+                                    } else { 
+                                    <li><a href="../Account/CareGiverProfile">My Account</a></li>
+                                    }
+                                    <li><a href="../Account/Settings">Change Password</a></li>
+                                    <li><a href="#">Settings</a></li>
                                     <li><a href="../Account/SignOut">SignOut</a></li>
                                 </ul>
                             </nav>
@@ -321,6 +353,7 @@
                 </div>
             </div>
         </header>
+
         <div class="main-content">
             <div class="container-fluid">
                 <div class="row row-fluid pt-7 pb-0">
@@ -330,1132 +363,1211 @@
                         <div class="row">
 
                             <div class="col-md-12">
-									@if (!string.IsNullOrEmpty(Convert.ToString(Session["usernamesignup"])))
+                                @if (!string.IsNullOrEmpty(Convert.ToString(Session["usernamesignup"])))
                                 {
-
-                                    <div class="alert alert-success">
-                                        <strong>Success!&nbsp;&nbsp;</strong><span>@Convert.ToString(Session["usernamesignup"]) Your profile has been successfully created.</span>
+                                    <div class="alert alert-success" style="margin:13px;">
+                                        <strong></strong><span>@Convert.ToString(Session["usernamesignup"]) Your profile has been successfully created.</span>
                                     </div>
-
                                 }
-                            </div>
-                            </div>
-
-                            <div class="col-sm-8">
-
-                                <div class="wpb_single_image welcome">
-
-                                    <h2 style="margin-left:20px; margin-top:0px; padding-top:20px;">Welcome Back</h2>
-
-
-                                    <br><br><br>
-
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-
-
-
-                                    <b style="margin-bottom:0; margin-left:20px;">4 unRead messages | 1 upcoming visit | 1 Community Update</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 ">
-                                <div class="wpb_single_image schedule">
-
-                                    <h3>SCHEDULE</h3>
-
-                                    <br>
-
-                                    <b> 1 upcoming Visit</b>
-
-                                </div>
-                                <div class="wpb_single_image mt-3 education">
-
-                                    <h3>EDUCATION</h3>
-
-                                    <ul>
-
-                                        <li>Videos</li>
-                                        <li>eBooks</li>
-                                        <li>PDF</li>
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid">
-                <div class="row row-fluid pt-7">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-3 ">
-                                <div class="wpb_single_image">
-                                    <a href="#" target="_self">
-                                        <img width="270" height="480" src="~/Content/images/save_25.jpg" alt="" />
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-sm-9 pt-5">
-                                <div class="simple-product commerce">
-                                    <div class="thumb">
-                                        <a href="">
-                                            <img width="420" height="365" src="~/Content/images/dr_nicole425x365.jpg" alt="" />
-                                        </a>
+                                @if (ViewBag.Activated != null)
+                                {
+                                    <div class="alert alert-success" style="margin:13px;">
+                                        <strong></strong><span>Your account has been activated successfully.</span>
                                     </div>
-                                    <div class="simple-content">
-                                        <h4><a href="">Dr. Nicole Jones</a></h4>
-                                        <div class="rating">
-                                            <div class="star-rating">
-                                                <span style="width:100%"></span>
-                                            </div> based on 11 patient reviews
-                                        </div>
-                                        <p>
-                                            Doctor Nicole Jones has been lorem ipsum dolor sit amet, consectetur adipiscing elit. In odio ex, tincidunt vel lobortis sed, commodo eget eros. Maecenas condimentum sem in tellus cursusbus.
-                                        </p>
-
-
-                                        <div class="entry-cart-meta">
-                                            <a href="#" class="button add_to_cart_button">SCHEDULE A VIRTUAL VISIT TODAY!</a>
-
-                                        </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Convert.ToString(Session["UpdateUSer"])))
+                                {
+                                    <div class="alert alert-success" style="margin:13px;">
+                                        <strong></strong><span>Your profile has been successfully updated.</span>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid">
-                <div class="row row-fluid">
-                    <div class="col-sm-12">
-                        <div class="noo-poster commerce">
-                            <div class="noo-poster-bk" style="background-image: url('images/ppd_bg.jpg')">
-                                <div class="container">
-                                    <button class="poster-prev nav-button">
-                                        <i class="fa fa-long-arrow-left"></i>
-                                    </button>
-                                    <button class="poster-next nav-button">
-                                        <i class="fa fa-long-arrow-right"></i>
-                                    </button>
-                                    <div class="row">
-                                        <ul class="noo_poster_products">
-                                            <li>
-                                                <a class="the_permalink" href="shop-detail.html">
-                                                    <img width="370" height="494" src="~/Content/images/ppd_360x480_wrd.jpg" alt="poster" />
-                                                </a>
-                                                <div class="entry-poster-meta">
-                                                    <div class="price">
-                                                        <span class="amount">Document Title</span>
-                                                    </div>
-                                                    <div class="action-meta">
-                                                        <a href="#" class="button add_to_cart_button">Download</a>
-                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                            <div class="yith-wcwl-add-button">
-                                                                <a href="#" class="add_to_wishlist">
-                                                                    Save for later
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a class="the_permalink" href="shop-detail.html">
-                                                    <img width="370" height="494" src="~/Content/images/ppd_360x480_pdf.jpg" alt="" />
-                                                </a>
-                                                <div class="entry-poster-meta">
-                                                    <div class="price">
-                                                        <span class="amount">Document Title</span>
-                                                    </div>
-                                                    <div class="action-meta">
-                                                        <a href="#" class="button add_to_cart_button">Download</a>
-                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                            <div class="yith-wcwl-add-button">
-                                                                <a href="#" class="add_to_wishlist">
-                                                                    Save for later
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a class="the_permalink" href="shop-detail.html">
-                                                    <img width="370" height="492" src="~/Content/images/ppd_360x480_ebk.jpg" alt="" />
-                                                </a>
-                                                <div class="entry-poster-meta">
-                                                    <div class="price">
-                                                        <span class="amount">Document Title</span>
-                                                    </div>
-                                                    <div class="action-meta">
-                                                        <a href="#" class="button add_to_cart_button">Download</a>
-                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                            <div class="yith-wcwl-add-button">
-                                                                <a href="#" class="add_to_wishlist">
-                                                                    Save for later
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a class="the_permalink" href="shop-detail.html">
-                                                    <img width="370" height="494" src="~/Content/images/ppd_360x480_wrd.jpg" alt="poster" />
-                                                </a>
-                                                <div class="entry-poster-meta">
-                                                    <div class="price">
-                                                        <span class="amount">Document Title</span>
-                                                    </div>
-                                                    <div class="action-meta">
-                                                        <a href="#" class="button add_to_cart_button">Download</a>
-                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                            <div class="yith-wcwl-add-button">
-                                                                <a href="#" class="add_to_wishlist">
-                                                                    Save for later
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a class="the_permalink" href="shop-detail.html">
-                                                    <img width="370" height="494" src="~/Content/images/ppd_360x480_pdf.jpg" alt="" />
-                                                </a>
-                                                <div class="entry-poster-meta">
-                                                    <div class="price">
-                                                        <span class="amount">Document Title</span>
-                                                    </div>
-                                                    <div class="action-meta">
-                                                        <a href="#" class="button add_to_cart_button">Downlaod</a>
-                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                            <div class="yith-wcwl-add-button">
-                                                                <a href="#" class="add_to_wishlist">
-                                                                    Save for later
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <a class="the_permalink" href="shop-detail.html">
-                                                    <img width="370" height="494" src="~/Content/images/ppd_360x480_ebk.jpg" alt="" />
-                                                </a>
-                                                <div class="entry-poster-meta">
-                                                    <div class="price">
-                                                        <span class="amount">Document Title</span>
-                                                    </div>
-                                                    <div class="action-meta">
-                                                        <a href="#" class="button add_to_cart_button">Downlaod</a>
-                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                            <div class="yith-wcwl-add-button">
-                                                                <a href="#" class="add_to_wishlist">
-                                                                    Save for later
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                }
+                                @if (!string.IsNullOrEmpty(Convert.ToString(Session["ChangePassword"])))
+                                {
+                                    <div class="alert alert-success" style="margin:13px;">
+                                        <strong></strong><span>Your password has been successfully changed.</span>
                                     </div>
-                                </div>
-                            </div>
-                            <!--end noo-poster-bk-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid">
-                <div class="row row-fluid pt-10">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="title-center">
-                                    <h3 class="">
-                                        <!--      <span class="noo-title-number">
-                                                  <span class="frist">0</span><span class="last">1</span>
-                                              </span>  -->
-                                        <strong>VIDEO EDUCATION</strong>
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid">
-                <div class="row row-fluid">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="text-center">
-                                    Video education resources summary lorem ipsum dolor sit amet, consectetur adipiscing elit. <br> In odio ex, tincidunt vel lobortis sed, commodo eget eros. Maecenas condimentum sem in tellus cursusbus.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid">
-                <div class="row row-fluid">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="tabbable product-tab">
-                                    <ul class="nav nav-tabs">
-                                        <li class="active">
-                                            <a data-toggle="tab" href="#tab-1">BARIATRIC FAQ</a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="tab" href="#tab-2">PROCEDURES</a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="tab" href="#tab-3">RECOVERY</a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="tab" href="#tab-4">TIPS</a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div id="tab-1" class="tab-pane fade in active">
-                                            <div class="noo-row-slider commerce">
-                                                <ul class="noo-woo-slider products">
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_1.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:0%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 0 rating
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Add to Wishlist
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">BARIATRIC FAQ VIDEO TITLE 1</a></h3>
-                                                                    <!-- 	<span class="price">
-                                                                             <span class="amount">Very brief summary. </span>
-                                                                         </span>  -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_2.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:0%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 0 rating
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Watch Later
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">BARIATRIC FAQ VIDEO TITLE 2</a></h3>
-                                                                    <!--	<span class="price">
-                                                                            <span class="amount">Very brief summary. </span>
-                                                                        </span>  -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_3.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:0%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 0 rating
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Watch Later
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">BARIATRIC FAQ VIDEO TITLE 3</a></h3>
-                                                                    <!--	<span class="price">
-                                                                        <span class="amount">Very brief summary. </span>
-                                                                    </span>  -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_4.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:100%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 5 ratings
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Watch Later
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">BARIATRIC FAQ VIDEO TITLE 4</a></h3>
-                                                                    <!--	<span class="price">
-                                                                        <span class="amount">Very brief summary. </span>
-                                                                    </span>  -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_4.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:60%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 3 ratings
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Watch Later
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">BARIATRIC FAQ VIDEO TITLE 5</a></h3>
-                                                                    <!--	<span class="price">
-                                                                        <span class="amount">Very brief summary. </span>
-                                                                    </span>  -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div id="tab-2" class="tab-pane fade">
-                                            <div class="noo-row-slider commerce">
-                                                <ul class="noo-woo-slider products">
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:0%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 0 rating
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Watch Later
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">PROCEDURES VIDEO TITLE 1</a></h3>
-                                                                    <!--	<span class="price">
-                                                                        <span class="amount">Very brief summary. </span>
-                                                                    </span>  -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:0%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 0 rating
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Watch Later
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">PROCEDURES VIDEO TITLE 2</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:0%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 0 rating
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Watch Later
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">PROCEDURES VIDEO TITLE 3</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:100%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 5 ratings
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Watch Later
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">PROCEDURES VIDEO TITLE 4</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:60%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 3 ratings
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Watch Later
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">PROCEDURES VIDEO TITLE 5</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div id="tab-3" class="tab-pane fade">
-                                            <div class="noo-row-slider commerce">
-                                                <ul class="noo-woo-slider products">
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:0%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 0 rating
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Watch Later
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">RECOVERY VIDEO TITLE 1</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:0%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 0 rating
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Add to Wishlist
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">RECOVERY VIDEO TITLE 2</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:0%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 0 rating
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Add to Wishlist
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">RECOVERY VIDEO TITLE 3</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:100%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 5 ratings
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Add to Wishlist
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">RECOVERY VIDEO TITLE 4</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:60%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 3 ratings
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Add to Wishlist
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">RECOVERY VIDEO TITLE 5</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div id="tab-4" class="tab-pane fade">
-                                            <div class="noo-row-slider commerce">
-                                                <ul class="noo-woo-slider products">
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:0%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 0 rating
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Add to Wishlist
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">TIP VIDEO TITLE 1</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:0%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 0 rating
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Add to Wishlist
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">TIP VIDEO TITLE 2</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:0%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 0 rating
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Add to Wishlist
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">TIP VIDEO TITLE 3</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:100%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 5 ratings
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Add to Wishlist
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">TIP VIDEO TITLE 4</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                            <div class="noo-product-inner">
-                                                                <div class="woo-thumbnail">
-                                                                    <div class="bk"></div>
-                                                                    <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                    <div class="noo-product-meta">
-                                                                        <div class="rating">
-                                                                            <div class="star-rating">
-                                                                                <span style="width:60%"></span>
-                                                                            </div>
-                                                                            <span class="noo-count-rating">
-                                                                                based on 3 ratings
-                                                                            </span>
-                                                                        </div>
-                                                                        <div class="entry-cart-meta">
-                                                                            <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                            <div class="yith-wcwl-add-to-wishlist">
-                                                                                <div class="yith-wcwl-add-button">
-                                                                                    <a href="#" class="add_to_wishlist">
-                                                                                        Add to Wishlist
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="noo-product-footer">
-                                                                    <h3><a href="">TIP VIDEO TITLE 5</a></h3>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Convert.ToString(Request["cg"])))
+                                {
+                                    <div class="alert alert-success" style="margin:13px;">
+                                        <strong></strong><span>Your account has been successfully created.</span>
                                     </div>
-                                </div>
+                                }
+                                @if (!string.IsNullOrEmpty(Convert.ToString(Request["msg"])))
+                                {
+                                    if (Convert.ToString(Request["msg"]) == "CareGiver")
+                                    {
+                                    <div class="alert alert-success" style="margin:13px;">
+                                        <strong></strong><span>Email sent successfully.</span>
+                                    </div>
+                                    }
+                                }
+                                @{
+                                    Session.Remove("UpdateUSer");
+                                    Session.Remove("ChangePassword");
+                                }
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-8">
+
+                            <div class="wpb_single_image welcome">
+
+                                <h2 style="margin-left:20px; margin-top:0px; padding-top:20px;">Welcome Back</h2>
+
+
+                                <br><br><br>
+
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+
+
+
+                                <b style="margin-bottom:0; margin-left:20px;">4 unRead messages | 1 upcoming visit | 1 Community Update</b>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 ">
+                            <div class="wpb_single_image schedule">
+
+                                <h3>SCHEDULE</h3>
+
+                                <br>
+
+                                <b> 1 upcoming Visit</b>
+
+                            </div>
+                            <div class="wpb_single_image mt-3 education">
+
+                                <h3>EDUCATION</h3>
+
+                                <ul>
+
+                                    <li>Videos</li>
+                                    <li>eBooks</li>
+                                    <li>PDF</li>
+                                </ul>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> <!-- /.main -->
-        <footer class="wrap-footer">
-            <!--Start footer widget-->
-            <div class="colophon wigetized">
+
+
+
+
+        </div>
+
+
+        <div class="container-fluid">
+            <div class="row row-fluid pt-7">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4 col-sm-6 noo-footer-4">
-                            <div class="widget widget_noo_infomation">
-                                <div class="social-all">
-                                    <span>Follow us</span>
-                                    <a href="#" class="fa fa-facebook"></a>
-                                    <a href="#" class="fa fa-twitter"></a>
-                                    <a href="#" class="fa fa-youtube"></a>
-                                    <a href="#" class="fa fa-skype"></a>
+                        <div class="col-sm-3 ">
+                            <div class="wpb_single_image">
+                                <a href="#" target="_self">
+                                    <img width="270" height="480" src="~/Content/images/save_25.jpg" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-9 pt-5">
+                            <div class="simple-product commerce">
+                                <div class="thumb">
+                                    <a href="">
+                                        <img width="420" height="365" src="~/Content/images/dr_nicole425x365.jpg" alt="" />
+                                    </a>
                                 </div>
-                                <div class="noo-info-top">
-
+                                <div class="simple-content">
+                                    <h4><a href="">Dr. Nicole Jones</a></h4>
+                                    <div class="rating">
+                                        <div class="star-rating">
+                                            <span style="width:100%"></span>
+                                        </div> based on 11 patient reviews
+                                    </div>
                                     <p>
-                                        L.O.B. Bariatric community is ...eget fermentum diam, vitae elementum mi. Nulla facilisi. Nam nisl libero, vestibulum a urna ut, tempor dictum tellus. Proin non est a justo dapibus varius!
+                                        Doctor Nicole Jones has been lorem ipsum dolor sit amet, consectetur adipiscing elit. In odio ex, tincidunt vel lobortis sed, commodo eget eros. Maecenas condimentum sem in tellus cursusbus.
                                     </p>
-                                </div>
-                                <ul class="noo-infomation-attr">
-                                    <li>
-                                        <span class="fa fa-map-marker infomation-left"></span>
-                                        <address>
-                                            230 N Broad St Philadelphia, PA 19102
 
-                                        </address>
-                                    </li>
-                                    <li>
-                                        <span class="fa fa-phone infomation-left"></span>
-                                        <span>(215) 762-7000 </span>
-                                    </li>
-                                    <li>
-                                        <span class="fa fa-envelope infomation-left"></span>
-                                        <span class="phone-text">info@emailsample.com</span>
-                                    </li>
-                                    <li>
-                                        <span class="fa fa-globe infomation-left"></span>
-                                        <span>www.L.O.B.dotcom</span>
-                                    </li>
-                                </ul>
-                                <div class="noo-info-footer">
-                                    � L.O.B. Bariatrics 2016, All Rights Reserved <br>
-                                    Copyright <i class="fa fa-hospital-o"></i> Tenet Health Network
-                                </div>
-                            </div>
-                        </div>
-                        <div class="noo-md-custom noo-footer-4">
-                            <div class="widget widget_noo_services">
-                                <h4 class="widget-title">Quick Links</h4>
-                                <ul>
-                                    <li><a href="#">Virtual Visit</a></li>
-                                    <li><a href="#">Procedures</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">ABOUT</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="noo-md-custom noo-footer-4">
-                            <div class="widget widget_noo_menu">
-                                <h4 class="widget-title">Resources</h4>
-                                <div class="noo-custom-menu">
-                                    <ul>
-                                        <li><a href="#">Diet</a></li>
-                                        <li><a href="#">Health</a></li>
-                                        <li><a href="#">Bariatric</a></li>
-                                        <li><a href="#">Care</a></li>
-                                    </ul>
-                                    <ul>
-                                        <li><a href="#">Videos</a></li>
-                                        <li><a href="#">Education</a></li>
-                                        <li><a href="#">Vlogs</a></li>
-                                        <li><a href="#">Community</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="noo-md-custom noo-footer-4">
-                            <div class="widget tweets-widget">
-                                <h4 class="widget-title">Community Tweets</h4>
-                                <div class="recent-tweets">
-                                    <ul>
-                                        <li>
-                                            <div class="twitter_user">
-                                                <a class="twitter_profile" target="_blank" href="#">&nbsp;</a>
-                                                <span class="twitter_username">@ViewBag.HUHospitalPHL</span>
-                                            </div>
-                                            <span class="tw-content">
-                                                Congrats to @ViewBag.HUHospitalPHL employees who were recognized for their service. These six have been here for 40+ years. <a href="#" target="_blank">@ViewBag.HUHospitalPHL</a> <a href="#" target="_blank">#TEAM</a>
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <div class="twitter_user">
-                                                <a class="twitter_profile" target="_blank" href="#">&nbsp;</a>
-                                                <span class="twitter_username">@ViewBag.HUHospitalPHL</span>
-                                            </div>
-                                            <span class="tw-content">
-                                                ICYMI: 31 @ViewBag.HUHospitalPHL physicians were named to @ViewBag.phillymag 2016 list of the region�s �Top Doctors.�:  <a href="#" target="_blank">https://goo.gl/OuU5fS </a> <a href="#" target="_blank">#TOPDOCTORS</a>
-                                            </span>
-                                        </li>
-                                    </ul>
+
+                                    <div class="entry-cart-meta">
+                                        <a href="#" class="button add_to_cart_button">SCHEDULE A VIRTUAL VISIT TODAY!</a>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--End footer widget-->
-        </footer>
-    </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row row-fluid">
+                <div class="col-sm-12">
+                    <div class="noo-poster commerce">
+                        <div class="noo-poster-bk" style="background-image: url('images/ppd_bg.jpg')">
+                            <div class="container">
+                                <button class="poster-prev nav-button">
+                                    <i class="fa fa-long-arrow-left"></i>
+                                </button>
+                                <button class="poster-next nav-button">
+                                    <i class="fa fa-long-arrow-right"></i>
+                                </button>
+                                <div class="row">
+                                    <ul class="noo_poster_products">
+                                        <li>
+                                            <a class="the_permalink" href="shop-detail.html">
+                                                <img width="370" height="494" src="~/Content/images/ppd_360x480_wrd.jpg" alt="poster" />
+                                            </a>
+                                            <div class="entry-poster-meta">
+                                                <div class="price">
+                                                    <span class="amount">Document Title</span>
+                                                </div>
+                                                <div class="action-meta">
+                                                    <a href="#" class="button add_to_cart_button">Download</a>
+                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                        <div class="yith-wcwl-add-button">
+                                                            <a href="#" class="add_to_wishlist">
+                                                                Save for later
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a class="the_permalink" href="shop-detail.html">
+                                                <img width="370" height="494" src="~/Content/images/ppd_360x480_pdf.jpg" alt="" />
+                                            </a>
+                                            <div class="entry-poster-meta">
+                                                <div class="price">
+                                                    <span class="amount">Document Title</span>
+                                                </div>
+                                                <div class="action-meta">
+                                                    <a href="#" class="button add_to_cart_button">Download</a>
+                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                        <div class="yith-wcwl-add-button">
+                                                            <a href="#" class="add_to_wishlist">
+                                                                Save for later
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a class="the_permalink" href="shop-detail.html">
+                                                <img width="370" height="492" src="~/Content/images/ppd_360x480_ebk.jpg" alt="" />
+                                            </a>
+                                            <div class="entry-poster-meta">
+                                                <div class="price">
+                                                    <span class="amount">Document Title</span>
+                                                </div>
+                                                <div class="action-meta">
+                                                    <a href="#" class="button add_to_cart_button">Download</a>
+                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                        <div class="yith-wcwl-add-button">
+                                                            <a href="#" class="add_to_wishlist">
+                                                                Save for later
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a class="the_permalink" href="shop-detail.html">
+                                                <img width="370" height="494" src="~/Content/images/ppd_360x480_wrd.jpg" alt="poster" />
+                                            </a>
+                                            <div class="entry-poster-meta">
+                                                <div class="price">
+                                                    <span class="amount">Document Title</span>
+                                                </div>
+                                                <div class="action-meta">
+                                                    <a href="#" class="button add_to_cart_button">Download</a>
+                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                        <div class="yith-wcwl-add-button">
+                                                            <a href="#" class="add_to_wishlist">
+                                                                Save for later
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a class="the_permalink" href="shop-detail.html">
+                                                <img width="370" height="494" src="~/Content/images/ppd_360x480_pdf.jpg" alt="" />
+                                            </a>
+                                            <div class="entry-poster-meta">
+                                                <div class="price">
+                                                    <span class="amount">Document Title</span>
+                                                </div>
+                                                <div class="action-meta">
+                                                    <a href="#" class="button add_to_cart_button">Downlaod</a>
+                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                        <div class="yith-wcwl-add-button">
+                                                            <a href="#" class="add_to_wishlist">
+                                                                Save for later
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <a class="the_permalink" href="shop-detail.html">
+                                                <img width="370" height="494" src="~/Content/images/ppd_360x480_ebk.jpg" alt="" />
+                                            </a>
+                                            <div class="entry-poster-meta">
+                                                <div class="price">
+                                                    <span class="amount">Document Title</span>
+                                                </div>
+                                                <div class="action-meta">
+                                                    <a href="#" class="button add_to_cart_button">Downlaod</a>
+                                                    <div class="yith-wcwl-add-to-wishlist">
+                                                        <div class="yith-wcwl-add-button">
+                                                            <a href="#" class="add_to_wishlist">
+                                                                Save for later
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end noo-poster-bk-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row row-fluid pt-10">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="title-center">
+                                <h3 class="">
+                                    <!--      <span class="noo-title-number">
+                                              <span class="frist">0</span><span class="last">1</span>
+                                          </span>  -->
+                                    <strong>VIDEO EDUCATION</strong>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row row-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="text-center">
+                                Video education resources summary lorem ipsum dolor sit amet, consectetur adipiscing elit. <br> In odio ex, tincidunt vel lobortis sed, commodo eget eros. Maecenas condimentum sem in tellus cursusbus.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row row-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="tabbable product-tab">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#tab-1">BARIATRIC FAQ</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#tab-2">PROCEDURES</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#tab-3">RECOVERY</a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#tab-4">TIPS</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="tab-1" class="tab-pane fade in active">
+                                        <div class="noo-row-slider commerce">
+                                            <ul class="noo-woo-slider products">
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_1.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:0%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 0 rating
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Add to Wishlist
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">BARIATRIC FAQ VIDEO TITLE 1</a></h3>
+                                                                <!-- 	<span class="price">
+                                                                         <span class="amount">Very brief summary. </span>
+                                                                     </span>  -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_2.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:0%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 0 rating
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Watch Later
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">BARIATRIC FAQ VIDEO TITLE 2</a></h3>
+                                                                <!--	<span class="price">
+                                                                        <span class="amount">Very brief summary. </span>
+                                                                    </span>  -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_3.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:0%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 0 rating
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Watch Later
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">BARIATRIC FAQ VIDEO TITLE 3</a></h3>
+                                                                <!--	<span class="price">
+                                                                    <span class="amount">Very brief summary. </span>
+                                                                </span>  -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_4.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:100%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 5 ratings
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Watch Later
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">BARIATRIC FAQ VIDEO TITLE 4</a></h3>
+                                                                <!--	<span class="price">
+                                                                    <span class="amount">Very brief summary. </span>
+                                                                </span>  -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_4.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:60%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 3 ratings
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Watch Later
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">BARIATRIC FAQ VIDEO TITLE 5</a></h3>
+                                                                <!--	<span class="price">
+                                                                    <span class="amount">Very brief summary. </span>
+                                                                </span>  -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div id="tab-2" class="tab-pane fade">
+                                        <div class="noo-row-slider commerce">
+                                            <ul class="noo-woo-slider products">
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:0%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 0 rating
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Watch Later
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">PROCEDURES VIDEO TITLE 1</a></h3>
+                                                                <!--	<span class="price">
+                                                                    <span class="amount">Very brief summary. </span>
+                                                                </span>  -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:0%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 0 rating
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Watch Later
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">PROCEDURES VIDEO TITLE 2</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:0%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 0 rating
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Watch Later
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">PROCEDURES VIDEO TITLE 3</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:100%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 5 ratings
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Watch Later
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">PROCEDURES VIDEO TITLE 4</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:60%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 3 ratings
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Watch Later
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">PROCEDURES VIDEO TITLE 5</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div id="tab-3" class="tab-pane fade">
+                                        <div class="noo-row-slider commerce">
+                                            <ul class="noo-woo-slider products">
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:0%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 0 rating
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Watch Later
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">RECOVERY VIDEO TITLE 1</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:0%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 0 rating
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Add to Wishlist
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">RECOVERY VIDEO TITLE 2</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:0%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 0 rating
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Add to Wishlist
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">RECOVERY VIDEO TITLE 3</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:100%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 5 ratings
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Add to Wishlist
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">RECOVERY VIDEO TITLE 4</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:60%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 3 ratings
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Add to Wishlist
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">RECOVERY VIDEO TITLE 5</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div id="tab-4" class="tab-pane fade">
+                                        <div class="noo-row-slider commerce">
+                                            <ul class="noo-woo-slider products">
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:0%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 0 rating
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Add to Wishlist
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">TIP VIDEO TITLE 1</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:0%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 0 rating
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Add to Wishlist
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">TIP VIDEO TITLE 2</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:0%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 0 rating
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Add to Wishlist
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">TIP VIDEO TITLE 3</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:100%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 5 ratings
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Add to Wishlist
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">TIP VIDEO TITLE 4</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
+                                                        <div class="noo-product-inner">
+                                                            <div class="woo-thumbnail">
+                                                                <div class="bk"></div>
+                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
+                                                                <div class="noo-product-meta">
+                                                                    <div class="rating">
+                                                                        <div class="star-rating">
+                                                                            <span style="width:60%"></span>
+                                                                        </div>
+                                                                        <span class="noo-count-rating">
+                                                                            based on 3 ratings
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="entry-cart-meta">
+                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Add to Wishlist
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="noo-product-footer">
+                                                                <h3><a href="">TIP VIDEO TITLE 5</a></h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /.main -->
+
+    <footer class="wrap-footer">
+        <!--Start footer widget-->
+        <div class="colophon wigetized">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 noo-footer-4">
+                        <div class="widget widget_noo_infomation">
+                            <div class="social-all">
+                                <span>Follow us</span>
+                                <a href="#" class="fa fa-facebook"></a>
+                                <a href="#" class="fa fa-twitter"></a>
+                                <a href="#" class="fa fa-youtube"></a>
+                                <a href="#" class="fa fa-skype"></a>
+                            </div>
+                            <div class="noo-info-top">
+
+                                <p>
+                                    L.O.B. Bariatric community is ...eget fermentum diam, vitae elementum mi. Nulla facilisi. Nam nisl libero, vestibulum a urna ut, tempor dictum tellus. Proin non est a justo dapibus varius!
+                                </p>
+                            </div>
+                            <ul class="noo-infomation-attr">
+                                <li>
+                                    <span class="fa fa-map-marker infomation-left"></span>
+                                    <address>
+                                        230 N Broad St Philadelphia, PA 19102
+
+                                    </address>
+                                </li>
+                                <li>
+                                    <span class="fa fa-phone infomation-left"></span>
+                                    <span>(215) 762-7000 </span>
+                                </li>
+                                <li>
+                                    <span class="fa fa-envelope infomation-left"></span>
+                                    <span class="phone-text">info@emailsample.com</span>
+                                </li>
+                                <li>
+                                    <span class="fa fa-globe infomation-left"></span>
+                                    <span>www.L.O.B.dotcom</span>
+                                </li>
+                            </ul>
+                            <div class="noo-info-footer">
+                                � L.O.B. Bariatrics 2016, All Rights Reserved <br>
+                                Copyright <i class="fa fa-hospital-o"></i> Tenet Health Network
+                            </div>
+                        </div>
+                    </div>
+                    <div class="noo-md-custom noo-footer-4">
+                        <div class="widget widget_noo_services">
+                            <h4 class="widget-title">Quick Links</h4>
+                            <ul>
+                                <li><a href="http://virtualvisitwebapp-qa.azurewebsites.net/">Virtual Visit</a></li>
+                                <li><a href="#">Procedures</a></li>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">ABOUT</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="noo-md-custom noo-footer-4">
+                        <div class="widget widget_noo_menu">
+                            <h4 class="widget-title">Resources</h4>
+                            <div class="noo-custom-menu">
+                                <ul>
+                                    <li><a href="#">Diet</a></li>
+                                    <li><a href="#">Health</a></li>
+                                    <li><a href="#">Bariatric</a></li>
+                                    <li><a href="#">Care</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Videos</a></li>
+                                    <li><a href="#">Education</a></li>
+                                    <li><a href="#">Vlogs</a></li>
+                                    <li><a href="#">Community</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="noo-md-custom noo-footer-4">
+                        <div class="widget tweets-widget">
+                            <h4 class="widget-title">Community Tweets</h4>
+                            <div class="recent-tweets">
+                                <ul>
+                                    <li>
+                                        <div class="twitter_user">
+                                            <a class="twitter_profile" target="_blank" href="#">&nbsp;</a>
+                                            <span class="twitter_username">@ViewBag.HUHospitalPHL</span>
+                                        </div>
+                                        <span class="tw-content">
+                                            Congrats to @ViewBag.HUHospitalPHL employees who were recognized for their service. These six have been here for 40+ years. <a href="#" target="_blank">@ViewBag.HUHospitalPHL</a> <a href="#" target="_blank">#TEAM</a>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <div class="twitter_user">
+                                            <a class="twitter_profile" target="_blank" href="#">&nbsp;</a>
+                                            <span class="twitter_username">@ViewBag.HUHospitalPHL</span>
+                                        </div>
+                                        <span class="tw-content">
+                                            ICYMI: 31 @ViewBag.HUHospitalPHL physicians were named to @ViewBag.phillymag 2016 list of the region�s �Top Doctors.�:  <a href="#" target="_blank">https://goo.gl/OuU5fS </a> <a href="#" target="_blank">#TOPDOCTORS</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End footer widget-->
+    </footer>
+
     <!--End .site -->
+
+
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <script>
+        $(function () {
+            $("#dialog_CareGiver").dialog({
+                resizable: false,
+                height: 200,
+                width: 400,
+                modal: true,
+                autoOpen: false,
+
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            //$('#dialog_CareGiver').parent('div').css('position', 'relative');
+            $('#dialog_CareGiver').parent('div').css('z-index', '99999');
+            //$("#dialog_CareGiver").dialog("open");
+            @if (ViewBag.Activated != null)
+            {
+                    @:$('#dialog_CareGiver').parent('div').css('z-index', '99999');
+                @:$("#dialog_CareGiver").dialog("open");
+            }
+        });
+
+    </script>
+
+
+
     <a href="#" class="go-to-top hidden-print"><i class="fa fa-angle-up"></i></a>
 
     <script type='text/javascript' src='~/Content/js/jquery.min.js'></script>
@@ -1491,5 +1603,10 @@
     <script type='text/javascript' src='~/Content/js/extensions/revolution.extension.parallax.min.js'></script>
 
 
+
+
+
+
 </body>
 </html>
+

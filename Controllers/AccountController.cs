@@ -14,6 +14,10 @@ namespace PatientMaster.Controllers
 {
     public class AccountController : Controller
     {
+        public ActionResult Home() {
+            return View();
+        }
+
         public ActionResult SignIn()
         {
             if (Session["usernamesignin"] == null && Session["usernamesignup"] == null)
@@ -352,10 +356,15 @@ namespace PatientMaster.Controllers
 
                 Session["usernamesignin"] = dt.Rows[0]["firstname"].ToString() + " " + dt.Rows[0]["lastname"].ToString();
                 Session["userid"] = dt.Rows[0]["id"].ToString();
+                Session["IsActivePerson"]=dt.Rows[0]["active"].ToString();
                 if (Convert.ToString(dt.Rows[0]["CareGiver"]) == "0" || string.IsNullOrEmpty(Convert.ToString(dt.Rows[0]["CareGiver"]))){
                     Session["IsCareGiver"] = 0;
                 }else
                     Session["IsCareGiver"] = Convert.ToString(dt.Rows[0]["CareGiver"]);
+                 if (!Convert.ToBoolean(Convert.ToString(Session["IsActivePerson"])))
+                {
+                    return Json(string.Format("Success, {0} ","false" ));
+                }
                 return Json(string.Format("Success, {0} ", dt.Rows[0]["id"].ToString()));
             }
             else
@@ -494,14 +503,14 @@ namespace PatientMaster.Controllers
                             obj2.middlename = dr["MiddleName"].ToString();
                             obj2.lastname = dr["LastName"].ToString();
                             obj2.dateofbirth = Convert.ToDateTime(dr["DateOfBirth"].ToString());
-                            obj2.gender = Convert.ToInt16(dr["Gender"].ToString());
+                            obj2.gender = Convert.ToInt32(dr["Gender"].ToString());
                             obj2.email = dr["Email"].ToString();
-                            obj2.phone1 = Convert.ToInt16(dr["Phone1"].ToString());
-                            obj2.phone2 = Convert.ToInt16(dr["Phone2"].ToString());
-                            obj2.phone3 = Convert.ToInt16(dr["Phone3"].ToString());
+                            obj2.phone1 = Convert.ToInt32(dr["Phone1"].ToString());
+                            obj2.phone2 = Convert.ToInt32(dr["Phone2"].ToString());
+                            obj2.phone3 = Convert.ToInt32(dr["Phone3"].ToString());
                             obj2.address = dr["Address"].ToString();
                             obj2.address1 = dr["Address1"].ToString();
-                            obj2.zipcode =Convert.ToInt16(dr["ZipCode"].ToString());
+                            obj2.zipcode =Convert.ToInt32(dr["ZipCode"].ToString());
                             obj2.state= dr["State"].ToString();
                             obj2.city = dr["City"].ToString();
                             obj2.procedure = dr["Procedure"].ToString();
@@ -606,6 +615,7 @@ namespace PatientMaster.Controllers
                     string name = obj.address;
                     obj.address = "";
                     i = obj.insert(obj);
+                    obj.address = name;
                     string myGuid = System.Guid.NewGuid().ToString().ToString();
                     sendInvitaion(obj, myGuid);
                     using (ConfirmedEmailCtl dbMail = new ConfirmedEmailCtl())
@@ -636,7 +646,7 @@ namespace PatientMaster.Controllers
         {
             string mailBody = "";
             //mailBody = "Hello " + obj.firstname + ", " + obj.lastname ;
-            mailBody += "<br /><br />"+obj.address+" has requeste that you become his care giver to support him in his health care.";
+            mailBody += "<br /><br />"+obj.address+" has requested that you become their care giver to support them with their health care.";
             string myLink = "";
             try
             {
@@ -645,12 +655,12 @@ namespace PatientMaster.Controllers
                 myLink = "";
             }
             mailBody += "<br /><a href = '" + myLink + "'>Click here to register your account.</a>";
-            mailBody += "<br /><br />Thanks";
+            mailBody += "<br /><br />Thank You!";
 
             MailMessage MyMailMessage = new MailMessage();
             MyMailMessage.From = new MailAddress(WebConfigurationManager.AppSettings["From"].ToString());
             MyMailMessage.To.Add(Convert.ToString(obj.email));
-            MyMailMessage.Subject = "Care giver invitation from "+obj.address.Split(',')[0];
+            MyMailMessage.Subject = "Care giver invitation";// "Care giver invitation from " + obj.address.Split(',')[0];
             MyMailMessage.IsBodyHtml = true;
             MyMailMessage.Body = mailBody;
 
@@ -777,14 +787,14 @@ namespace PatientMaster.Controllers
                         obj2.middlename = dr["MiddleName"].ToString();
                         obj2.lastname = dr["LastName"].ToString();
                         obj2.dateofbirth = Convert.ToDateTime(dr["DateOfBirth"].ToString());
-                        obj2.gender = Convert.ToInt16(dr["Gender"].ToString());
+                        obj2.gender = Convert.ToInt32(dr["Gender"].ToString());
                         obj2.email = dr["Email"].ToString();
-                        obj2.phone1 = Convert.ToInt16(dr["Phone1"].ToString());
-                        obj2.phone2 = Convert.ToInt16(dr["Phone2"].ToString());
-                        obj2.phone3 = Convert.ToInt16(dr["Phone3"].ToString());
+                        obj2.phone1 = Convert.ToInt32(dr["Phone1"].ToString());
+                        obj2.phone2 = Convert.ToInt32(dr["Phone2"].ToString());
+                        obj2.phone3 = Convert.ToInt32(dr["Phone3"].ToString());
                         obj2.address = dr["Address"].ToString();
                         obj2.address1 = dr["Address1"].ToString();
-                        obj2.zipcode = Convert.ToInt16(dr["ZipCode"].ToString());
+                        obj2.zipcode = Convert.ToInt32(dr["ZipCode"].ToString());
                         obj2.state = dr["State"].ToString();
                         obj2.city = dr["City"].ToString();
                         obj2.procedure = dr["Procedure"].ToString();

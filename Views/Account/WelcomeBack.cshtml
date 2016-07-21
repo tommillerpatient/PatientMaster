@@ -1,69 +1,92 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
 }
 
-<!doctype html>
-<html lang="en-US" ng-app="demoModule">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-    <link rel="shortcut icon" href="Content/images/favicon.ico" />
-    <title>L.O.B. Patient Portal | Welcome Back</title>
-    <link rel='stylesheet' href='~/Content/css/bootstrap.min.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='~/Content/css/commerce.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='~/Content/css/prettyPhoto.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='~/Content/css/jquery.selectBox.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='~/Content/css/font-awesome.min.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='~/Content/css/owl.carousel.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='~/Content/css/owl.theme.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='~/Content/css/jquery.ui.timepicker.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700,800,900,300italic,400italic,700italic,900italic' type='text/css' media='all' />
-    <link rel='stylesheet' href='~/Content/css/style.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='~/Content/css/custom.css' type='text/css' media='all' />
-    <link rel="stylesheet" href='~/Content/css/magnific-popup.css' type='text/css' media='all' />
-    <link rel='stylesheet' href='~/Content/css/settings.css' type='text/css' media='all' />
-    <link rel="stylesheet" href='~/Content/css/preloader.css' type='text/css' media='all' />
-
-
-    <script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/PersonCareGiver.js"></script>
-    <script src="~/Scripts/angular-sanitize.js"></script>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+ <link href="/Content/assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="/Content/assets/css/custome.css" rel="stylesheet">
+@*<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>L.O.B. Patient Portal | Welcome</title>
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <!-- Stylesheet -->
+    <link href="/Content/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Content/assets/css/custome.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <style type="text/css">
-        input.ng-dirty.ng-invalid,
-        .ng-submitted input.ng-invalid {
-            border: 1px solid #EB3034 !important;
-        }
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->*@
 
-        select.ng-dirty.ng-invalid,
-        .ng-submitted select.ng-invalid {
-            border: 1px solid #EB3034 !important;
-        }
-
-        .css-form input.ng-valid.ng-touched {
-            border: 1px solid #0EAB55 !important;
-        }
-    </style>
+    <script src="/Scripts/angular.js"></script>
+    <script src="/Scripts/PersonCareGiver.js"></script>
+    <script src="/Scripts/angular-sanitize.js"></script>
 
 
-
-
-
-</head>
-<body>
-
-    <div id="loading">
-        <div id="loading-center">
-            <div id="loading-center-absolute">
-                <div class="loader">Loading...</div>
-            </div>
-        </div>
-    </div>
+    <div class="page-wrapper" ng-app="demoModule">
+    <!-- Header Start -->
+    <header>
+        @*<div class="container">
+                <div class="topbar">
+                    <label>Attend A free <span>seminars Today!</span></label>
+                    <div class="topbtn">
+                        <a href="#"><img src="/Content/assets/images/icn_bariatics.png" alt="">My Health Rec</a>
+                        <a href="/Account/WelcomeBack"><img src="/Content/assets/images/icn_register.png" alt="">Home</a>
+                        <a href="/Account/SignOut"><img src="/Content/assets/images/icn_login.png" alt="">Logout</a>
+                    </div>
+                </div>
+                <a href="#" class="logo"><img src="/Content/assets/images/logo.png" alt=""></a>
+                <div class="info">
+                    <p>
+                        <span class="phone">(215) 762-7000</span><br class="visible-xs">
+                        &nbsp;| &nbsp;<span class="add">230 N Broad St Philadelphia, PA 19102</span>
+                    </p>
+                    <div class="input-group hidden-xs">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><img src="/Content/assets/images/icn_search.png" alt=""></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <div class="input-group visible-xs">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><img src="/Content/assets/images/icn_search.png" alt=""></button>
+                                </span>
+                            </div>
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
+                                <span class="icon-bar"></span> <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="/Account/WelcomeBack">Home <span class="sr-only">(current)</span></a></li>
+                                <li><a href="#">Health Library</a></li>
+                                <li><a href="#">Community</a></li>
+                                <li><a href="http://virtualvisitwebapp-qa.azurewebsites.net">Virtual Visit</a></li>
+                                <li><a href="#">Success Stories</a></li>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Contact Physician</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+            </div>*@
+    </header>
+    <!-- Header End -->
+    <!-- Page Conetnt Start -->
 
     <div id="dialog_CareGiver" title="Someone to support your journey" style="display:none;">
         <div class="addedit-box" ng-controller="demoCtrl">
@@ -75,1463 +98,420 @@
             </div>
             <div class="clear"></div>
         </div>
-
     </div>
 
-
-
-    <div class="site">
-        <header class="noo-header header-2 header-style3">
-            <div class="navbar-wrapper">
-                <div class="navbar navbar-default">
-                    <div class="noo-topbar">
-                        <div class="container">
-                            <ul class="pull-left">
-                                <li>
-                                    <a href="#"><i class="fa fa-phone"></i>Call or text 1.800.555.1234 to speak with a physician today! </a>
-                                </li>
-                                <!-- <li>
-                                     <a href="mailto:email@domain.com">
-                                         <i class="fa fa-envelope-o"></i>email@domain.com
-                                     </a>
-                                 </li>  -->
-                            </ul>
-                            <ul class="pull-right">
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <i class="fa fa-location-arrow"></i>
-
-                                        You have an upcoming appontment at The Bariatric Medical Center
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" style="margin:0; padding:0;">
-                                        <i class="fa fa-clock-o"></i>
-                                        Fri May 16th 3:00 pm PST
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="noo-nav-header4">
-                        <div class="container">
-                            <div class="noo-nav-wrap">
-                                <div class="navbar-header pull-left">
-                                    <h1 class="sr-only">Bariatric Patient Welcome</h1>
-                                    <button data-target=".nav-collapse" class="btn-navbar noo_icon_menu" type="button">
-                                        <i class="fa fa-bars"></i>
-                                    </button>
-                                    <a href="" class="navbar-brand">
-                                        <img class="noo-logo-img noo-logo-normal" src="/Content/images/logo.png" alt=" ">
-
-
-                                    </a>
-
-                                </div> <!-- / .nav-header -->
-                                <div class="noo-search-wrap pull-right">
-                                    <div class="noo-infomation-cart">
-
-                                    </div>
-                                    <form id="form-header">
-                                        <div class="category-tree">
-                                            <div class="category-inner">
-                                                <span class="cat_name">All categories</span>
-                                                <i class="fa fa-caret-down"></i>
-                                            </div>
-                                            <div class="nav-dropdown">
-                                                <ul>
-                                                    <li>categorie 1</li>
-                                                    <li>categorie 2</li>
-                                                    <li>categorie 3</li>
-                                                    <li>categorie 4</li>
-                                                    <li>categorie 5</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="search-input">
-                                            <input type="search" value="" name="s" autocomplete="off">
-                                            <i class="fa fa-search icon-search-form"></i>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="noo-wrap-menu noo-wrap-menu2">
-                        <div class="container">
-                            <nav class="noo-main-menu pull-left">
-                                <ul class="nav-collapse navbar-nav">
-                                    <li class="current-menu-item menu-item-has-children">
-                                        <a href="">HOME</a>
-                                        <!--	<ul class="sub-menu">
-                                                    <li><a href="index-service.html">Home Services</a></li>
-                                                    <li><a href="index-shop.html">Home Shop 1</a></li>
-                                                    <li><a href="index-shop-2.html">Home Shop 2</a></li>
-                                                    <li><a href="index-onepage.html">Home One Page</a></li>
-                                                    <li><a href="index-revolution.html">Home Revolution</a></li>
-                                                </ul>	-->
-                                    </li>
-
-                                    <li class="noo_megamenu mega-col-columns-4 menu-item-has-children">
-                                        <a href="shop.html">EDUCATION</a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="#">Resource Menu</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="">eBooks</a></li>
-                                                    <li><a href="">Videos</a></li>
-                                                    <li><a href="">Vlogs</a></li>
-                                                    <!--	<li><a href="">Empty Cart</a></li>
-                                                        <li><a href="">My Account</a></li>  -->
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <div class="noo_megamenu_widget_area">
-                                                    <div class="widget commerce">
-                                                        <h3 class="widget-title">Just for you</h3>
-                                                        <ul class="product_list_widget">
-                                                            <li>
-                                                                <a href="">
-                                                                    <img width="270" height="350" src="~/Content/images/resource_image_65x85.png" alt="poster" />
-                                                                    <span class="product-title">Resource Title</span>
-                                                                </a>
-                                                                <span class="amount">Very brief summary. </span>
-                                                            </li>
-                                                            <li>
-                                                                <a href="">
-                                                                    <img width="270" height="350" src="~/Content/images/resource_image_65x85.png" alt="poster1" />
-                                                                    <span class="product-title">Resource Title</span>
-                                                                </a>
-                                                                <span class="amount">Very brief summary. </span>
-                                                            </li>
-                                                            <li>
-                                                                <a href="">
-                                                                    <img width="270" height="350" src="~/Content/images/resource_image_65x85.png" alt="poster2" />
-                                                                    <span class="product-title">Resource Title</span>
-                                                                </a>
-                                                                <span class="amount">Very brief summary. </span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="noo_megamenu_widget_area">
-                                                    <div class="widget commerce">
-                                                        <h3 class="widget-title">Top Rated</h3>
-                                                        <ul class="product_list_widget">
-                                                            <li>
-                                                                <a href="">
-                                                                    <img width="270" height="350" src="~/Content/images/resource_image_65x85.png" alt="poster" />
-                                                                    <span class="product-title">Resource Title</span>
-                                                                </a>
-                                                                <span class="amount">Very brief summary. </span>
-                                                            </li>
-                                                            <li>
-                                                                <a href="">
-                                                                    <img width="270" height="350" src="~/Content/images/resource_image_65x85.png" alt="poster1" />
-                                                                    <span class="product-title">Resource Title</span>
-                                                                </a>
-                                                                <span class="amount">Very brief summary. </span>
-                                                            </li>
-                                                            <li>
-                                                                <a href="">
-                                                                    <img width="270" height="350" src="~/Content/images/resource_image_65x85.png" alt="poster2" />
-                                                                    <span class="product-title">Resource Title</span>
-                                                                </a>
-                                                                <span class="amount">Very brief summary. </span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="noo_megamenu_widget_area">
-                                                    <div class="widget commerce">
-                                                        <h3 class="widget-title">Trending</h3>
-                                                        <ul class="product_list_widget">
-                                                            <li>
-                                                                <a href="">
-                                                                    <img width="270" height="350" src="~/Content/images/resource_image_65x85.png" alt="poster" />
-                                                                    <span class="product-title">Resource Title</span>
-                                                                </a>
-                                                                <span class="amount">Very brief summary. </span>
-                                                            </li>
-                                                            <li>
-                                                                <a href="">
-                                                                    <img width="270" height="350" src="~/Content/images/resource_image_65x85.png" alt="poster1" />
-                                                                    <span class="product-title">Resource Title</span>
-                                                                </a>
-                                                                <span class="amount">Very brief summary. </span>
-                                                            </li>
-                                                            <li>
-                                                                <a href="">
-                                                                    <img width="270" height="350" src="~/Content/images/resource_image_65x85.png" alt="poster2" />
-                                                                    <span class="product-title">Resource Title</span>
-                                                                </a>
-                                                                <span class="amount">Very brief summary. </span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="">COMMUNITY</a>
-                                        <!--	<ul class="sub-menu">
-                                                <li><a href="header-boxed.html">Header Boxed</a></li>
-                                                <li><a href="header-shop.html">Header Shop</a></li>
-                                                <li><a href="header-business.html">Header Business</a></li>
-                                                <li><a href="header-transparent.html">Header Transparent</a></li>
-                                                <li><a href="header-minimalist.html">Header Minimalist</a></li>
-                                                <li><a href="header-centralized.html">Header Centralized</a></li>
-                                            </ul>	-->
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="">PROCEDURES</a>
-                                        <!--	<ul class="sub-menu">
-                                                <li><a href="service-1.html">Service 1</a></li>
-                                                <li><a href="service-2.html">Service 2</a></li>
-                                                <li><a href="service-detail.html">Service Detail</a></li>
-                                            </ul>	-->
-                                    </li>
-
-
-
-                                    <li class="menu-item-has-children">
-                                        <a href="http://virtualvisitwebapp-qa.azurewebsites.net/">VIRTUAL VISIT</a>
-                                        <!--	<ul class="sub-menu">
-                                                <li><a href="clients.html">Clients</a></li>
-                                                <li><a href="introduction.html">Introduction</a></li>
-                                                <li><a href="special-offers.html">Special Offers</a></li>
-                                            </ul>  -->
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="">ABOUT</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="">Meet the Team</a></li>
-
-                                        </ul>
-                                    </li>
-
-                                    <li class="menu-item-has-children">
-                                        <a href="">Contact Us</a>
-
-                                    </li>
-
-                                </ul>
-                            </nav>
-                            <nav class="noo-left-menu pull-right">
-                                <span class="cate-name">
-                                    <i class="fa fa-bars icon-bars"></i>
-                                    @if (!string.IsNullOrEmpty(Convert.ToString(Session["usernamesignin"])))
-                                    {
-                                        <span>@Convert.ToString(Session["usernamesignin"])</span>
-                                    }
-                                    else
-                                    {
-                                        <span>@Convert.ToString(Session["usernamesignup"])</span>
-                                    }
-                                    <i class="fa fa-chevron-down pull-right"></i>
-
-                                </span>
-                                <ul class="menu-categories">
-                                    @if (Convert.ToString(Session["IsCareGiver"]) == "0" || string.IsNullOrEmpty(Convert.ToString(Session["IsCareGiver"]))){
-                                    <li><a href="../Account/UserProfile">My Account</a></li>
-                                    <li><a href="../Account/MyCareGivers">My Caregivers</a></li>
-                                    } else { 
-                                    <li><a href="../Account/CareGiverProfile">My Account</a></li>
-                                    }
-                                    <li><a href="../Account/Settings">Change Password</a></li>
-                                    <li><a href="#">Settings</a></li>
-                                    <li><a href="../Account/SignOut">SignOut</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <div class="main-content">
-            <div class="container-fluid">
-                <div class="row row-fluid pt-7 pb-0">
-                    <div class="container">
-
-
-                        <div class="row">
-
-                            <div class="col-md-12">
-                                @if (!string.IsNullOrEmpty(Convert.ToString(Session["usernamesignup"])))
-                                {
-                                    <div class="alert alert-success" style="margin:13px;">
-                                        <strong></strong><span>@Convert.ToString(Session["usernamesignup"]) Your profile has been successfully created.</span>
-                                    </div>
-                                }
-                                @if (ViewBag.Activated != null)
-                                {
-                                    <div class="alert alert-success" style="margin:13px;">
-                                        <strong></strong><span>Your account has been activated successfully.</span>
-                                    </div>
-                                }
-                                @if (!string.IsNullOrEmpty(Convert.ToString(Session["UpdateUSer"])))
-                                {
-                                    <div class="alert alert-success" style="margin:13px;">
-                                        <strong></strong><span>Your profile has been successfully updated.</span>
-                                    </div>
-                                }
-                                @if (!string.IsNullOrEmpty(Convert.ToString(Session["ChangePassword"])))
-                                {
-                                    <div class="alert alert-success" style="margin:13px;">
-                                        <strong></strong><span>Your password has been successfully changed.</span>
-                                    </div>
-                                }
-                                @if (!string.IsNullOrEmpty(Convert.ToString(Request["cg"])))
-                                {
-                                    <div class="alert alert-success" style="margin:13px;">
-                                        <strong></strong><span>Your account has been successfully created.</span>
-                                    </div>
-                                }
-                                @if (!string.IsNullOrEmpty(Convert.ToString(Request["msg"])))
-                                {
-                                    if (Convert.ToString(Request["msg"]) == "CareGiver")
-                                    {
-                                    <div class="alert alert-success" style="margin:13px;">
-                                        <strong></strong><span>Email sent successfully.</span>
-                                    </div>
-                                    }
-                                }
-                                @{
-                                    Session.Remove("UpdateUSer");
-                                    Session.Remove("ChangePassword");
-                                }
-
-                            </div>
-                        </div>
-
-                        <div class="col-sm-8">
-
-                            <div class="wpb_single_image welcome">
-
-                                <h2 style="margin-left:20px; margin-top:0px; padding-top:20px;">Welcome Back</h2>
-
-
-                                <br><br><br>
-
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-
-
-
-                                <b style="margin-bottom:0; margin-left:20px;">4 unRead messages | 1 upcoming visit | 1 Community Update</b>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 ">
-                            <div class="wpb_single_image schedule">
-
-                                <h3>SCHEDULE</h3>
-
-                                <br>
-
-                                <b> 1 upcoming Visit</b>
-
-                            </div>
-                            <div class="wpb_single_image mt-3 education">
-
-                                <h3>EDUCATION</h3>
-
-                                <ul>
-
-                                    <li>Videos</li>
-                                    <li>eBooks</li>
-                                    <li>PDF</li>
-                                </ul>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
+    <div class="content-wrapper">
+        <div class="banner">
+            <div class="container"> <img src="/Content/assets/images/banner_3.png" alt=""> </div>
         </div>
+        <div class="container">
+            <div class="col-sm-4 col-md-3">
+                <div class="sidebarsection">
+                    <div class="headerimg">MY Journey</div>
+                    <div class="single">
+                        <label><img src="/Content/assets/images/icn_program.png" alt="">Program</label>
+                        <ul>
+                            @if (Convert.ToString(Session["IsCareGiver"]) == "0" || string.IsNullOrEmpty(Convert.ToString(Session["IsCareGiver"])))
+                            {
+                                <li><a href="../Account/UserProfile">My Account</a></li>
+                                <li><a href="../Account/MyCareGivers">My Caregivers</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="../Account/CareGiverProfile">My Account</a></li>
+                            }
+                            <li><a href="../Account/Settings">Change Password</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="../Account/SignOut">SignOut</a></li>
 
+                            <li><a href="#">Nutrition Counseling</a></li>
+                            <li><a href="#">Support Group( 2 mandatory)</a></li>
+                        </ul>
+                    </div>
+                    <div class="single">
+                        <label><img src="/Content/assets/images/icn_pulmonary.png" alt="">Pulmonary</label>
+                        <ul>
+                            <li><a href="#">Pulmonary Evaluation</a></li>
+                            <li><a href="#">Sleep study</a></li>
+                            <li><a href="#">Pulmonary function test</a></li>
+                            <li><a href="#">Chest x-ray</a></li>
+                            <li><a href="#">Pulmonologist Clearance</a></li>
+                        </ul>
+                    </div>
+                    <div class="single">
+                        <label><img src="/Content/assets/images/icn_gastrointestinal.png" alt="">Gastrointestinal</label>
+                        <ul>
+                            <li><a href="#">Pulmonary Evaluation</a></li>
+                            <li><a href="#">Sleep study</a></li>
+                            <li><a href="#">Pulmonary function test</a></li>
+                            <li><a href="#">Chest x-ray</a></li>
+                            <li><a href="#">Pulmonologist Clearance</a></li>
+                        </ul>
+                    </div>
+                    <div class="single">
+                        <label><img src="/Content/assets/images/icn_cardiology.png" alt="">Pulmonary</label>
+                        <ul>
+                            <li><a href="#">Pulmonary Evaluation</a></li>
+                            <li><a href="#">Sleep study</a></li>
+                            <li><a href="#">Pulmonary function test</a></li>
+                            <li><a href="#">Chest x-ray</a></li>
+                            <li><a href="#">Pulmonologist Clearance</a></li>
+                        </ul>
+                    </div>
+                    <div class="single">
+                        <label><img src="/Content/assets/images/icn_phycological.png" alt="">Pulmonary</label>
+                        <ul>
+                            <li><a href="#">Pulmonary Evaluation</a></li>
+                            <li><a href="#">Sleep study</a></li>
+                            <li><a href="#">Pulmonary function test</a></li>
+                            <li><a href="#">Chest x-ray</a></li>
+                            <li><a href="#">Pulmonologist Clearance</a></li>
+                        </ul>
+                    </div>
+                    <div class="single">
+                        <label><img src="/Content/assets/images/icn_blood_work.png" alt="">Pulmonary</label>
+                        <ul>
+                            <li><a href="#">Pulmonary Evaluation</a></li>
+                            <li><a href="#">Sleep study</a></li>
+                            <li><a href="#">Pulmonary function test</a></li>
+                            <li><a href="#">Chest x-ray</a></li>
+                            <li><a href="#">Pulmonologist Clearance</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-9">
+                <div class="col-sm-8 col-xs-12 pull-left">
 
-        <div class="container-fluid">
-            <div class="row row-fluid pt-7">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-3 ">
-                            <div class="wpb_single_image">
-                                <a href="#" target="_self">
-                                    <img width="270" height="480" src="~/Content/images/save_25.jpg" alt="" />
+                    @if (!string.IsNullOrEmpty(Convert.ToString(Session["usernamesignup"])))
+                    {
+                        <div class="alert alert-success" style="margin:13px;">
+                            <strong></strong><span>@Convert.ToString(Session["usernamesignup"]) Your profile has been successfully created.</span>
+                        </div>
+                    }
+                    @if (ViewBag.Activated != null)
+                    {
+                        <div class="alert alert-success" style="margin:13px;">
+                            <strong></strong><span>Your account has been activated successfully.</span>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Convert.ToString(Session["UpdateUSer"])))
+                    {
+                        <div class="alert alert-success" style="margin:13px;">
+                            <strong></strong><span>Your profile has been successfully updated.</span>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Convert.ToString(Session["ChangePassword"])))
+                    {
+                        <div class="alert alert-success" style="margin:13px;">
+                            <strong></strong><span>Your password has been successfully changed.</span>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Convert.ToString(Request["cg"])))
+                    {
+                        <div class="alert alert-success" style="margin:13px;">
+                            <strong></strong><span>Your account has been successfully created.</span>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Convert.ToString(Request["msg"])))
+                    {
+                        if (Convert.ToString(Request["msg"]) == "CareGiver")
+                        {
+                            <div class="alert alert-success" style="margin:13px;">
+                                <strong></strong><span>Email sent successfully.</span>
+                            </div>
+                        }
+                    }
+                    @{
+                        Session.Remove("UpdateUSer");
+                        Session.Remove("ChangePassword");
+                    }
+
+                    <h1 class="text-left">
+                        You're doing a <span>Great Job!</span><br>
+                        There are only a few requirements left
+                    </h1>
+                    <p>
+                        <span class="text-left">Hello steave</span><br>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br>
+                        <span class="pull-right text-right">
+                            June 3, 2016 11.53am PST<br>
+                            Anothony J. Smith, MD, OD
+                        </span>
+                    </p>
+
+                </div>
+                <div class="col-sm-4 docphoto"> <img src="/Content/assets/images/doctor.png" alt=""> </div>
+                <div class="sep col-sm-12"></div>
+                <div class="col-sm-12">
+                    <h2 class="pull-left">Upcoming Appoinments</h2>
+                    <div class="event">
+                        <label class="date col-md-2 col-sm-2"> <span>AUG</span><span>16</span> </label>
+                        <div class="col-md-10 pad0 col-sm-10">
+                            <div class="details col-sm-12 col-md-8">
+                                <h3>Psychological Evaluation</h3>
+                                <label>August 16, 2016  11:30am PST</label>
+                                <a href="#"><img src="/Content/assets/images/icn_pin.png" alt="">Map it</a>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <button type="submit" class="btn  btn-block btn-primary">Message Physician</button>
+                                <button type="submit" class="btn btn-block btn-default">Required Documents</button>
+                            </div>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <label class="date col-md-2 col-sm-2"> <span>AUG</span><span>16</span> </label>
+                        <div class="col-md-10 pad0 col-sm-10">
+                            <div class="details col-sm-12 col-md-8">
+                                <h3>Psychological Evaluation</h3>
+                                <label>August 16, 2016  11:30am PST</label>
+                                <a href="#"><img src="/Content/assets/images/icn_pin.png" alt="">Map it</a>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <button type="submit" class="btn  btn-block btn-primary">Message Physician</button>
+                                <button type="submit" class="btn btn-block btn-default">Requirement Documents</button>
+                            </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bgshadow"><img src="/Content/assets/images/boxshadow.png" alt=""></div>
+            </div>
+
+            @*<div class="gallery">
+                    <h1 class="text-center">Surgical <span>Weight Loss</span> Gallery</h1>
+                    <img src="/Content/assets/images/section_bg.png" alt="">
+                </div>
+                <div class="sep col-sm-12"></div>
+                <div class="container" >
+                    <div class="socialmedia">
+                        <div class=" col-xs-4">
+                            <a href="#">
+                                <span> <img src="/Content/assets/images/icn_facebook.png" alt=""> </span>
+                                <label>Link us on facebook</label>
+                            </a>
+                        </div>
+                        <div class=" col-xs-4">
+                            <a href="#">
+                                <span> <img src="/Content/assets/images/icn_youtube.png" alt=""> </span>
+                                <label>Watch us on You Tube</label>
+                            </a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="#">
+                                <span> <img src="/Content/assets/images/icn_twitter.png" alt=""> </span>
+                                <label>Connect on Twitter</label>
+                            </a>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+        <!-- Page Conetnt End -->
+        <!-- Footer Start -->
+        @*<footer>
+                <div class="bluesep"></div>
+                <div class="ftr ">
+                    <div class="footermenus">
+                        <div class="col-sm-2">
+                            <span>Our Services</span>
+                            <ul>
+                                <li><a href="#">Find A Phsiciyn</a></li>
+                                <li><a href="#">Bariatrics</a></li>
+                                <li><a href="#">Behaviour health Services</a></li>
+                                <li><a href="#">Bloodless Medicine and Sergery</a></li>
+                                <li><a href="#">Cancer Care</a></li>
+                                <li><a href="#">Dermatology</a></li>
+                                <li><a href="#">Emergency & Truma</a></li>
+                                <li><a href="#">Heart & Vasclar Care</a></li>
+                                <li><a href="#">Imaging & Radiology</a></li>
+                                <li><a href="#">Neurological Services</a></li>
+                                <li><a href="#">Orthopaedics</a></li>
+                                <li><a href="#">Pain Management</a></li>
+                                <li><a href="#">Plastic, Cosmetic and Hand Surgery</a></li>
+                                <li><a href="#">Primary Care</a></li>
+                                <li><a href="#">Transplant Servces</a></li>
+                                <li><a href="#">Urology</a></li>
+                                <li><a href="#">Womens Health</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>Our Location</span>
+                            <ul>
+                                <li><a href="#">Hahmann University 	Hospital</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>Our Stories</span>
+                            <ul>
+                                <li><a href="#">Devon's Story</a></li>
+                                <li><a href="#">Ivy's Story</a></li>
+                                <li><a href="#">Scott and Dwight: A transplant Story</a></li>
+                                <li><a href="#">Share Your Story</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>For Patients</span>
+                            <ul>
+                                <li><a href="#">health Risk Assesments</a></li>
+                                <li><a href="#">Insurance and Financial Support</a></li>
+                                <li><a href="#">Legal and Ethical Decisions</a></li>
+                                <li><a href="#">Maps & Directions</a></li>
+                                <li><a href="#">Mobile App</a></li>
+                                <li><a href="#">Online Bill Pay</a></li>
+                                <li><a href="#">Patient Portal</a></li>
+                                <li><a href="#">Registration</a></li>
+                                <li><a href="#">Request Madical Records</a></li>
+                                <li><a href="#">Share Your Story</a></li>
+                                <li><a href="#">Staff Recognition</a></li>
+                                <li><a href="#">Support Groups</a></li>
+                                <li><a href="#">What to Bring/What not to Bring</a></li>
+                                <li><a href="#">What to Export</a></li>
+                                <li><a href="#">Your Patient Rights</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>For Family & Visitors</span>
+                            <ul>
+                                <li><a href="#">Gifts & Support</a></li>
+                                <li><a href="#">Maps & Directions</a></li>
+                                <li><a href="#">Nearby Hotels & Restaurants</a></li>
+                                <li><a href="#">Share Your Story</a></li>
+                                <li><a href="#">Staff Recognition</a></li>
+                                <li><a href="#">Visitation Rights</a></li>
+                                <li><a href="#">What to Bring/What not to Bring</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>For Health Professional</span>
+                            <ul>
+                                <li><a href="#">Education & Trainning</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Physical Portal</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <div class="pull-left">
+                            <a href="#">Disclaimers</a>&nbsp; | &nbsp;<a href="#">Sitemap</a>
+                            <span>&copy; Hahnemann University Hospital 2016, All rights Reserved</span>
+                        </div>
+                        <div class="pull-right">
+                            <p>
+                                <span class="phone">(215) 762-7000</span> <span class="add">
+                                    230 N Broad St<br>
+                                    Philadelphia, PA 19102
+                                </span>
+                            </p>
+                            <a href="#"><img src="/Content/assets/images/footer_logo.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </footer>*@
+        <!-- Footer End -->
+        @*<div class="sidebar" style="display:none;">
+                <a href="#"><img src="/Content/assets/images/icn_fb_sidebar.png" alt=""></a> <a href="#">
+                    <img src="/Content/assets/images/icn_twitter_sidebar.png" alt="">
+                </a> <a href="#">
+                    <img src="/Content/assets/images/icn_msg_sidebar.png" alt="">
+                </a> <a href="#">
+                    <img src="/Content/assets/images/icn_print_sidebar.png" alt="">
+                </a> <a href="#">
+                    <img src="/Content/assets/images/icn_add_sidebar.png" alt="">
+                </a>
+                <a href="#" class="locationpin" data-toggle="modal" data-target="#myModal"><img src="/Content/assets/images/icn_location_red.png" alt=""></a>
+            </div>*@
+    </div>
+    <!-- location Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog  modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="searchbg">
+                        <div class="input-group col-sm-6">
+                            <input type="text" class="form-control" placeholder="Result for Pharmacy near me...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><img src="/Content/assets/images/popup_search.png" alt=""></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-4 pad0">
+                        <div class="nearadd">
+                            <div class="address">
+                                <label>Discount Medical Pharmacy</label>
+                                <span>Pharmacy</span> <span>2716 Griffith Park Blvd</span> <span>(323) 661-8366</span>
+                                <label> Open until<span>6.30 PM</span></label>
+                            </div>
+                            <div class="btngroup">
+                                <a href="#"><img src="/Content/assets/images/icn_world.png" alt="">Website</a> <a href="#">
+                                    <img src="/Content/assets/images/icn_direction.png" alt="">Directions
                                 </a>
                             </div>
                         </div>
-                        <div class="col-sm-9 pt-5">
-                            <div class="simple-product commerce">
-                                <div class="thumb">
-                                    <a href="">
-                                        <img width="420" height="365" src="~/Content/images/dr_nicole425x365.jpg" alt="" />
-                                    </a>
-                                </div>
-                                <div class="simple-content">
-                                    <h4><a href="">Dr. Nicole Jones</a></h4>
-                                    <div class="rating">
-                                        <div class="star-rating">
-                                            <span style="width:100%"></span>
-                                        </div> based on 11 patient reviews
-                                    </div>
-                                    <p>
-                                        Doctor Nicole Jones has been lorem ipsum dolor sit amet, consectetur adipiscing elit. In odio ex, tincidunt vel lobortis sed, commodo eget eros. Maecenas condimentum sem in tellus cursusbus.
-                                    </p>
-
-
-                                    <div class="entry-cart-meta">
-                                        <a href="#" class="button add_to_cart_button">SCHEDULE A VIRTUAL VISIT TODAY!</a>
-
-                                    </div>
-                                </div>
+                        <div class="nearadd">
+                            <div class="address">
+                                <label>Discount Medical Pharmacy</label>
+                                <span>Pharmacy</span> <span>2716 Griffith Park Blvd</span> <span>(323) 661-8366</span>
+                                <label> Open until<span>6.30 PM</span></label>
+                            </div>
+                            <div class="btngroup">
+                                <a href="#"><img src="/Content/assets/images/icn_world.png" alt="">Website</a> <a href="#">
+                                    <img src="/Content/assets/images/icn_direction.png" alt="">Directions
+                                </a>
+                            </div>
+                        </div>
+                        <div class="nearadd">
+                            <div class="address">
+                                <label>Discount Medical Pharmacy</label>
+                                <span>Pharmacy</span> <span>2716 Griffith Park Blvd</span> <span>(323) 661-8366</span>
+                                <label> Open until<span>6.30 PM</span></label>
+                            </div>
+                            <div class="btngroup">
+                                <a href="#"><img src="/Content/assets/images/icn_world.png" alt="">Website</a>
+                                <a href="#"><img src="/Content/assets/images/icn_direction.png" alt="">Directions</a>
+                            </div>
+                        </div>
+                        <div class="nearadd">
+                            <div class="address">
+                                <label>Discount Medical Pharmacy</label>
+                                <span>Pharmacy</span> <span>2716 Griffith Park Blvd</span> <span>(323) 661-8366</span>
+                                <label> Open until<span>6.30 PM</span></label>
+                            </div>
+                            <div class="btngroup">
+                                <a href="#"><img src="/Content/assets/images/icn_world.png" alt="">Website</a>
+                                <a href="#"><img src="/Content/assets/images/icn_direction.png" alt="">Directions</a>
+                            </div>
+                        </div>
+                        <div class="nearadd">
+                            <div class="address">
+                                <label>Discount Medical Pharmacy</label>
+                                <span>Pharmacy</span> <span>2716 Griffith Park Blvd</span> <span>(323) 661-8366</span>
+                                <label> Open until<span>6.30 PM</span></label>
+                            </div>
+                            <div class="btngroup">
+                                <a href="#"><img src="/Content/assets/images/icn_world.png" alt="">Website</a>
+                                <a href="#"><img src="/Content/assets/images/icn_direction.png" alt="">Directions</a>
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-8">
+                        <div class="map"><img src="/Content/assets/images/dummymap.png" alt=""> </div>
+                    </div>
+                    <div class="modal-footer"> </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="row row-fluid">
-                <div class="col-sm-12">
-                    <div class="noo-poster commerce">
-                        <div class="noo-poster-bk" style="background-image: url('images/ppd_bg.jpg')">
-                            <div class="container">
-                                <button class="poster-prev nav-button">
-                                    <i class="fa fa-long-arrow-left"></i>
-                                </button>
-                                <button class="poster-next nav-button">
-                                    <i class="fa fa-long-arrow-right"></i>
-                                </button>
-                                <div class="row">
-                                    <ul class="noo_poster_products">
-                                        <li>
-                                            <a class="the_permalink" href="shop-detail.html">
-                                                <img width="370" height="494" src="~/Content/images/ppd_360x480_wrd.jpg" alt="poster" />
-                                            </a>
-                                            <div class="entry-poster-meta">
-                                                <div class="price">
-                                                    <span class="amount">Document Title</span>
-                                                </div>
-                                                <div class="action-meta">
-                                                    <a href="#" class="button add_to_cart_button">Download</a>
-                                                    <div class="yith-wcwl-add-to-wishlist">
-                                                        <div class="yith-wcwl-add-button">
-                                                            <a href="#" class="add_to_wishlist">
-                                                                Save for later
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a class="the_permalink" href="shop-detail.html">
-                                                <img width="370" height="494" src="~/Content/images/ppd_360x480_pdf.jpg" alt="" />
-                                            </a>
-                                            <div class="entry-poster-meta">
-                                                <div class="price">
-                                                    <span class="amount">Document Title</span>
-                                                </div>
-                                                <div class="action-meta">
-                                                    <a href="#" class="button add_to_cart_button">Download</a>
-                                                    <div class="yith-wcwl-add-to-wishlist">
-                                                        <div class="yith-wcwl-add-button">
-                                                            <a href="#" class="add_to_wishlist">
-                                                                Save for later
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a class="the_permalink" href="shop-detail.html">
-                                                <img width="370" height="492" src="~/Content/images/ppd_360x480_ebk.jpg" alt="" />
-                                            </a>
-                                            <div class="entry-poster-meta">
-                                                <div class="price">
-                                                    <span class="amount">Document Title</span>
-                                                </div>
-                                                <div class="action-meta">
-                                                    <a href="#" class="button add_to_cart_button">Download</a>
-                                                    <div class="yith-wcwl-add-to-wishlist">
-                                                        <div class="yith-wcwl-add-button">
-                                                            <a href="#" class="add_to_wishlist">
-                                                                Save for later
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a class="the_permalink" href="shop-detail.html">
-                                                <img width="370" height="494" src="~/Content/images/ppd_360x480_wrd.jpg" alt="poster" />
-                                            </a>
-                                            <div class="entry-poster-meta">
-                                                <div class="price">
-                                                    <span class="amount">Document Title</span>
-                                                </div>
-                                                <div class="action-meta">
-                                                    <a href="#" class="button add_to_cart_button">Download</a>
-                                                    <div class="yith-wcwl-add-to-wishlist">
-                                                        <div class="yith-wcwl-add-button">
-                                                            <a href="#" class="add_to_wishlist">
-                                                                Save for later
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a class="the_permalink" href="shop-detail.html">
-                                                <img width="370" height="494" src="~/Content/images/ppd_360x480_pdf.jpg" alt="" />
-                                            </a>
-                                            <div class="entry-poster-meta">
-                                                <div class="price">
-                                                    <span class="amount">Document Title</span>
-                                                </div>
-                                                <div class="action-meta">
-                                                    <a href="#" class="button add_to_cart_button">Downlaod</a>
-                                                    <div class="yith-wcwl-add-to-wishlist">
-                                                        <div class="yith-wcwl-add-button">
-                                                            <a href="#" class="add_to_wishlist">
-                                                                Save for later
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
+    </div>
 
-                                        <li>
-                                            <a class="the_permalink" href="shop-detail.html">
-                                                <img width="370" height="494" src="~/Content/images/ppd_360x480_ebk.jpg" alt="" />
-                                            </a>
-                                            <div class="entry-poster-meta">
-                                                <div class="price">
-                                                    <span class="amount">Document Title</span>
-                                                </div>
-                                                <div class="action-meta">
-                                                    <a href="#" class="button add_to_cart_button">Downlaod</a>
-                                                    <div class="yith-wcwl-add-to-wishlist">
-                                                        <div class="yith-wcwl-add-button">
-                                                            <a href="#" class="add_to_wishlist">
-                                                                Save for later
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end noo-poster-bk-->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row row-fluid pt-10">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="title-center">
-                                <h3 class="">
-                                    <!--      <span class="noo-title-number">
-                                              <span class="frist">0</span><span class="last">1</span>
-                                          </span>  -->
-                                    <strong>VIDEO EDUCATION</strong>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row row-fluid">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="text-center">
-                                Video education resources summary lorem ipsum dolor sit amet, consectetur adipiscing elit. <br> In odio ex, tincidunt vel lobortis sed, commodo eget eros. Maecenas condimentum sem in tellus cursusbus.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row row-fluid">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="tabbable product-tab">
-                                <ul class="nav nav-tabs">
-                                    <li class="active">
-                                        <a data-toggle="tab" href="#tab-1">BARIATRIC FAQ</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#tab-2">PROCEDURES</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#tab-3">RECOVERY</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab" href="#tab-4">TIPS</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div id="tab-1" class="tab-pane fade in active">
-                                        <div class="noo-row-slider commerce">
-                                            <ul class="noo-woo-slider products">
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_1.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:0%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 0 rating
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Add to Wishlist
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">BARIATRIC FAQ VIDEO TITLE 1</a></h3>
-                                                                <!-- 	<span class="price">
-                                                                         <span class="amount">Very brief summary. </span>
-                                                                     </span>  -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_2.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:0%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 0 rating
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Watch Later
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">BARIATRIC FAQ VIDEO TITLE 2</a></h3>
-                                                                <!--	<span class="price">
-                                                                        <span class="amount">Very brief summary. </span>
-                                                                    </span>  -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_3.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:0%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 0 rating
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Watch Later
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">BARIATRIC FAQ VIDEO TITLE 3</a></h3>
-                                                                <!--	<span class="price">
-                                                                    <span class="amount">Very brief summary. </span>
-                                                                </span>  -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_4.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:100%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 5 ratings
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Watch Later
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">BARIATRIC FAQ VIDEO TITLE 4</a></h3>
-                                                                <!--	<span class="price">
-                                                                    <span class="amount">Very brief summary. </span>
-                                                                </span>  -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_4.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:60%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 3 ratings
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Watch Later
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">BARIATRIC FAQ VIDEO TITLE 5</a></h3>
-                                                                <!--	<span class="price">
-                                                                    <span class="amount">Very brief summary. </span>
-                                                                </span>  -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div id="tab-2" class="tab-pane fade">
-                                        <div class="noo-row-slider commerce">
-                                            <ul class="noo-woo-slider products">
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:0%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 0 rating
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Watch Later
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">PROCEDURES VIDEO TITLE 1</a></h3>
-                                                                <!--	<span class="price">
-                                                                    <span class="amount">Very brief summary. </span>
-                                                                </span>  -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:0%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 0 rating
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Watch Later
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">PROCEDURES VIDEO TITLE 2</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:0%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 0 rating
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Watch Later
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">PROCEDURES VIDEO TITLE 3</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:100%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 5 ratings
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Watch Later
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">PROCEDURES VIDEO TITLE 4</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:60%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 3 ratings
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Watch Later
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">PROCEDURES VIDEO TITLE 5</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div id="tab-3" class="tab-pane fade">
-                                        <div class="noo-row-slider commerce">
-                                            <ul class="noo-woo-slider products">
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:0%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 0 rating
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Watch Later
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">RECOVERY VIDEO TITLE 1</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:0%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 0 rating
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Add to Wishlist
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">RECOVERY VIDEO TITLE 2</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:0%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 0 rating
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Add to Wishlist
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">RECOVERY VIDEO TITLE 3</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:100%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 5 ratings
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Add to Wishlist
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">RECOVERY VIDEO TITLE 4</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:60%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 3 ratings
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Add to Wishlist
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">RECOVERY VIDEO TITLE 5</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div id="tab-4" class="tab-pane fade">
-                                        <div class="noo-row-slider commerce">
-                                            <ul class="noo-woo-slider products">
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:0%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 0 rating
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Add to Wishlist
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">TIP VIDEO TITLE 1</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:0%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 0 rating
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Add to Wishlist
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">TIP VIDEO TITLE 2</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:0%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 0 rating
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Add to Wishlist
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">TIP VIDEO TITLE 3</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:100%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 5 ratings
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Add to Wishlist
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">TIP VIDEO TITLE 4</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="col-md-4 col-sm-6 col-xs-6 product">
-                                                        <div class="noo-product-inner">
-                                                            <div class="woo-thumbnail">
-                                                                <div class="bk"></div>
-                                                                <img width="270" height="350" src="~/Content/images/video_cover_270x350_5.jpg" alt="" />
-                                                                <div class="noo-product-meta">
-                                                                    <div class="rating">
-                                                                        <div class="star-rating">
-                                                                            <span style="width:60%"></span>
-                                                                        </div>
-                                                                        <span class="noo-count-rating">
-                                                                            based on 3 ratings
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="entry-cart-meta">
-                                                                        <a href="#" class="add_to_cart_button">Watch Now</a>
-                                                                        <div class="yith-wcwl-add-to-wishlist">
-                                                                            <div class="yith-wcwl-add-button">
-                                                                                <a href="#" class="add_to_wishlist">
-                                                                                    Add to Wishlist
-                                                                                </a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="noo-product-footer">
-                                                                <h3><a href="">TIP VIDEO TITLE 5</a></h3>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> <!-- /.main -->
-
-    <footer class="wrap-footer">
-        <!--Start footer widget-->
-        <div class="colophon wigetized">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-6 noo-footer-4">
-                        <div class="widget widget_noo_infomation">
-                            <div class="social-all">
-                                <span>Follow us</span>
-                                <a href="#" class="fa fa-facebook"></a>
-                                <a href="#" class="fa fa-twitter"></a>
-                                <a href="#" class="fa fa-youtube"></a>
-                                <a href="#" class="fa fa-skype"></a>
-                            </div>
-                            <div class="noo-info-top">
-
-                                <p>
-                                    L.O.B. Bariatric community is ...eget fermentum diam, vitae elementum mi. Nulla facilisi. Nam nisl libero, vestibulum a urna ut, tempor dictum tellus. Proin non est a justo dapibus varius!
-                                </p>
-                            </div>
-                            <ul class="noo-infomation-attr">
-                                <li>
-                                    <span class="fa fa-map-marker infomation-left"></span>
-                                    <address>
-                                        230 N Broad St Philadelphia, PA 19102
-
-                                    </address>
-                                </li>
-                                <li>
-                                    <span class="fa fa-phone infomation-left"></span>
-                                    <span>(215) 762-7000 </span>
-                                </li>
-                                <li>
-                                    <span class="fa fa-envelope infomation-left"></span>
-                                    <span class="phone-text">info@emailsample.com</span>
-                                </li>
-                                <li>
-                                    <span class="fa fa-globe infomation-left"></span>
-                                    <span>www.L.O.B.dotcom</span>
-                                </li>
-                            </ul>
-                            <div class="noo-info-footer">
-                                � L.O.B. Bariatrics 2016, All Rights Reserved <br>
-                                Copyright <i class="fa fa-hospital-o"></i> Tenet Health Network
-                            </div>
-                        </div>
-                    </div>
-                    <div class="noo-md-custom noo-footer-4">
-                        <div class="widget widget_noo_services">
-                            <h4 class="widget-title">Quick Links</h4>
-                            <ul>
-                                <li><a href="http://virtualvisitwebapp-qa.azurewebsites.net/">Virtual Visit</a></li>
-                                <li><a href="#">Procedures</a></li>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">ABOUT</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="noo-md-custom noo-footer-4">
-                        <div class="widget widget_noo_menu">
-                            <h4 class="widget-title">Resources</h4>
-                            <div class="noo-custom-menu">
-                                <ul>
-                                    <li><a href="#">Diet</a></li>
-                                    <li><a href="#">Health</a></li>
-                                    <li><a href="#">Bariatric</a></li>
-                                    <li><a href="#">Care</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="#">Videos</a></li>
-                                    <li><a href="#">Education</a></li>
-                                    <li><a href="#">Vlogs</a></li>
-                                    <li><a href="#">Community</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="noo-md-custom noo-footer-4">
-                        <div class="widget tweets-widget">
-                            <h4 class="widget-title">Community Tweets</h4>
-                            <div class="recent-tweets">
-                                <ul>
-                                    <li>
-                                        <div class="twitter_user">
-                                            <a class="twitter_profile" target="_blank" href="#">&nbsp;</a>
-                                            <span class="twitter_username">@ViewBag.HUHospitalPHL</span>
-                                        </div>
-                                        <span class="tw-content">
-                                            Congrats to @ViewBag.HUHospitalPHL employees who were recognized for their service. These six have been here for 40+ years. <a href="#" target="_blank">@ViewBag.HUHospitalPHL</a> <a href="#" target="_blank">#TEAM</a>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <div class="twitter_user">
-                                            <a class="twitter_profile" target="_blank" href="#">&nbsp;</a>
-                                            <span class="twitter_username">@ViewBag.HUHospitalPHL</span>
-                                        </div>
-                                        <span class="tw-content">
-                                            ICYMI: 31 @ViewBag.HUHospitalPHL physicians were named to @ViewBag.phillymag 2016 list of the region�s �Top Doctors.�:  <a href="#" target="_blank">https://goo.gl/OuU5fS </a> <a href="#" target="_blank">#TOPDOCTORS</a>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--End footer widget-->
-    </footer>
-
-    <!--End .site -->
+</div>
+    <!-- jQuery Library -->
+    <script src="/Content/assets/js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/Content/assets/js/bootstrap.min.js"></script>
 
 
 
@@ -1559,54 +539,14 @@
             //$("#dialog_CareGiver").dialog("open");
             @if (ViewBag.Activated != null)
             {
-                    @:$('#dialog_CareGiver').parent('div').css('z-index', '99999');
-                @:$("#dialog_CareGiver").dialog("open");
-            }
+                @:$('#dialog_CareGiver').parent('div').css('z-index', '99999');
+                            @:$("#dialog_CareGiver").dialog("open");
+                        }
         });
 
     </script>
 
 
 
-    <a href="#" class="go-to-top hidden-print"><i class="fa fa-angle-up"></i></a>
 
-    <script type='text/javascript' src='~/Content/js/jquery.min.js'></script>
-    <script type='text/javascript' src='http://maps.googleapis.com/maps/api/js?ver=1.0'></script>
-
-    <script type='text/javascript' src='~/Content/js/bootstrap.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/off-cavnass.js'></script>
-    <script type='text/javascript' src='~/Content/js/owl.carousel.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/jquery-migrate.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/modernizr-2.7.1.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/jquery.prettyPhoto.js'></script>
-    <script type='text/javascript' src='~/Content/js/jquery.prettyPhoto.init.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/script.js'></script>
-
-    <script type='text/javascript' src='~/Content/js/jquery.parallax-1.1.3.js'></script>
-    <script type='text/javascript' src='~/Content/js/jquery.magnific-popup.js'></script>
-    <script type='text/javascript' src='~/Content/js/custom.js'></script>
-
-    <script type='text/javascript' src='~/Content/js/jquery-ui.js'></script>
-    <script type='text/javascript' src='~/Content/js/jquery.ui.timepicker.js'></script>
-    <script type='text/javascript' src='~/Content/js/imagesloaded.pkgd.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/isotope.pkgd.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/portfolio.js'></script>
-    <script type='text/javascript' src='~/Content/js/jquery.themepunch.tools.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/jquery.themepunch.revolution.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/extensions/revolution.extension.video.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/extensions/revolution.extension.slideanims.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/extensions/revolution.extension.actions.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/extensions/revolution.extension.layeranimation.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/extensions/revolution.extension.kenburn.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/extensions/revolution.extension.navigation.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/extensions/revolution.extension.migration.min.js'></script>
-    <script type='text/javascript' src='~/Content/js/extensions/revolution.extension.parallax.min.js'></script>
-
-
-
-
-
-
-</body>
-</html>
 

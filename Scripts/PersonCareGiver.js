@@ -11,6 +11,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
     personService.GetAllRecords().then(function (d) {
         $scope.personData = d.data; // Success
+        document.getElementById('diverror').style.display = "block";
         // alert($scope.personData[0].insuranceeffectivedate);
         $scope.person = {
             Id: $scope.personData[0].id,
@@ -38,7 +39,9 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
             PharmacyCity: $scope.personData[0].pharmacycity,
             PharmacyState: $scope.personData[0].pharmacystate,
             CareGiver: $scope.personData[0].CareGiver,
-            HasCareGiver: $scope.personData[0].HasCareGiver
+            HasCareGiver: $scope.personData[0].HasCareGiver,
+            Error: false,
+            Success: false
         };
         if ($scope.person.ZipCode == '0') {
             $scope.person.ZipCode = '';

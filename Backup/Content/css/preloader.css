@@ -1,0 +1,95 @@
+/*--------------------------------------------------------------
+Preloader - CSS
+--------------------------------------------------------------*/
+#loading{
+  background-color: #000000;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 9999999;
+  margin-top: 0px;
+  top: 0px;
+}
+#loading-center{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+#loading-center-absolute {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  height: 50px;
+  width: 150px;
+  margin-top: -25px;
+  margin-left: -75px;
+
+}
+.loader {
+  font-size: 20px;
+  margin: 100px auto;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-animation: load4 1.3s infinite linear;
+  animation: load4 1.3s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+@-webkit-keyframes load4 {
+  0%,
+  100% {
+    box-shadow: 0 -3em 0 0.2em #1493f8, 2em -2em 0 0em #1493f8, 3em 0 0 -1em #1493f8, 2em 2em 0 -1em #1493f8, 0 3em 0 -1em #1493f8, -2em 2em 0 -1em #1493f8, -3em 0 0 -1em #1493f8, -2em -2em 0 0 #1493f8;
+  }
+  12.5% {
+    box-shadow: 0 -3em 0 0 #1493f8, 2em -2em 0 0.2em #1493f8, 3em 0 0 0 #1493f8, 2em 2em 0 -1em #1493f8, 0 3em 0 -1em #1493f8, -2em 2em 0 -1em #1493f8, -3em 0 0 -1em #1493f8, -2em -2em 0 -1em #1493f8;
+  }
+  25% {
+    box-shadow: 0 -3em 0 -0.5em #1493f8, 2em -2em 0 0 #1493f8, 3em 0 0 0.2em #1493f8, 2em 2em 0 0 #1493f8, 0 3em 0 -1em #1493f8, -2em 2em 0 -1em #1493f8, -3em 0 0 -1em #1493f8, -2em -2em 0 -1em #1493f8;
+  }
+  37.5% {
+    box-shadow: 0 -3em 0 -1em #1493f8, 2em -2em 0 -1em #1493f8, 3em 0em 0 0 #1493f8, 2em 2em 0 0.2em #1493f8, 0 3em 0 0em #1493f8, -2em 2em 0 -1em #1493f8, -3em 0em 0 -1em #1493f8, -2em -2em 0 -1em #1493f8;
+  }
+  50% {
+    box-shadow: 0 -3em 0 -1em #1493f8, 2em -2em 0 -1em #1493f8, 3em 0 0 -1em #1493f8, 2em 2em 0 0em #1493f8, 0 3em 0 0.2em #1493f8, -2em 2em 0 0 #1493f8, -3em 0em 0 -1em #1493f8, -2em -2em 0 -1em #1493f8;
+  }
+  62.5% {
+    box-shadow: 0 -3em 0 -1em #1493f8, 2em -2em 0 -1em #1493f8, 3em 0 0 -1em #1493f8, 2em 2em 0 -1em #1493f8, 0 3em 0 0 #1493f8, -2em 2em 0 0.2em #1493f8, -3em 0 0 0 #1493f8, -2em -2em 0 -1em #1493f8;
+  }
+  75% {
+    box-shadow: 0em -3em 0 -1em #1493f8, 2em -2em 0 -1em #1493f8, 3em 0em 0 -1em #1493f8, 2em 2em 0 -1em #1493f8, 0 3em 0 -1em #1493f8, -2em 2em 0 0 #1493f8, -3em 0em 0 0.2em #1493f8, -2em -2em 0 0 #1493f8;
+  }
+  87.5% {
+    box-shadow: 0em -3em 0 0 #1493f8, 2em -2em 0 -1em #1493f8, 3em 0 0 -1em #1493f8, 2em 2em 0 -1em #1493f8, 0 3em 0 -1em #1493f8, -2em 2em 0 0 #1493f8, -3em 0em 0 0 #1493f8, -2em -2em 0 0.2em #1493f8;
+  }
+}
+@keyframes load4 {
+  0%,
+  100% {
+    box-shadow: 0 -3em 0 0.2em #1493f8, 2em -2em 0 0em #1493f8, 3em 0 0 -1em #1493f8, 2em 2em 0 -1em #1493f8, 0 3em 0 -1em #1493f8, -2em 2em 0 -1em #1493f8, -3em 0 0 -1em #1493f8, -2em -2em 0 0 #1493f8;
+  }
+  12.5% {
+    box-shadow: 0 -3em 0 0 #1493f8, 2em -2em 0 0.2em #1493f8, 3em 0 0 0 #1493f8, 2em 2em 0 -1em #1493f8, 0 3em 0 -1em #1493f8, -2em 2em 0 -1em #1493f8, -3em 0 0 -1em #1493f8, -2em -2em 0 -1em #1493f8;
+  }
+  25% {
+    box-shadow: 0 -3em 0 -0.5em #1493f8, 2em -2em 0 0 #1493f8, 3em 0 0 0.2em #1493f8, 2em 2em 0 0 #1493f8, 0 3em 0 -1em #1493f8, -2em 2em 0 -1em #1493f8, -3em 0 0 -1em #1493f8, -2em -2em 0 -1em #1493f8;
+  }
+  37.5% {
+    box-shadow: 0 -3em 0 -1em #1493f8, 2em -2em 0 -1em #1493f8, 3em 0em 0 0 #1493f8, 2em 2em 0 0.2em #1493f8, 0 3em 0 0em #1493f8, -2em 2em 0 -1em #1493f8, -3em 0em 0 -1em #1493f8, -2em -2em 0 -1em #1493f8;
+  }
+  50% {
+    box-shadow: 0 -3em 0 -1em #1493f8, 2em -2em 0 -1em #1493f8, 3em 0 0 -1em #1493f8, 2em 2em 0 0em #1493f8, 0 3em 0 0.2em #1493f8, -2em 2em 0 0 #1493f8, -3em 0em 0 -1em #1493f8, -2em -2em 0 -1em #1493f8;
+  }
+  62.5% {
+    box-shadow: 0 -3em 0 -1em #1493f8, 2em -2em 0 -1em #1493f8, 3em 0 0 -1em #1493f8, 2em 2em 0 -1em #1493f8, 0 3em 0 0 #1493f8, -2em 2em 0 0.2em #1493f8, -3em 0 0 0 #1493f8, -2em -2em 0 -1em #1493f8;
+  }
+  75% {
+    box-shadow: 0em -3em 0 -1em #1493f8, 2em -2em 0 -1em #1493f8, 3em 0em 0 -1em #1493f8, 2em 2em 0 -1em #1493f8, 0 3em 0 -1em #1493f8, -2em 2em 0 0 #1493f8, -3em 0em 0 0.2em #1493f8, -2em -2em 0 0 #1493f8;
+  }
+  87.5% {
+    box-shadow: 0em -3em 0 0 #1493f8, 2em -2em 0 -1em #1493f8, 3em 0 0 -1em #1493f8, 2em 2em 0 -1em #1493f8, 0 3em 0 -1em #1493f8, -2em 2em 0 0 #1493f8, -3em 0em 0 0 #1493f8, -2em -2em 0 0.2em #1493f8;
+  }
+}

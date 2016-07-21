@@ -11,7 +11,8 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     personService.GetAllRecords().then(function (d) {
         $scope.personData = d.data; // Success
        
-      
+        document.getElementById('diverror').style.display  = "block";
+        //$('#diverror').show();
         $scope.person = {
             Id: $scope.personData[0].id,
             FirstName: $scope.personData[0].firstname,
@@ -38,7 +39,9 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
             PharmacyCity: $scope.personData[0].pharmacycity,
             PharmacyState: $scope.personData[0].pharmacystate,
             CareGiver: $scope.personData[0].CareGiver,
-            
+            Error: false,
+            Success: false,
+
 
         };
        
@@ -119,11 +122,11 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         //$('#Procedure').addClass('ng-valid ')
         //$('#Procedure').addClass('ng-valid-required')
         $('#Procedure').removeAttr('required');
-
+       
         //alert($scope.person.DateOfBirth + ' - ' + $scope.person.dateofbirth + ' - ' + $scope.personData[0].dateofbirth);
         
     }, function () {
-        alert('Error Occured !!!'); // Failed
+        //alert('Error Occured !!!'); // Failed
     });
     
     $scope.person = {
@@ -302,7 +305,18 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
                 url: '/Account/CheckUserPass',
                 data: $scope.person
             }).then(function successCallback(response) {
-                if (response.data =="") {
+
+                if (response.data.toLowerCase().indexOf('false') != -1)
+                {
+                    $scope.person.MessageError = "<br/> -You are not authorized for login.";
+                    $scope.person.Error = true;
+
+                    $scope.clear();
+                    return;
+                }
+                else if (response.data == "") {
+
+
                     $scope.person.MessageError = "<br/> -Email-Id or Password is incorrect.";
                     $scope.person.Error = true;
 
@@ -341,6 +355,10 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         
 
     };
+
+    $scope.GoRegister = function () {
+        window.location.href = '/Account/SignUp';
+    }
 
     $scope.ActivateAccount = function () {
 
@@ -386,8 +404,8 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     //Update  Item
     $scope.Update = function () {
 
-        $scope.person.phone1 = $('#Phone1').val();
-
+        $scope.person.Phone1 = $('#Phone1').val();
+        //alert($scope.person.Phone1);
         $scope.person.DateOfBirth = $('#DateOfBirth').val();
 
         $scope.person.PreferredPharmacy = $('#PreferredPharmacy').val();
@@ -421,6 +439,8 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
             $scope.person.MessageError = $scope.person.MessageError + "<br> -Please fix validations.";
             $scope.person.Error = true;
+            //document.getElementById('diverror').style.display  = "block";
+            $('#diverror').show();
             document.location.href = "#UpdateProfile1";
         }
 
@@ -468,7 +488,8 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
 
         $scope.person.Error = false;
-        if (checkValidPass()) {
+        if (checkValidPass())
+        {
 
             $http({
                 method: 'POST',
@@ -493,7 +514,6 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     };
     
     $scope.fetchPharmasies = function () {
-
         getLatLng();
 
 
@@ -584,8 +604,14 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
             if ($scope.person.Phone1 == "") {
                 $('#Phone1').addClass('ng-dirty');
                 $('#Phone1').addClass('ng-invalid');
+                $('#Phone1').css('border-color','red');
                 IsError = false;
-            }
+            } else if ($('#Phone1').val() == "") {
+                $('#Phone1').addClass('ng-dirty');
+        $('#Phone1').addClass('ng-invalid');
+        $('#Phone1').css('border-color', 'red');
+        IsError = false;
+    }
             if ($('#DateOfBirth').val() == "") {
                 $('#DateOfBirth').addClass('ng-dirty');
                 $('#DateOfBirth').addClass('ng-invalid');
@@ -810,7 +836,9 @@ var zoomLevel = 15;
 function getLatLng() {
 
     var address = $('#PharmacyZipcode').val();
-
+    if (address == '') {
+        return;
+    }
     zoomLevel = 15;
 
     //test:
@@ -1002,6 +1030,7 @@ function showInfo(pharm, phone, addr, result) {
 
 app.factory('personService', function ($http) {
     var fac = {};
+    $('#diverror').hide();
     fac.GetAllRecords = function () {
         return $http.get('/Account/GetRecordById');
     }

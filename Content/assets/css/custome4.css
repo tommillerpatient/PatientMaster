@@ -1,0 +1,296 @@
+/*default css*/
+*{ padding:0px; margin:0px;}
+body {
+	background: #fff;
+	voice-family: "\"}\"";
+	voice-family: inherit;
+	font-size: 14px;
+	color: #5f5f5f;
+	font-family:Arial, Helvetica, sans-serif;
+}
+img {
+	height: auto;
+	width: auto
+}
+.navbar_outer, .triangle_up {
+	width: 100%;
+	position: absolute;
+	left: 0
+}
+p {
+	line-height: 18px;
+	color:#5f5f5f;
+}
+a {
+	color: #5f5f5f;
+	cursor: pointer
+}
+a:hover {
+	color: #111755;
+}
+h1, h2, h3, h4, h5, h6 {
+	padding: 0 0 5px;
+	margin: 0 0 10px;
+	font-weight: 400
+}
+
+h1 span{
+font-weight:bold;}
+h1, h2, h3, h4, li, ol, ul {
+	padding: 0
+}
+h1, h2 {
+	margin: 5px 0 2	0px;
+	font-weight: 400;
+	color: #5f5f5f;
+	text-align: 
+}
+h1 {
+	font-size: 34px
+}
+h2 {
+	font-size: 30px
+}
+h3 {
+	margin: 0 0 2px;
+	font-size: 16px
+}
+h4 {
+	margin: 0 0 5px;
+	font-size: 17px
+}
+
+h5 {
+color: #111755;
+font-weight: bold;
+font-size: 20px;
+text-align: center;
+}
+ol {
+	list-style-type: decimal
+}
+li {
+	list-style: none
+}
+ol ol, ol ul, ul ol, ul ul {
+	margin: 0 0 0 20px
+}
+textarea {
+	resize: none
+}
+
+/*hover effect img*/
+thumbnail a>img:hover{
+border:2px solid #111755;
+}
+/*Reset Boostrap*/
+.navbar {margin-bottom:0; min-height:35px;}
+
+.navbar-default .navbar-brand,
+a {color:#0098da;}
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover,
+a:focus, a:hover {color: #6cb049;}
+
+/*col-md-8*/
+
+p.small {
+    float:right;
+	padding-top: 25px;
+}
+
+p.big{
+line-height:0.4;}
+
+h1.aside{
+line-height:0.4;}
+
+/*col-md-8*/
+.sidebanner img{
+width:100%;
+margin:36px 0px 15px 0px;
+}
+
+h1.head1{
+text-align: center;
+font-size: 28px;
+padding: 10px;}
+
+p.add{
+font-size:16px;
+text-align: center;
+box-sizing: border-box;
+}
+
+/*New CSS*/
+
+.topbar{ float:right; font-weight:normal; }
+.topbar label{ font-weight:normal; float:left; margin-right:15px;}
+.topbar label span{ color:#111755;}
+.topbtn{ float:right}
+.topbtn a{ background:#dfdfdf; color:#111755; padding:0 10px 0 0; float:right; font-size:12px; margin:0 2px; }
+.topbtn a:first-child{border-bottom-right-radius:15px; padding-right:15px;}
+.topbtn a:last-child{border-bottom-left-radius:15px;padding-left:15px; }
+.topbtn a img{ width:20px; margin:2px 5px;}
+.info{ clear: right; float: right; padding: 5px; text-align: right;}
+.info .phone{ color:#111755;}
+.info p{ float:left; padding:15px 10px 0; }
+.info .input-group{ float:left; width:220px; margin:10px; 0;}
+.info .input-group input{ box-shadow:none; border-radius:0px; height:30px;}
+.info .input-group .btn-default{ padding:0 10px; height:30px; border-right:0px; background:#111755;}
+.info .input-group .btn-default img{ width:15px;}
+.logo{  display: block; float: left;  width: 250px;}
+.logo img{ width:100%;}
+.navbar-collapse{ padding:0px;}
+.navbar-default{ background:#ffffff; border:0px;}
+.navbar-nav > li > a{ padding:0px 30px; text-transform:uppercase; color:#606060; font-size:14px; font-weight:bold;}
+.navbar-nav > li:first-child > a{ padding-left:0px;}
+.navbar-nav > li:last-child > a{ padding-right:0px}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover,.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover{background-color:#ffffff; color:#111755;}
+.banner { float: left; width: 100%; background:#dfdfdf;}
+.banner img { float: left; width: 100%;}
+
+.para{ padding:10px; float:left; width:100%;}
+.para h1{ text-align:left;}
+.para h1 span, h1 span{color:#111755; }
+.sidebanner{}
+.sidebanner img{ width:100%;}
+.sep{/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fafafa+0,8b8b8b+48,fafafa+100 */
+background: #fafafa; /* Old browsers */
+background: -moz-linear-gradient(left, #fafafa 0%, #8b8b8b 48%, #fafafa 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #fafafa 0%,#8b8b8b 48%,#fafafa 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #fafafa 0%,#8b8b8b 48%,#fafafa 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#fafafa',GradientType=1 ); /* IE6-9 */ height:1px; width:100%; margin-bottom:30px; clear:both;}
+
+.login{ background:#e8e8e8; margin-bottom:30px;}
+.loginheader{ background-image:url(../images/loginheader.png) ;  background-position: center top; background-size: 100% 100%;
+color: #ffffff; display: block; float: left; padding: 10px; text-align: center; width: 100%;}
+form { clear: both; display: block; padding: 20px; width: 100%;}
+form .btn-default, .paraimgbtn{ background:#ffffff; border:1px solid #111755; color:#111755;}
+form .btn-default:hover,  .paraimgbtn:hover{ background:#111755; color:#ffffff; border:1px solid #a1a1a1;}
+form .btn-primary { background:#111755; border:1px solid #a1a1a1; color:#ffffff; margin-bottom:25px;}
+form .btn-primary:hover{ background:#111755; color:#ffffff; border:1px solid #a1a1a1;}
+form .form-control::-moz-placeholder{ color:#111755;}
+form .form-control:focus{ box-shadow:none; border:1px solid #111755;}
+form .form-group{ margin-bottom:25px;}
+
+.paraimg { width:100%;}
+.paraimg{ padding:10px; float:left; width:100%;}
+.paraimg h1{}
+.paraimg h1 span{color:#111755; }
+.paraimg img{ width:100%}
+
+.bgshadow{ width:100%; float:left; }
+.bgshadow img{ width:100%;}
+.gallery{ float:left; width:100%; margin-bottom:10px;}
+.gallery img{ width:100%; margin:20px 0px;}
+.centerpara{ width:65%; margin: 0 auto 30px; text-align:center;}
+footer{ margin-top:30px;}
+.bluesep {background: #111755; display: block; float: left;  height: 7px; margin-bottom: 3px; width: 100%;}
+.ftr{ background:#585858; padding:30px 0px 30px; margin-bottom:30px; clear:both; float:left;}
+.footermenus{ float:left; width:100%; border-bottom:1px solid #3f3f3f; margin-bottom:20px; padding-bottom:20px;}
+.footermenus span{ font-weight:bold; color:#ffffff;}
+.footermenus ul{ padding-left:15px; margin-top:10px;}
+.footermenus ul li { list-style-type:none; float:left; width:100%; margin-bottom:10px;}
+.footermenus ul li a{ color:#ffffff; font-size:12px; line-height:14px; float:left; width:100%}
+.links { float:left; color:#ffffff; font-weight:bold; width:100%; padding:0 15px;}
+.links a, .links a:hover, .links a:focus{ color :#ffffff; font-weight:bold; margin-bottom:4px; display:inline-block}
+.links span { clear: both; color: #bababa; display: block; font-size: 12px;}
+.links .pull-right{ text-align:right;}
+.links .pull-right p{ float:left; margin-right:10px; margin-bottom:0px;}
+.links .pull-right .phone{ color:#ffffff; text-decoration:underline}
+.links .pull-right .add{color: #bababa; display: block; font-size: 12px;}
+.links .pull-right a{ float:left; width:150px;}
+.links .pull-right a img{ width:100%}
+.socialmedia{ width:65%; margin:0 auto;}
+.socialmedia a{ display:block;text-align:center}
+.socialmedia a span{ border: 1px solid #111755; border-radius: 50%; display: block; margin: 0 auto; height: 80px; width: 80px;}
+.socialmedia a span img{ padding:20px; width:100%}
+.socialmedia a label{ color:#111755; font-weight:normal; margin:5px 0; }
+
+/*sidebar*/
+.sidebar{ position:absolute; bottom:10%; left:0px;}
+.sidebar > a{ display:block; width:35px;}
+.sidebar > a img{ max-width:100%;}
+
+
+/*CSS Media Query*/
+@media screen and (min-width: 992px) {
+
+}
+@media screen and (min-width: 768px) {
+
+}
+
+@media screen and (max-width: 1199px) {
+	.navbar-nav > li > a{ padding:0 18px;}
+	h1{ font-size:25px;}
+	.logo{ width:190px;}
+	.info p{ font-size:12px;}
+	.info .input-group{ width:165px;}
+	
+
+}
+/*Tablet*/
+@media screen and (max-width: 991px) {
+	h1{ font-size:18px;}
+.navbar-nav > li > a{ font-size:12px; padding:0 10px;}
+}
+/*Small Device*/
+@media screen and (max-width: 767px) {
+	.logo{ width:140px; margin-top:25px;}
+	.info p{ padding-top:5px; width:140px; padding:5px 0;}
+	.topbtn a{ font-size:10px; padding:0 7px 0 0; }
+	.topbar label{ text-align:center; width:100%;}
+	.socialmedia, .centerpara{ width:100%;}
+	.navbar-header .input-group{ float:left; width:72%; margin:10px; 0;}
+	.navbar-header .input-group input{ box-shadow:none; border-radius:0px; height:30px; width:173px;}
+	.navbar-header .input-group .btn-default{ padding:0 10px; height:30px; border-right:0px; background:#111755;}
+	.navbar-header .input-group .btn-default img{ width:15px;}
+	.navbar-nav > li:first-child > a,.navbar-nav > li > a{ padding:5px 15px;}
+	.navbar-nav{ margin:0px;}
+
+
+}
+/*Mobile Device*/
+@media screen and (max-width: 640px) {
+.font50 {
+	font-size: 30px;
+}
+.font45 {
+	font-size: 25px;
+}
+.font40 {
+	font-size: 22px;
+}
+.font36 {
+	font-size: 20px;
+}
+.font30,
+.font26 {
+	font-size: 18px;
+}
+.font22,
+.font20 {
+	font-size: 16px;
+}
+}
+/*Extra Small Mobile Device*/
+@media screen and (max-width: 480px) {
+.font50 {
+	font-size: 22px;
+}
+.font45 {
+	font-size: 20px;
+}
+.font40,
+.font36 {
+	font-size: 18px;
+}
+.font30,
+.font26 {
+	font-size: 16px;
+}
+}
+@media screen and (max-width: 420px) {
+
+}

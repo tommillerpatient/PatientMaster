@@ -11,12 +11,15 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
     personService.GetAllRecords().then(function (d) {
         $scope.personData = d.data; // Success
+        document.getElementById('diverror').style.display = "block";
 
 
         $scope.person = {
             Id: $scope.personData[0].id,
             Address: $scope.personData[0].firstname + ', ' + $scope.personData[0].lastname,
             CareGiver: $scope.personData[0].CareGiver,
+            Error: false,
+            Success: false,
         };
 
         
@@ -103,7 +106,9 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         $scope.person.PharmacyCity = '';
         $scope.person.PharmacyState = '';
         $scope.person.CareGiver = 0;
-    }
+        $scope.person.Error = false,
+        $scope.person.Success = false
+        }
 
     //Add New Item
     $scope.SendRequest = function () {

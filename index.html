@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="demoModule">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Index</title>
+    <link rel="shortcut icon" href="/Content/assets/images/favicon.ico">
+    <!-- Stylesheet -->
+    <link href="/Content/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Content/assets/css/custome.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/PersonAngular.js"></script>
+    <script src="~/Scripts/angular-sanitize.js"></script>
+
+
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header Start -->
+        <header>
+            <div class="container">
+                <div class="topbar">
+                    <label>Attend A free <span>saminar Today!</span></label>
+                    <div class="topbtn">
+                        <a href="#"><img src="/Content/assets/images/icn_bariatics.png" alt="">Bariatrics Portal</a>
+                        <a href="#"><img src="/Content/assets/images/icn_register.png" alt="">Register</a>
+                        <a href="#"><img src="/Content/assets/images/icn_login.png" alt="">Login</a>
+                    </div>
+                </div>
+                <a href="#" class="logo"><img src="/Content/assets/images/logo.png" alt=""></a>
+                <div class="info">
+                    <p>
+                        <span class="phone">(215) 762-7000</span><br class="visible-xs">
+                        &nbsp;| &nbsp;<span class="add">230 N Broad St Philadelphia, PA 19102</span>
+                    </p>
+                    <div class="input-group hidden-xs">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><img src="/Content/assets/images/icn_search.png" alt=""></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <div class="input-group visible-xs">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><img src="/Content/assets/images/icn_search.png" alt=""></button>
+                                </span>
+                            </div>
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                                <li><a href="#">Health Library</a></li>
+                                <li><a href="#">Community</a></li>
+                                <li><a href="#">Virtual Visit</a></li>
+                                <li><a href="#">Success Stories</a></li>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Contact Physician</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+            </div>
+        </header>
+        <!-- Header End -->
+        <!-- Page Conetnt Start -->
+        <div class="content-wrapper">
+            <div class="banner">
+                <div class="container"> <img src="/Content/assets/images/banner_1.png" alt=""> </div>
+            </div>
+            <div class="container" ng-controller="demoCtrl" ng-submit="signIn()">
+                <div class="col-sm-7">
+                    <div class="para">
+                        <h1> The Benifits of <span>Bariatric Surgenry</span></h1>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        </p>
+                    </div>
+                    <div class="para">
+                        <h1>Sergical<span>Options</span></h1>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        </p>
+                    </div>
+                    <div class="para">
+                        <h1>Begin Your<span>Journey</span></h1>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-5 sidebanner"><img src="/Content/assets/images/img1.png" alt=""></div>
+                <div class="sep col-sm-12"></div>
+                <div class="loginbox_otr col-sm-4">
+                    <div class="login">
+                        <div class="loginheader">RETURNING PATIENT LOGIN</div>
+                        <form>
+                            <div class="alert alert-danger" ng-show="person.Error" id="diverror1">
+                                <strong>Error!</strong><span ng-bind-html="person.MessageError"></span>
+                            </div>
+                            @if (ViewBag.Message != null)
+                            {
+                            <div class="alert alert-success" id="mesegid">
+                                <strong></strong><span>@ViewBag.Message.</span>
+                            </div>
+
+                            }
+                            @if (!string.IsNullOrEmpty(Convert.ToString(Session["PasswordSend"])))
+                            {
+
+                            <div class="alert alert-success" id="PasswordSendid">
+                                <strong></strong><span>@Session["PasswordSend"]</span>
+                            </div>
+
+                            }
+                            @if (!string.IsNullOrEmpty(Convert.ToString(Session["ResetPassMeseg"])))
+                            {
+
+                            <div class="alert alert-success" id="ResetPassMesegid">
+                                <strong></strong><span>@Session["ResetPassMeseg"]</span>
+                            </div>
+
+                            }
+                            @if (!string.IsNullOrEmpty(Convert.ToString(Session["InvalidURl"])))
+                            {
+
+                            <div class="alert alert-danger" id="ResetPassMesegid">
+                                <strong></strong><span>@Session["InvalidURl"]</span>
+                            </div>
+
+                            }
+                            @if (!string.IsNullOrEmpty(Convert.ToString(Request["cg"])))
+                            {
+
+                            <div class="alert alert-danger" id="ResetPassMesegid">
+                                <strong></strong><span>Seems you have invalid link. Please check your link again.</span>
+                            </div>
+
+                            }
+                            @{
+
+                            Session.Remove("PasswordSend");
+                            Session.Remove("ResetPassMeseg");
+                            Session.Remove("InvalidURl");
+
+                            }
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="exampleInputEmail1" ng-model="person.Email" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="exampleInputPassword1" ng-model="person.PasswordHash" placeholder="Password">
+                            </div>
+                            <button type="button" class="btn  btn-block btn-primary" data-ng-click="SignIn()" >login</button>
+                            <button type="button" class="btn btn-block btn-default">Register</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="paraimg">
+                        <div class="col-sm-8">
+                            <h1> Visit <span>Bariatrics Portal</span></h1>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            </p>
+                        </div>
+                        <div class="img col-sm-4"> <img src="/Content/assets/images/paraimg.png" alt=""> </div>
+                        <button type="submit" class="btn paraimgbtn btn-default">Login Now</button>
+                    </div>
+                </div>
+                <div class="bgshadow"><img src="/Content/assets/images/boxshadow.png" alt=""></div>
+            </div>
+            <div class="gallery">
+                <h1 class="text-center">Sergical <span>Weight Loss</span> Gallery</h1>
+                <img src="/Content/assets/images/section_bg.png" alt="">
+            </div>
+            <div class="sep col-sm-12"></div>
+            <div class="container">
+                <h1 class="text-center">Join a <span>Community and </span> Stay <span>Connect</span></h1>
+                <p class="centerpara">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+                <div class="socialmedia">
+                    <div class=" col-xs-4">
+                        <a href="#">
+                            <span> <img src="/Content/assets/images/icn_facebook.png" alt=""> </span>
+                            <label>Link us on facebook</label>
+                        </a>
+                    </div>
+                    <div class=" col-xs-4">
+                        <a href="#">
+                            <span> <img src="/Content/assets/images/icn_youtube.png" alt=""> </span>
+                            <label>Watch us on You Tube</label>
+                        </a>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="#">
+                            <span> <img src="/Content/assets/images/icn_twitter.png" alt=""> </span>
+                            <label>Connect on Twitter</label>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Conetnt End -->
+            <!-- Footer Start -->
+            <footer class="container">
+                <div class="bluesep"></div>
+                <div class="ftr ">
+                    <div class="footermenus">
+                        <div class="col-sm-2">
+                            <span>Our Services</span>
+                            <ul>
+                                <li><a href="#">Find A Phsiciyn</a></li>
+                                <li><a href="#">Bariatrics</a></li>
+                                <li><a href="#">Behaviour health Services</a></li>
+                                <li><a href="#">Bloodless Medicine and Sergery</a></li>
+                                <li><a href="#">Cancer Care</a></li>
+                                <li><a href="#">Dermatology</a></li>
+                                <li><a href="#">Emergency & Truma</a></li>
+                                <li><a href="#">Heart & Vasclar Care</a></li>
+                                <li><a href="#">Imaging & Radiology</a></li>
+                                <li><a href="#">Neurological Services</a></li>
+                                <li><a href="#">Orthopaedics</a></li>
+                                <li><a href="#">Pain Management</a></li>
+                                <li><a href="#">Plastic, Cosmetic and Hand Surgery</a></li>
+                                <li><a href="#">Primary Care</a></li>
+                                <li><a href="#">Transplant Servces</a></li>
+                                <li><a href="#">Urology</a></li>
+                                <li><a href="#">Womens Health</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>Our Location</span>
+                            <ul>
+                                <li><a href="#">Hahmann University 	Hospital</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>Our Stories</span>
+                            <ul>
+                                <li><a href="#">Devon's Story</a></li>
+                                <li><a href="#">Ivy's Story</a></li>
+                                <li><a href="#">Scott and Dwight: A transplant Story</a></li>
+                                <li><a href="#">Share Your Story</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>For Patients</span>
+                            <ul>
+                                <li><a href="#">health Risk Assesments</a></li>
+                                <li><a href="#">Insurance and Financial Support</a></li>
+                                <li><a href="#">Legal and Ethical Decisions</a></li>
+                                <li><a href="#">Maps & Directions</a></li>
+                                <li><a href="#">Mobile App</a></li>
+                                <li><a href="#">Online Bill Pay</a></li>
+                                <li><a href="#">Patient Portal</a></li>
+                                <li><a href="#">Registration</a></li>
+                                <li><a href="#">Request Madical Records</a></li>
+                                <li><a href="#">Share Your Story</a></li>
+                                <li><a href="#">Staff Recognition</a></li>
+                                <li><a href="#">Support Groups</a></li>
+                                <li><a href="#">What to Bring/What not to Bring</a></li>
+                                <li><a href="#">What to Export</a></li>
+                                <li><a href="#">Your Patient Rights</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>For Family & Visitors</span>
+                            <ul>
+                                <li><a href="#">Gifts & Support</a></li>
+                                <li><a href="#">Maps & Directions</a></li>
+                                <li><a href="#">Nearby Hotels & Restaurants</a></li>
+                                <li><a href="#">Share Your Story</a></li>
+                                <li><a href="#">Staff Recognition</a></li>
+                                <li><a href="#">Visitation Rights</a></li>
+                                <li><a href="#">What to Bring/What not to Bring</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>For Health Professional</span>
+                            <ul>
+                                <li><a href="#">Education & Trainning</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Physical Portal</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <div class="pull-left"> <a href="#">Disclaimers</a>&nbsp; | &nbsp;<a href="#">Sitemap</a> <span>&copy; Hahnemann University Hospital 2016, All rights Reserved</span> </div>
+                        <div class="pull-right">
+                            <p>
+                                <span class="phone">(215) 762-7000</span> <span class="add">
+                                    230 N Broad St<br>
+                                    Philadelphia, PA 19102
+                                </span>
+                            </p>
+                            <a href="#"><img src="/Content/assets/images/footer_logo.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- Footer End -->
+        </div>
+        <!-- jQuery Library -->
+        <script src="/Content/assets/js/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/Content/assets/js/bootstrap.min.js"></script>
+    </div>
+</body>
+</html>

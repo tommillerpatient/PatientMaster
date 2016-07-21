@@ -10,6 +10,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
     personService.GetAllRecords().then(function (d) {
         $scope.personData = d.data; // Success
+        document.getElementById('diverror').style.display = "block";
 
         // alert($scope.personData[0].insuranceeffectivedate);
         $scope.person = {
@@ -38,8 +39,8 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
             PharmacyCity: $scope.personData[0].pharmacycity,
             PharmacyState: $scope.personData[0].pharmacystate,
             CareGiver: $scope.personData[0].CareGiver,
-
-
+            Error: false,
+            Success: false,
 
         };
         if ($scope.person.ZipCode == '0') {
@@ -209,7 +210,9 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         $scope.person.PharmacyCity = '';
         $scope.person.PharmacyState = '';
         $scope.person.CareGiver = 0;
-    }
+        $scope.person.Error = false;
+        $scope.person.Success = false;
+        }
 
     //Add New Item
     $scope.SignUp = function () {

@@ -10,6 +10,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
     personService.GetAllRecords().then(function (d) {
         $scope.personData = d.data; // Success
+        document.getElementById('diverror').style.display = "block";
 
         if (d.data == '') {          
             //window.location.href = '/Account/SignIn?cg=msg';
@@ -42,7 +43,9 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
             PharmacyState: $scope.personData[0].pharmacystate,
             CareGiver: $scope.personData[0].CareGiver,
             Email: $scope.personData[0].email,
-            ConfirmedByEmail:$scope.personData[0].ConfirmedByEmail,
+            ConfirmedByEmail: $scope.personData[0].ConfirmedByEmail,
+            Error: false,
+            Success: false,
         };
         if ($scope.person.ZipCode == '0') {
             $scope.person.ZipCode = '';
@@ -169,6 +172,8 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         $scope.person.PharmacyCity = '';
         $scope.person.PharmacyState = '';
         $scope.person.CareGiver = 0;
+        $scope.person.Error = false;
+        $scope.person.Success = false;
     }
 
     //Add New Item

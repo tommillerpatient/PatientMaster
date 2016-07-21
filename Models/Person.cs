@@ -36,24 +36,24 @@ namespace PatientMaster.Models
 
         private DateTime _dateofbirth = Convert.ToDateTime("01/01/1900");
 
-        private Int16 _gender = 0;
+        private Int32 _gender = 0;
 
         private string _email = string.Empty;
 
-        private Int16 _phone1 = 0;
+        private Int32 _phone1 = 0;
 
-        private Int16 _phone2 = 0;
+        private Int32 _phone2 = 0;
 
-        private Int16 _phone3 = 0;
+        private Int32 _phone3 = 0;
 
-        private Int16 _personispatient = 0;
+        private Int32 _personispatient = 0;
 
         private bool _acknowledgednoticeofprivacy = false;
 
         private string _address = string.Empty;
         private string _address1 = string.Empty;
 
-        private Int16 _zipcode = 0;
+        private Int32 _zipcode = 0;
 
         private string _state = string.Empty;
 
@@ -176,7 +176,7 @@ namespace PatientMaster.Models
 
         }
 
-        public Int16 gender
+        public Int32 gender
         {
 
             get { return _gender; }
@@ -194,7 +194,7 @@ namespace PatientMaster.Models
 
         }
 
-        public Int16 phone1
+        public Int32 phone1
         {
 
             get { return _phone1; }
@@ -203,7 +203,7 @@ namespace PatientMaster.Models
 
         }
 
-        public Int16 phone2
+        public Int32 phone2
         {
 
             get { return _phone2; }
@@ -212,7 +212,7 @@ namespace PatientMaster.Models
 
         }
 
-        public Int16 phone3
+        public Int32 phone3
         {
 
             get { return _phone3; }
@@ -221,7 +221,7 @@ namespace PatientMaster.Models
 
         }
 
-        public Int16 personispatient
+        public Int32 personispatient
         {
 
             get { return _personispatient; }
@@ -256,7 +256,7 @@ namespace PatientMaster.Models
 
         }
 
-        public Int16 zipcode
+        public Int32 zipcode
         {
 
             get { return _zipcode; }
@@ -442,22 +442,22 @@ namespace PatientMaster.Models
                 if (dt.Rows.Count > 0)
                 {
 
-                    _id = Convert.ToInt16(dt.Rows[0]["id"]);
+                    _id = Convert.ToInt32(dt.Rows[0]["id"]);
                     _username = Convert.ToString(dt.Rows[0]["username"]);
                     _passwordhash = Convert.ToString(dt.Rows[0]["passwordhash"]);
                     _sessiontoken = Convert.ToString(dt.Rows[0]["sessiontoken"]);
                     _firstname = Convert.ToString(dt.Rows[0]["firstname"]);
                     _middlename = Convert.ToString(dt.Rows[0]["middlename"]);
                     _lastname = Convert.ToString(dt.Rows[0]["lastname"]);
-                    _gender = Convert.ToInt16(dt.Rows[0]["gender"]);
+                    _gender = Convert.ToInt32(dt.Rows[0]["gender"]);
                     _email = Convert.ToString(dt.Rows[0]["email"]);
-                    _phone1 = Convert.ToInt16(dt.Rows[0]["phone1"]);
-                    _phone2 = Convert.ToInt16(dt.Rows[0]["phone2"]);
-                    _phone3 = Convert.ToInt16(dt.Rows[0]["phone3"]);
-                    _personispatient = Convert.ToInt16(dt.Rows[0]["personispatient"]);
+                    _phone1 = Convert.ToInt32(dt.Rows[0]["phone1"]);
+                    _phone2 = Convert.ToInt32(dt.Rows[0]["phone2"]);
+                    _phone3 = Convert.ToInt32(dt.Rows[0]["phone3"]);
+                    _personispatient = Convert.ToInt32(dt.Rows[0]["personispatient"]);
                     _acknowledgednoticeofprivacy = Convert.ToBoolean(dt.Rows[0]["acknowledgednoticeofprivacy"]);
                     _address = Convert.ToString(dt.Rows[0]["address"]);
-                    _zipcode = Convert.ToInt16(dt.Rows[0]["zipcode"]);
+                    _zipcode = Convert.ToInt32(dt.Rows[0]["zipcode"]);
                     _state = Convert.ToString(dt.Rows[0]["state"]);
                     _city = Convert.ToString(dt.Rows[0]["city"]);
                     _procedure = Convert.ToString(dt.Rows[0]["procedure"]);
@@ -669,6 +669,26 @@ namespace PatientMaster.Models
             catch (Exception ex)
             {
                 throw new Exception("sp_Person_selectall");
+            }
+        }
+
+
+
+        //update status
+        public void changestatus(Int64 id, bool active)
+        {
+            try
+            {
+                obj_con.clearParameter();
+                obj_con.addParameter("@id", id);
+                obj_con.addParameter("@active", active);
+                obj_con.BeginTransaction();
+                obj_con.ExecuteNoneQuery("sp_Person_updateactive", CommandType.StoredProcedure);
+                obj_con.CommitTransaction();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("sp_Person_updateactive");
             }
         }
 
@@ -914,22 +934,22 @@ namespace PatientMaster.Models
             {
                 using (PersonCLS obj_Person = new PersonCLS())
                 {
-                    obj_Person.id = Convert.ToInt16(dt.Rows[i]["id"]);
+                    obj_Person.id = Convert.ToInt32(dt.Rows[i]["id"]);
                     obj_Person.username = Convert.ToString(dt.Rows[i]["username"]);
                     obj_Person.passwordhash = Convert.ToString(dt.Rows[i]["passwordhash"]);
                     obj_Person.sessiontoken = Convert.ToString(dt.Rows[i]["sessiontoken"]);
                     obj_Person.firstname = Convert.ToString(dt.Rows[i]["firstname"]);
                     obj_Person.middlename = Convert.ToString(dt.Rows[i]["middlename"]);
                     obj_Person.lastname = Convert.ToString(dt.Rows[i]["lastname"]);
-                    obj_Person.gender = Convert.ToInt16(dt.Rows[i]["gender"]);
+                    obj_Person.gender = Convert.ToInt32(dt.Rows[i]["gender"]);
                     obj_Person.email = Convert.ToString(dt.Rows[i]["email"]);
-                    obj_Person.phone1 = Convert.ToInt16(dt.Rows[i]["phone1"]);
-                    obj_Person.phone2 = Convert.ToInt16(dt.Rows[i]["phone2"]);
-                    obj_Person.phone3 = Convert.ToInt16(dt.Rows[i]["phone3"]);
-                    obj_Person.personispatient = Convert.ToInt16(dt.Rows[i]["personispatient"]);
+                    obj_Person.phone1 = Convert.ToInt32(dt.Rows[i]["phone1"]);
+                    obj_Person.phone2 = Convert.ToInt32(dt.Rows[i]["phone2"]);
+                    obj_Person.phone3 = Convert.ToInt32(dt.Rows[i]["phone3"]);
+                    obj_Person.personispatient = Convert.ToInt32(dt.Rows[i]["personispatient"]);
                     obj_Person.acknowledgednoticeofprivacy = Convert.ToBoolean(dt.Rows[i]["acknowledgednoticeofprivacy"]);
                     obj_Person.address = Convert.ToString(dt.Rows[i]["address"]);
-                    obj_Person.zipcode = Convert.ToInt16(dt.Rows[i]["zipcode"]);
+                    obj_Person.zipcode = Convert.ToInt32(dt.Rows[i]["zipcode"]);
                     obj_Person.state = Convert.ToString(dt.Rows[i]["state"]);
                     obj_Person.city = Convert.ToString(dt.Rows[i]["city"]);
                     obj_Person.procedure = Convert.ToString(dt.Rows[i]["procedure"]);
@@ -1003,9 +1023,9 @@ namespace PatientMaster.Models
 
         private string _email = string.Empty;
 
+        private Int32 _phone1 = 0;
 
-
-
+        private bool _active = false;
 
         #endregion
 
@@ -1038,23 +1058,8 @@ namespace PatientMaster.Models
 
         }
 
-        public string middlename
-        {
-
-            get { return _middlename; }
-
-            set { _middlename = value; }
-
-        }
-
-        public string lastname
-        {
-
-            get { return _lastname; }
-
-            set { _lastname = value; }
-
-        }
+    
+     
 
 
         public string email
@@ -1066,9 +1071,24 @@ namespace PatientMaster.Models
 
         }
 
+        public Int32 phone1
+        {
+
+            get { return _phone1; }
+
+            set { _phone1 = value; }
+
+        }
 
 
+        public bool active
+        {
 
+            get { return _active; }
+
+            set { _active = value; }
+
+        }
 
 
         #endregion

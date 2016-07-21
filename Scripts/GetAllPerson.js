@@ -10,7 +10,8 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     personService.GetAllRecords().then(function (d) {
        
         $scope.personData = d.data; // Success
-      
+        document.getElementById('diverror').style.display = "block";
+
 
     }, function () {
         alert('Error Occured !!!'); // Failed

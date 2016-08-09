@@ -1,0 +1,101 @@
+﻿
+@{
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+@{
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+@*<link href="~/Content/fonts/font-awesome-4.6.3/font-awesome-4.6.3/css/font-awesome.css" rel="stylesheet" />*@
+
+<link href="~/Content/assets/css/calender-css/responsive-calendar.css" rel="stylesheet" />
+
+
+<link href="~/Content/css/mystyle.css" rel="stylesheet" />
+<link href="~/Content/css/responsive.css" rel="stylesheet" />
+<script src="/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Content/assets/js/bootstrap.min.js"></script>
+<script src="/Scripts/angular.js"></script>
+<script src="/Scripts/MyPatientAngular.js"></script>
+<script src="/Scripts/angular-sanitize.js"></script>
+
+
+
+<div ng-app="demoModule">
+
+    <div ng-controller="demoCtrl">
+        <div ng-repeat="user in personData">
+            @*<div>FirstName</div>
+            <div>{{user.firstname}}</div>
+            <div>Last Name</div>
+            <div>{{user.lastname}}</div>
+            <div>Telephone</div>
+            <div>{{user.phone1}}</div>
+            <div>Mobile</div>
+            <div>{{user.mobile}}</div>
+            <div>Email</div>
+            <div>{{user.email}}</div>
+            <div><img ng-src="{{user.profileimage}}" class="img-thumbnail img-thumbnail-custom img-responsive" style=" max-width: 150px;max-height: 150px; position: absolute;" id="imgprof" /></div>*@
+            <section class="patient-profile">
+                <div class="container banner">
+
+                    <div class="row text-center p_top_20 p_bottom_20">
+                        <div class="col-md-12">
+                            <h2 class="blue">
+                                @*Your (Patient) Profile*@
+                                YOUR (PATIENT) PROFILE
+                            </h2>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="container ">
+                    <div class="row p_top_20 p_bottom_20">
+                        <div class="col-md-2 col-sm-2"></div>
+                        <div class="col-md-3 col-sm-3 m_bottom_20">
+                            <img ng-src="{{user.profileimage}}" class="img-thumbnail img-thumbnail-custom img-responsive" style="width: 150px;height: 150px;" id="imgprof" />
+                        </div>
+                        <div class="col-md-5 col-sm-5">
+                            <div class="row form-group patient-div">
+                                <div class="col-md-5 col-xs-5"><p>FirstName :</p></div>
+                                <div class="col-md-7 col-xs-7"><span>{{user.firstname}}</span></div>
+
+                            </div>
+                            <div class="row  form-group patient-div">
+                                <div class="col-md-5 col-xs-5"><p>Last Name :</p></div>
+                                <div class="col-md-7 col-xs-7"><span>{{user.lastname}}</span></div>
+                            </div>
+                            <div class="row  form-group patient-div">
+                                <div class="col-md-5 col-xs-5"><p>Telephone :</p></div>
+                                <div class="col-md-7 col-xs-7"><span>{{user.phone1==0?'':user.phone1}}</span></div>
+                            </div>
+                            <div class="row  form-group patient-div">
+                                <div class="col-md-5 col-xs-5"><p>Mobile :</p></div>
+                                <div class="col-md-7 col-xs-7"><span>{{user.mobile==0?'':user.mobile}}</span></div>
+                            </div>
+                            <div class="row  form-group patient-div">
+                                <div class="col-md-5 col-xs-5"><p>Email address :</p></div>
+                                <div class="col-md-7 col-xs-7"><span>{{user.email}}</span></div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-2"></div>
+                    </div>
+                </div>
+            </section>
+            @*<div>Preferred contact method</div>
+            <div>{{user.email}}</div>
+            <div>Alerts to support</div>
+            <div>{{user.email}}</div>*@
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+

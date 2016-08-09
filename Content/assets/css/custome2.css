@@ -238,8 +238,8 @@ color: #ffffff; display: block; float: left; padding: 10px; text-align: center; 
 form { clear: both; display: block; padding: 20px; width: 100%;}
 form .btn-default, .paraimgbtn{ background:#ffffff; border:1px solid #111755; color:#111755;}
 form .btn-default:hover,  .paraimgbtn:hover{ background:#111755; color:#ffffff; border:1px solid #a1a1a1;}
-form .btn-primary { background:#111755; border:1px solid #a1a1a1; color:#ffffff; margin-bottom:25px;}
-form .btn-primary:hover{ background:#111755; color:#ffffff; border:1px solid #a1a1a1;}
+form .btn-primary { background:#111755 !important; border:1px solid #a1a1a1; color:#ffffff; margin-bottom:25px;}
+form .btn-primary:hover{ background:#111755 !important; color:#ffffff; border:1px solid #a1a1a1;}
 form .form-control::-moz-placeholder{ color:#111755;}
 form .form-control:focus{ box-shadow:none; border:1px solid #111755;}
 form .form-group{ margin-bottom:25px;}
@@ -384,3 +384,21 @@ footer{ margin-top:30px;}
 @media screen and (max-width: 420px) {
 
 }
+
+.dropdown-blue{
+    height: 40px;
+padding: 9px 20px;
+margin-bottom: 25px;
+width: 100%;
+color:#fff !important;
+background:#111755 !important;
+}
+.dropdown-blue:hover{
+    color:#fff !important;
+    background:#111755 !important;
+}
+.dropdown-blue:active{
+color:#fff !important;
+    background:#111755 !important;
+}
+.btn-primary{  background:#111755; border:1px solid #a1a1a1; color:#ffffff; margin-bottom:15px;}

@@ -1,31 +1,20 @@
-﻿//var app = angular.module('demoModule', ['ngSanitize']);
-var app = angular.module('demoModule', ['ui.bootstrap', 'ngResource']);
-// Defining angularjs Controller and injecting personService
-app.controller('demoCtrl', function ($scope, $http, personService) {
+﻿
+//var app = angular.module('demoModule', ['ui.bootstrap', 'ngResource', 'ngSanitize']);
+var myApp = angular.module('myApp', ['angularUtils.directives.dirPagination']);
 
+
+function MyController($scope, $http, personService) {
+  
     $scope.staffData = null;
+   
     personService.GetAllRecords().then(function (d) {
 
         $scope.staffData = d.data; // Success
-        $scope.predicate = 'firstname';
-        $scope.reverse = true;
         $scope.currentPage = 1;
-        $scope.order = function (predicate) {
-            $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
-            $scope.predicate = predicate;
-        };
-
-        $scope.totalItems = $scope.staffData.length;
-        $scope.numPerPage = 10;
-        $scope.paginate = function (value) {
-            var begin, end, index;
-            begin = ($scope.currentPage - 1) * $scope.numPerPage;
-            end = begin + $scope.numPerPage;
-            index = $scope.staffData.indexOf(value);
-            return (begin <= index && index < end);
-        };
+        $scope.pageSize = 10;
+   
     });
-      
+     
 
     $scope.staff = {
         Id: '',
@@ -47,6 +36,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
     $scope.Add=function()
     {
+        $scope.clear();
         $scope.staff.VisibleInsert = true;
         $scope.staff.createstaff = true;
         $scope.staff.Insertbutton = true;
@@ -83,6 +73,11 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     $scope.Cancel = function () {
         $scope.staff.VisibleIndex = true;
         $scope.staff.VisibleInsert = false;
+        $scope.clear();
+        $scope.staff.MessageError = '';
+        $scope.staff.MessageSuccess = '';
+        $scope.staff.Success = false;
+        $scope.staff.Error = false;
     }
 
  
@@ -93,6 +88,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         $scope.staff.Password = '';
         $scope.staff.FirstName = '';
         $scope.staff.LastName = '';
+       
        
     }
 
@@ -109,8 +105,9 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
             }).then(function successCallback(response) {
 
                 if (response.data == "") {
-                    $scope.staff.MessageError = "Email-Id or Password is incorrect.";
+                    $scope.staff.MessageError = "  Email-Id or Password is incorrect.";
                     $scope.staff.Error = true;
+                    document.getElementById('diverror').style.display = "block";
                     $scope.clear();
                     return;
 
@@ -129,8 +126,9 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         }
         else {
    
-            $scope.staff.MessageError = $scope.staff.MessageError+"Please fix validations."
+            $scope.staff.MessageError = $scope.staff.MessageError + "<br>-Please fix validations."
             $scope.staff.Error = true;
+            document.getElementById('diverror').style.display = "block";
             $scope.clear();
 
         }
@@ -160,8 +158,9 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
             }
             else
             {
-                $scope.staff.MessageError = $scope.staff.MessageError + "-Email is invalid.";
+                $scope.staff.MessageError = $scope.staff.MessageError + " Email is invalid.";
                 IsError = false;
+                document.getElementById('diverror').style.display = "block";
             }
 
 
@@ -191,20 +190,21 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
         if ($scope.staff.FirstName == "")
         {
-            $scope.staff.MessageError = $scope.staff.MessageError + "<br> -FirstName is required..";
-            IsError = false;
+          
 
+            IsError = false;
         }
         if ($scope.staff.LastName == "")
-        {
-            $scope.staff.MessageError = $scope.staff.MessageError + "<br> -LastName is required..";
+       {
             IsError = false;
+
 
         }
         if ($scope.staff.EmailId == "") {
 
-            $scope.staff.MessageError = $scope.staff.MessageError + "<br> -EmailId is required.";
+        
             IsError = false;
+
         }
         else
         {
@@ -217,14 +217,15 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
             else {
                 $scope.staff.MessageError = $scope.staff.MessageError + "<br> -Email is invalid.";
+
                 IsError = false;
-            }
+              }
 
 
         }
 
         if ($scope.staff.Password == "") {
-            $scope.staff.MessageError = $scope.staff.MessageError + "<br> -Password is required..";
+        
             IsError = false;
 
         }
@@ -249,8 +250,14 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
                 data: $scope.staff
             }).then(function successCallback(response)
             {
-                $scope.staff.MessageSuccess = "Record Inserted Successfully.";
+                personService.GetAllRecords().then(function (d) {
+                    $scope.staffData = d.data;
+                });
+                $scope.staff.MessageSuccess = "  Record Inserted Successfully.";
                 $scope.staff.Success = true;
+                $scope.staff.VisibleIndex = true;
+                $scope.staff.VisibleInsert = false;
+                document.getElementById('divsuccess').style.display = "block";
                 $scope.clear();
             },
             function errorCallback(response) {
@@ -261,9 +268,10 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         }
         else {
 
-            $scope.staff.MessageError = "Please Fix Validations.";
+            $scope.staff.MessageError =  $scope.staff.MessageError+"<br> -Please Fix Validations.";
             $scope.staff.Error = true;
-            $scope.clear();
+            document.getElementById('diverror').style.display = "block";
+          ;
 
         }
 
@@ -280,13 +288,18 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
                 url: '/XpanelAdmin/Update',
                 data: $scope.staff
             }).then(function successCallback(response) {
+                personService.GetAllRecords().then(function (d) {
+                    $scope.staffData = d.data;
+                });
 
                 $scope.staff.MessageSuccess = "Record Update Successfully.";
+                document.getElementById('divsuccess').style.display = "block";
                 $scope.staff.Success = true;
                 $scope.staff.VisibleIndex = true;
                 $scope.staff.VisibleInsert = false;
                 $scope.clear();
-                alert($scope.staff.MessageSuccess);
+
+               
             },
             function errorCallback(response) {
 
@@ -296,9 +309,10 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         }
         else {
 
-            $scope.staff.MessageError = "Please Fix Validations.";
+            $scope.staff.MessageError = "<br> -Please Fix Validations.";
             $scope.staff.Error = true;
-            $scope.clear();
+            document.getElementById('diverror').style.display = "block";
+          
 
         }
 
@@ -321,8 +335,8 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
 
             $scope.staffData.splice(index, 1);
-            document.getElementById('success').style.display = "block";
-            $("#dialog-confirm").dialog("close");
+            document.getElementById('divsuccess').style.display = "block";
+            $('#dialog-confirm').css("display", "none");
         }, function errorCallback(response) {
             alert("Error : " + response.data.ExceptionMessage);
         });
@@ -338,22 +352,33 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
 
 
-        $("#dialog-confirm").dialog("open");
+        $('#dialog-confirm').css("display", "block");
     }
     $scope.cancel = function (index) {
 
 
-        $("#dialog-confirm").dialog("close");
+        $('#dialog-confirm').css("display", "none");
     }
 
-});
+};
 
 // Here I have created a factory which is a populer way to create and configure services. You may also create the factories in another script file which is best practice.
 // You can also write above codes for POST,PUT,DELETE in this factory instead of controller, so that our controller will look clean and exhibits proper Separation of Concern.
-app.factory('personService', function ($http) {
+myApp.factory('personService', function ($http) {
     var fac = {};
+ 
     fac.GetAllRecords = function () {
         return $http.get('/XpanelAdmin/staffData');
     }
     return fac;
 });
+
+
+function OtherController($scope) {
+    $scope.pageChangeHandler = function (num) {
+        console.log('going to page ' + num);
+    };
+}
+
+myApp.controller('MyController', MyController);
+myApp.controller('OtherController', OtherController);

@@ -92,7 +92,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
 
     }, function () {
-        alert('Error Occured !!!'); // Failed
+        //alert('Error Occured !!!'); // Failed
     });
 
 
@@ -138,7 +138,8 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         Error: false,
         Success: false,
         CareGiver: 0,
-        HasCareGiver:0,
+        HasCareGiver: 0,
+
     };
 
 
@@ -448,7 +449,153 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
     }
 
+    function GetUserProgress()
+    {
 
+
+        $scope.UserProgressData = null;
+
+        $http({
+            method: 'POST',
+            url: '/Account/GetUserProgress/',
+            data: {}
+        }).then(function successCallback(response) {
+            $scope.UserProgressData = response.data;
+            for(var i=0;i<response.data.length;i++)
+            {
+                if ($scope.UserProgressData[i].contentid == 7)
+                {
+                  
+                    $('#pulmonaryli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+              else  if ($scope.UserProgressData[i].contentid == 8) {
+
+                  $('#cardiologyli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+              }
+              else if ($scope.UserProgressData[i].contentid == 9) {
+
+                  $('#upperli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+              }
+              else if ($scope.UserProgressData[i].contentid == 10) {
+
+                  $('#psycologicalli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+              }
+              else if ($scope.UserProgressData[i].contentid == 12) {
+
+                  $('#sleepstudyli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+              }
+              else if ($scope.UserProgressData[i].contentid == 14) {
+
+                  $('#pulmonaryfunctionli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+              }
+              else if ($scope.UserProgressData[i].contentid == 15) {
+
+                  $('#pulmonologistclrli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+              }
+
+              else if ($scope.UserProgressData[i].contentid == 3) {
+
+                  $('#bloodworkli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+              }
+                else if ($scope.UserProgressData[i].contentid == 4)
+                {
+                  
+                    $('#chestxryli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+                else if ($scope.UserProgressData[i].contentid == 5)
+                {
+
+                    $('#nutritionli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+                else if ($scope.UserProgressData[i].contentid == 6)
+                {
+                    $('#suprtgroupli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+
+
+            }
+        
+
+            var per = response.data.length;
+            var percentage = (per * 8) / 100;
+            var percentg = parseInt(percentage * 100);
+            $('#per').text(percentg + "% OF JOURNEY COMPLETED");
+            $('#progr').css('width', percentg+'%');
+        }, function errorCallback(response) {
+
+        });
+    }
+
+
+
+    $scope.UpdateUserProgress=function(str)
+    {
+        contentid = '';
+        if (str == 'pulmonaryeve')
+        {
+
+            contentid = 7;
+        }
+        else if(str=='chestxry')
+        {
+            contentid = 4;
+
+        }
+        else if (str == 'nutrition')
+        {
+
+            contentid = 5;
+        }
+        else if (str == 'suprtgroup')
+        {
+            contentid = 6;
+
+        }
+        else if (str == 'bloodwork') {
+            contentid = 3;
+
+        }
+        else if (str == 'cardiology') {
+
+            contentid = 8;
+        }
+
+        else if (str == 'upper') {
+            contentid = 9;
+
+        }
+        else if (str == 'psycological') {
+            contentid = 10;
+
+        }
+        else if (str == 'sleep') {
+            contentid = 12;
+
+        }
+        else if (str == 'function') {
+            contentid = 14;
+
+        }
+        else if (str == 'clearance') {
+            contentid = 15;
+
+        }
+        $http({
+            method: 'POST',
+            url: '/Account/UpdateUserProgress/'+contentid,
+            data: {}
+        }).then(function successCallback(response) {
+           
+        }, function errorCallback(response) {
+
+        });
+
+    }
+
+
+
+
+    GetUserProgress()
 
 });
 

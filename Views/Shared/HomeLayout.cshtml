@@ -1,102 +1,249 @@
-﻿<html>
+﻿
+
+<html>
 
 <head>
     <title>L.O.B Patient Portal </title>
-
     <link rel="shortcut icon" href="/Content/assets/images/favicon.ico">
-    <link href="~/Content/css/preloader.css" rel="stylesheet" />
+    <link href="~/Content/fonts/font-awesome-4.6.3/font-awesome-4.6.3/css/font-awesome.css" rel="stylesheet" />
+    @*<link href="~/Content/css/preloader.css" rel="stylesheet" />*@
     <!-- Stylesheet -->
-    @*<link href="/Content/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/Content/assets/css/custome.css" rel="stylesheet">*@
+    <link href="~/Content/css/bootstrap_datepicker.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="~/Content/assets/css/custome.css" rel="stylesheet">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/js/bootstrap_datepicker.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+
+    $(document).ready(function () {
+        $(".dropbtn").click(function () {
+            $(".dropdown-content").toggleClass("hidden unhidden");
+        });
+    });
+
+    </script>
+
+
+
+
+
+
+
+    @if (string.IsNullOrEmpty(Convert.ToString(Session["userid"])))
+    {
+        if (!Request.Url.ToString().ToLower().Contains("signin") && !Request.Url.ToString().ToLower().Contains("signup"))
+        { 
+        <script>
+            window.location.href = "/Account/SignIn";
+        </script>
+        }
+ 
+    }
+
+    <style>
+        #loading {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: fixed;
+            display: block;
+            opacity: 1;
+            background-color: #000;
+            z-index: 9999999;
+        }
+
+        #loading-image {
+            position: absolute;
+            top: 42%;
+            height: 100px !important;
+            width: 100px !important;
+            left: 45%;
+            z-index: 100;
+        }
+    </style>
 </head>
 
 
 
-<body>
-    <div id="loading">
-        <div id="loading-center">
-            <div id="loading-center-absolute">
-                <div class="loader">Loading...</div>
-            </div>
+<body ng-app="demoModule">
+    <div ng-controller="demoCtrl">
+
+        <div id="loading">
+
+            <img id="loading-image" src="~/Content/images/loader.gif" alt="Loading..." />
         </div>
-    </div>
-    <div class="container">
-        <div class="topbar">
-            <label>Attend A free <span>seminars Today!</span></label>
-            <div class="topbtn">
-                <a href="~/Account/SignUp"><img src="/Content/assets/images/icn_bariatics.png" alt="">My Health Rec</a>
-                <a href="/Account/SignUp"><img src="/Content/assets/images/icn_register.png" alt="">Register</a>
-   
-                @if (!string.IsNullOrEmpty(Convert.ToString(Session["userid"])))
+
+        @*<div id="loading">
+                <div id="loading-center">
+                    <div id="loading-center-absolute">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+            </div>*@
+        <div class="container">
+            <div class="topbar">
+                <label>Attend A free <span>seminars Today!</span></label>
+                <div class="topbtn">
+                    <a href="~/Account/SignUp"><img src="/Content/assets/images/icn_bariatics.png" alt="">My Health Rec</a>
+                    <a href="/Account/SignUp"><img src="/Content/assets/images/icn_register.png" alt="">Register</a>
+                    <div class="dropdown3">
+                        @*<img src="~/Content/img/User-icon.png" />*@
+                        <i class="fa fa-uaer"></i>
+                        <a class="dropbtn">
+                        @if (!string.IsNullOrEmpty(Convert.ToString(Session["userid"])))
+                                    {
+                           <span>My Account</span>
+                                    }
+                        else
+                        {
+                            <span>Login</span>
+                        }
+                        </a>
+                        @* <button type="button" class="dropbtn">My Account</button>*@
+
+                        <ul class="dropdown-content hidden" id="dropdiv">
+                            <li>
+
+                                <div class="login-div text-center" id="logdiv">
+
+                                    @if (!string.IsNullOrEmpty(Convert.ToString(Session["userid"])))
+                                    {
+
+                                    <a href="/Account/SignOut">
+                                        @*<img src="/Content/assets/images/icn_login.png" alt="">*@
+                                        Logout
+                                    </a>
+                                    <script>
+
+                                        $('#logdiv').removeClass("login-div text-center");
+                                        $('#dropdiv').css('min-width', '121px');
+                                    </script>
+                                    }
+                                    else
+                                    {
+                                    @*<div class="alert alert-danger" ng-show="person.Error" id="diverror" style="display:none;">
+                                        <strong>Error!</strong><span ng-bind-html="person.MessageError"></span>
+                                    </div>*@
+                                    <div class=" ng-show=" person.error" id="diverror" style="display:none;font-size: 11px;
+color: rgb(225, 62, 62);
+margin-bottom: 5px;">
+                                        <span ng-bind-html="person.MessageError"></span>
+                                    </div>
+                                    <div class="profile-pic">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+
+                                    <label class="control-label label2"></label><input type="text" class="form-control" style="height: 30px;margin-bottom: 10px;font-size: 12px;" ng-model="person.Email" placeholder="Email" />
+                                    <label class="control-label label2"></label><input type="password" class="form-control" style="height: 30px;margin-bottom: 10px;font-size: 12px;" ng-model="person.PasswordHash" placeholder="Password" />
+
+
+                                    <input type="submit" class="btn btn-block btn-primary" name="login" id="loginbtn1" value="Login" data-ng-click="SignIn()" />
+                                    }
+                                </div>
+                            </li>
+                            @if (!string.IsNullOrEmpty(Convert.ToString(Session["userid"])))
+                            {
+
+
+                            if (Convert.ToString(Session["IsCareGiver"]) == "0" || string.IsNullOrEmpty(Convert.ToString(Session["IsCareGiver"])))
+                            {
+                            <li><a href="../Account/UserProfile">My Account</a></li>
+                            <li><a href="../Account/MyCareGivers">My Caregivers</a></li>
+                            }
+                            else
+                            {
+                            <li><a href="../Account/CareGiverProfile">My Account</a></li>
+                            <li><a href="../Account/MyPatientProfile">My Patients</a></li>
+                            }
+                            <li><a href="../Account/Settings">Change Password</a></li>
+                            @*
+                            <li><a href="#">Settings</a></li>*@
+
+
+                            }
+                        </ul>
+
+                    </div>
+
+
+                </div>
+
+
+
+                @*@if (!string.IsNullOrEmpty(Convert.ToString(Session["userid"])))
                 {
                 <a href="/Account/SignOut"><img src="/Content/assets/images/icn_login.png" alt="">Logout</a>
                 }
                 else
                 {
                 <a href="/Account/SignIn"><img src="/Content/assets/images/icn_login.png" alt="">Login</a>
-                }
-              
+                }*@
+
 
             </div>
-        </div>
-        <a href="#" class="logo"><img src="/Content/assets/images/logo.png" alt=""></a>
 
-        <div class="info">
-            <p>
-                <span class="phone">(215) 762-7000</span><br class="visible-xs">
-                &nbsp;| &nbsp;<span class="add">230 N Broad St Philadelphia, PA 19102</span>
-            </p>
-            <div class="input-group hidden-xs">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><img src="/Content/assets/images/icn_search.png" alt=""></button>
-                </span>
+            <a href="#" class="logo"><img src="/Content/assets/images/logo.png" alt=""></a>
+
+            <div class="info">
+                <p>
+                    <span class="phone">(215) 762-7000</span><br class="visible-xs">
+                    &nbsp;| &nbsp;<span class="add">230 N Broad St Philadelphia, PA 19102</span>
+                </p>
+                <div class="input-group hidden-xs">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><img src="/Content/assets/images/icn_search.png" alt=""></button>
+                    </span>
+                </div>
             </div>
-        </div>
-        <div class="clearfix"></div>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <div class="input-group visible-xs">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><img src="/Content/assets/images/icn_search.png" alt=""></button>
-                        </span>
+            <div class="clearfix"></div>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <div class="input-group visible-xs">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><img src="/Content/assets/images/icn_search.png" alt=""></button>
+                            </span>
+                        </div>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
                     </div>
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                    @if (!string.IsNullOrEmpty(Convert.ToString(Session["userid"])))
-                          {
-                        <li class="active"><a href="/Account/WelcomeBack">Home <span class="sr-only">(current)</span></a></li>
-                            }
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            @if (!string.IsNullOrEmpty(Convert.ToString(Session["userid"])))
+                        {
+                                <li class="active"><a href="/Account/WelcomeBack">Home <span class="sr-only">(current)</span></a></li>
+                        }
                         else
-                            {
-    
-                        <li class="active"><a href="/Account/Home">Home <span class="sr-only">(current)</span></a></li>
-                                }
-                        <li><a href="#">Health Library</a></li>
-                        <li><a href="#">Community</a></li>
-                        <li><a href="http://virtualvisitwebapp-qa.azurewebsites.net">Virtual Visit</a></li>
-                        <li><a href="#">Success Stories</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Physician</a></li>
-                    </ul>
+                        {
+
+                                <li class="active"><a href="/Account/Home">Home <span class="sr-only">(current)</span></a></li>
+                        }
+                            <li><a href="#">Health Library</a></li>
+                            <li><a href="#">Community</a></li>
+                            <li><a href="http://virtualvisitwebapp-qa.azurewebsites.net">Virtual Visit</a></li>
+                            <li><a href="#">Success Stories</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact Physician</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
                 </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
-        </nav>
+                <!-- /.container-fluid -->
+            </nav>
+        </div>
     </div>
 
 
     <div>@RenderBody()</div>
 
-        
-    
+
+
 
     <div class="gallery">
         <h1 class="text-center">Surgical <span>Weight Loss</span> Gallery</h1>
@@ -235,14 +382,30 @@
         <a href="#"><img src="/Content/assets/images/icn_print_sidebar.png" alt=""></a>
         <a href="#"><img src="/Content/assets/images/icn_add_sidebar.png" alt=""></a>
     </div>
+
+
+   
+
+    <script language="javascript" type="text/javascript">
+        $(window).load(function () {
+            $('#loading').hide();
+        });
+    </script>
 </body>
+
+
 
 
 
 </html>
 
-<script type='text/javascript' src='~/Content/js/script.js'></script>
-<script type='text/javascript' src='~/Content/js/owl.carousel.min.js'></script>
-<script type='text/javascript' src='~/Content/js/jquery.parallax-1.1.3.js'></script>
-<script type='text/javascript' src='~/Content/js/jquery.magnific-popup.js'></script>
-<script type='text/javascript' src='~/Content/js/custom.js'></script>
+
+
+
+@*<script type='text/javascript' src='~/Content/js/script.js'></script>
+    <script type='text/javascript' src='~/Content/js/owl.carousel.min.js'></script>
+    <script type='text/javascript' src='~/Content/js/jquery.parallax-1.1.3.js'></script>
+    <script type='text/javascript' src='~/Content/js/jquery.magnific-popup.js'></script>
+    <script type='text/javascript' src='~/Content/js/custom.js'></script>
+
+    <script src="~/Content/js/bootstrap.min.js"></script>*@

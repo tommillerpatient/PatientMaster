@@ -15,30 +15,53 @@ namespace PatientMaster.Controllers
             return View();
         }
 
-        public ActionResult UserList()
-        {
-            return View();
-        }
-
-
-        public ActionResult ChangePassword()
-        {
-            return View();
-        }
         public ActionResult appointment()
         {
             return View();
         }
 
+        public ActionResult PersonList()
 
+        {
+
+            List<person> viewmodellist = new List<person>();
+            DataTable dt = new DataTable();
+            using (PersonCLS obj = new PersonCLS())
+            {
+
+
+                dt = obj.getAll();
+
+            }
+            foreach (DataRow dr in dt.Rows)
+            {
+                using (person obj2 = new person())
+                {
+
+                    obj2.id = Convert.ToInt64(dr["id"].ToString());
+
+                    obj2.firstname = dr["firstname"].ToString() + " " + dr["lastname"].ToString();
+
+                    viewmodellist.Add(obj2);
+                }
+            }
+
+
+            return Json(viewmodellist, JsonRequestBehavior.AllowGet); ;
+        }
    
 
-        [HttpPost]
+     
         public ActionResult Insert(AppointmentCLS obj)
         {
             using (AppointmentCLS obj1 = new AppointmentCLS())
             {
-             
+                Int32 id=0;
+                 if(Session["adminid"].ToString()!=null)
+                {
+                     id=Convert.ToInt32(Session["adminid"].ToString());
+                }
+                obj1.staffid = id;
                 obj1.insert(obj);
 
             }
@@ -61,7 +84,7 @@ namespace PatientMaster.Controllers
 
 
         [HttpPost]
-        public ActionResult Deleteappointment(int id)
+        public ActionResult DeleteArticle(int id)
         {
             using (AppointmentCLS obj = new AppointmentCLS())
             {
@@ -71,10 +94,11 @@ namespace PatientMaster.Controllers
         }
 
 
-    
 
 
-        public ActionResult appointmentData()
+
+
+        public ActionResult ArticleData()
         {
             List<AppointmentCLS> viewmodellist = new List<AppointmentCLS>();
             DataTable dt = new DataTable();

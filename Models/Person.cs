@@ -38,6 +38,8 @@ namespace PatientMaster.Models
 
         private Int32 _gender = 0;
 
+        private string _genderVal = "";
+
         private string _email = string.Empty;
 
         private Int32 _phone1 = 0;
@@ -92,6 +94,23 @@ namespace PatientMaster.Models
         private Int32 _HasCareGiver = 0;
 
         private string _ActiveCode = "";
+         private string _profileimage = "";
+
+         private string _maritalstatus = string.Empty;
+
+         private string _weight = string.Empty;
+
+         private string _mobile = string.Empty;
+
+         private string _preferredcommunication = string.Empty;
+
+         private string _socialnetworks = string.Empty;
+         private string _language = string.Empty;
+
+         private string _country = string.Empty;
+         private string _relationship = string.Empty;
+         private string _caregivercomment = string.Empty;
+    
 
         #endregion
 
@@ -184,6 +203,16 @@ namespace PatientMaster.Models
             set { _gender = value; }
 
         }
+
+        public string genderVal
+        {
+
+            get { return _genderVal; }
+
+            set { _genderVal = value; }
+
+        }
+
 
         public string email
         {
@@ -406,7 +435,7 @@ namespace PatientMaster.Models
             set { _ConfirmedByEmail = value; }
 
         }
-
+       
         public Int32 CareGiver
         {
             get { return _CareGiver; }
@@ -418,11 +447,77 @@ namespace PatientMaster.Models
             set { _HasCareGiver = value; }
         }
 
+        public string country
+        {
+            get { return _country; }
+            set { _country = value; }
+        }
+        public string relationship
+        {
+            get { return _relationship; }
+            set { _relationship = value; }
+        }
+        
+
         public string ActiveCode {
             get { return _ActiveCode; }
             set { _ActiveCode = value; }
         }
 
+
+        public string profileimage
+        {
+            get { return _profileimage; }
+            set { _profileimage = value; }
+
+
+        
+        }
+        public string maritalstatus 
+
+        {
+
+            get { return _maritalstatus; }
+            set { _maritalstatus = value; }
+
+        }
+
+        public string weight 
+        {
+            get { return _weight; }
+            set { _weight = value; }
+        }
+        public string mobile 
+        {
+            get { return _mobile; }
+            set { _mobile = value; }
+        }
+
+        public string preferredcommunication
+        {
+            get { return _preferredcommunication; }
+            set { _preferredcommunication = value; }
+        }
+
+        public string socialnetworks 
+        {
+            get { return _socialnetworks; }
+            set { _socialnetworks = value; }
+        }
+        public string language
+        {
+
+            get { return _language; }
+            set { _language = value; }
+        }
+        public string caregivercomment
+
+        {
+
+            get { return _caregivercomment; }
+            set { _caregivercomment = value; }
+        }
+        
         #endregion
 
         #region "constructors"
@@ -523,6 +618,46 @@ namespace PatientMaster.Models
             }
         }
 
+        //update caregiver decline request
+        public long updateDecline(PersonCLS obj)
+
+        {
+            try
+            {
+                obj_con.clearParameter();
+                obj_con.addParameter("@id",obj.id);
+                obj_con.addParameter("@caregivercomment", obj.caregivercomment);
+                obj_con.BeginTransaction();
+                obj_con.ExecuteNoneQuery("sp_Person_updateCaegiverComent", CommandType.StoredProcedure);
+                obj_con.CommitTransaction();
+                return obj.id = Convert.ToInt64(obj_con.getValue("@id"));
+            }
+            catch (Exception ex)
+            {
+                obj_con.RollbackTransaction();
+                throw new Exception("sp_Person_update");
+            }
+        }
+
+
+        //updateadmin person data into database 
+        public long updatePerson(PersonCLS obj)
+        {
+            try
+            {
+                obj_con.clearParameter();
+                createParameter(obj, DBTrans.Update);
+                obj_con.BeginTransaction();
+                obj_con.ExecuteNoneQuery("sp_PersonAdmin_update", CommandType.StoredProcedure);
+                obj_con.CommitTransaction();
+                return obj.id = Convert.ToInt64(obj_con.getValue("@id"));
+            }
+            catch (Exception ex)
+            {
+                obj_con.RollbackTransaction();
+                throw new Exception("sp_PersonAdmin_update");
+            }
+        }
         public long updateCareGiverProfile(PersonCLS obj)
         {
             try
@@ -544,7 +679,50 @@ namespace PatientMaster.Models
                 throw new Exception("sp_Person_updateCareGiverProfile");
             }
         }
+        public long updateCareGiverProfile1(PersonCLS obj)
 
+        {
+            try
+            {
+
+
+
+                if (obj.firstname == null)
+                    obj.firstname = string.Empty;
+
+                if (obj.lastname == null)
+                    obj.lastname = string.Empty;
+                if (obj.mobile == null)
+                    obj.mobile = string.Empty;
+                if (obj.relationship == null)
+                    obj.relationship = string.Empty;
+                if (obj.email == null)
+                    obj.email = string.Empty;
+                if (obj.gender == null)
+                    obj.gender = 0;
+                if (obj.preferredcommunication == null)
+                    obj.preferredcommunication = string.Empty;
+
+                obj_con.clearParameter();
+                obj_con.addParameter("@FirstName", obj.firstname);
+                obj_con.addParameter("@LastName", obj.lastname);
+                obj_con.addParameter("@Mobile", obj.mobile);
+                obj_con.addParameter("@Relationship", obj.relationship);
+                obj_con.addParameter("@Email", obj.email);
+                obj_con.addParameter("@Gender", obj.gender);
+                obj_con.addParameter("@preferredcommunication", obj.preferredcommunication);
+                obj_con.addParameter("@id", obj.id, DBTrans.Update);
+                obj_con.BeginTransaction();
+                obj_con.ExecuteNoneQuery("sp_Person_updateCareGiverProfile1", CommandType.StoredProcedure);
+                obj_con.CommitTransaction();
+                return obj.id = Convert.ToInt64(obj_con.getValue("@id"));
+            }
+            catch (Exception ex)
+            {
+                obj_con.RollbackTransaction();
+                throw new Exception("sp_Person_updateCareGiverProfile");
+            }
+        }
         //CheckOldPassword
 
         public long CheckOldPassword(PersonCLS obj)
@@ -586,8 +764,10 @@ namespace PatientMaster.Models
                 throw new Exception("sp_Person_updatepassword");
             }
         }
+       
+    
+        
         //update  Reset Password
-
         public DataTable UpdateResetPassword(PersonCLS obj, string guid)
         {
             try
@@ -658,6 +838,22 @@ namespace PatientMaster.Models
             }
         }
 
+
+        //getmypatient
+        public DataTable getmypatient(int id)
+        {
+            try
+            {
+                obj_con.clearParameter();
+                obj_con.addParameter("@patientid",id);
+                return ConvertDatareadertoDataTable(obj_con.ExecuteReader("sp_getmypatient_selectall", CommandType.StoredProcedure));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("sp_getmypatient_selectall");
+            }
+        }
+
         //select all data from database 
         public DataTable getAll()
         {
@@ -671,7 +867,19 @@ namespace PatientMaster.Models
                 throw new Exception("sp_Person_selectall");
             }
         }
-
+        //select all data from database 
+        public DataTable getAllwithprogress()
+        {
+            try
+            {
+                obj_con.clearParameter();
+                return ConvertDatareadertoDataTable(obj_con.ExecuteReader("sp_Personprogress_selectall", CommandType.StoredProcedure));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("sp_Personprogress_selectall");
+            }
+        }
 
 
         //update status
@@ -827,7 +1035,8 @@ namespace PatientMaster.Models
 
                 if (obj.city == null)
                     obj.city = "";
-
+                if (obj.country == null)
+                    obj.country = "";
                 if (obj.state == null)
                     obj.state = "";
 
@@ -851,6 +1060,23 @@ namespace PatientMaster.Models
 
                 if (obj.preferredpharmacy == null)
                     obj.preferredpharmacy = "";
+
+                if (obj.profileimage == null)
+                    obj.profileimage = "";
+
+                if (obj.maritalstatus == null)
+                    obj.maritalstatus = "";
+                if (obj.weight == null)
+                    obj.weight = "";
+                if (obj.mobile == null)
+                    obj.mobile = "";
+                if (obj.preferredcommunication == null)
+                    obj.preferredcommunication = "";
+                if (obj.socialnetworks == null)
+                    obj.socialnetworks = "";
+                if (obj.language == null)
+                    obj.language = "";
+
 
                 obj_con.addParameter("@username", obj.username);
                 obj_con.addParameter("@passwordhash", obj.passwordhash);
@@ -904,6 +1130,21 @@ namespace PatientMaster.Models
                 obj_con.addParameter("@ConfirmedByEmail", obj.ConfirmedByEmail);
                 obj_con.addParameter("@address1", obj.address1);
                 obj_con.addParameter("@caregiver", obj.CareGiver);
+                obj_con.addParameter("@profileimage", obj.profileimage);
+                obj_con.addParameter("@maritalstatus", obj.maritalstatus);
+                obj_con.addParameter("@weight", obj.weight);
+                obj_con.addParameter("@mobile", obj.mobile);
+                obj_con.addParameter("@preferredcommunication", obj.preferredcommunication);
+                obj_con.addParameter("@socialnetworks", obj.socialnetworks);
+                obj_con.addParameter("@language", obj.language);
+                obj_con.addParameter("@country", obj.country);
+                if (trans==DBTrans.Update)
+                {
+                    obj_con.addParameter("@caregivercomment", obj.caregivercomment);
+
+                }
+                
+                
                 obj_con.addParameter("@id", obj.id, trans);
             }
             catch (Exception ex)
@@ -1016,7 +1257,6 @@ namespace PatientMaster.Models
 
         private string _firstname = string.Empty;
 
-        private string _middlename = string.Empty;
 
         private string _lastname = string.Empty;
 
@@ -1026,6 +1266,26 @@ namespace PatientMaster.Models
         private Int32 _phone1 = 0;
 
         private bool _active = false;
+
+
+        private DateTime _dateofbirth = Convert.ToDateTime("01/01/1900");
+        private DateTime _proceduredate = Convert.ToDateTime("01/01/1900");
+
+        private Int32 _gender = 0;
+
+        private string _address = string.Empty;
+
+        private string _address1 = string.Empty;
+
+        private Int32 _zipcode = 0;
+
+        private string _state = string.Empty;
+
+        private string _city = string.Empty;
+        private string _contentid = string.Empty;
+
+        private string _proceduredatestr = string.Empty;
+        private decimal _percentage = 0;
 
         #endregion
 
@@ -1058,8 +1318,47 @@ namespace PatientMaster.Models
 
         }
 
-    
-     
+        public string lastname
+        {
+
+            get { return _lastname; }
+
+            set { _lastname = value; }
+
+        }
+        public DateTime dateofbirth
+        {
+
+            get { return _dateofbirth; }
+
+            set { _dateofbirth = value; }
+
+        }
+        public DateTime proceduredate
+
+        {
+
+            get { return _proceduredate; }
+
+            set { _proceduredate = value; }
+
+        }
+        public string proceduredatestr
+        {
+
+            get { return _proceduredatestr; }
+
+            set { _proceduredatestr = value; }
+
+        }
+        public Int32 gender
+        {
+
+            get { return _gender; }
+
+            set { _gender = value; }
+
+        }
 
 
         public string email
@@ -1090,6 +1389,68 @@ namespace PatientMaster.Models
 
         }
 
+        public string address
+        {
+
+            get { return _address; }
+
+            set { _address = value; }
+
+        }
+        public string address1
+        {
+
+            get { return _address1; }
+
+            set { _address1 = value; }
+
+        }
+
+        public Int32 zipcode
+        {
+
+            get { return _zipcode; }
+
+            set { _zipcode = value; }
+
+        }
+
+        public string state
+        {
+
+            get { return _state; }
+
+            set { _state = value; }
+
+        }
+
+        public string city
+        {
+
+            get { return _city; }
+
+            set { _city = value; }
+
+        
+        }
+        public string contentid
+
+
+        {
+
+            get { return _contentid; }
+
+            set { _contentid = value; }
+
+        }
+        public decimal percentage
+        {
+
+            get { return _percentage; }
+
+            set { _percentage = value; }
+
+        }
 
         #endregion
 

@@ -89,7 +89,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         }
 
     }, function () {
-        alert('Error Occured !!!'); // Failed
+        //alert('Error Occured !!!'); // Failed
     });
 
 

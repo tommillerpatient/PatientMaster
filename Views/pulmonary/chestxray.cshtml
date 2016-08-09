@@ -1,0 +1,442 @@
+﻿
+@{
+    ViewBag.Title = "chestxray";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+<script src="/Scripts/angular.js"></script>
+<script src="/Scripts/PersonAngular.js"></script>
+<script src="/Scripts/angular-sanitize.js"></script>
+<script type='text/javascript' src='http://maps.googleapis.com/maps/api/js?key=AIzaSyAgAcybECac87C7jemSdqwinAfeq6cV7GM&libraries=places'></script>
+<style>
+    #dialog-confirm {
+        /*display:none;*/
+        background: rgba(0, 0, 0, 0.7);
+    }
+</style>
+<link href="~/Content/css/myStyl11.css" rel="stylesheet" />
+
+
+
+
+<div ng-app="demoModule">
+    <div ng-controller="demoCtrl">
+
+        <div class="content-wrapper">
+            <div class="banner">
+                <div class="container"> <img src="/Content/assets/images/banner_3.png" alt="" /> </div>
+            </div>
+
+          
+
+            <div class="container">
+                <div class="col-sm-4 col-md-3">
+                    <div class="sidebarsection">
+                        <div class="headerimg">MY Journey</div>
+
+                        <div class="single">
+                            <label><img src="/Content/assets/images/icn_program.png" alt="">Program</label>
+                            <ul>
+                               
+                                <li id="bloodworkli"><a href="~/bloodwork/Index" id="bloodwork" ng-click="UpdateUserProgress('bloodwork')">Blood Work</a></li>
+                                <li id="nutritionli"><a href="~/nutritioncounseling/Index" id="nutrition" ng-click="UpdateUserProgress('nutrition')">Nutrition Counseling</a></li>
+                                <li id="suprtgroupli"><a href="~/supportgroup/index" id="suprtgroup" ng-click="UpdateUserProgress('suprtgroup')">Support Group( 2 mandatory)</a></li>
+                            </ul>
+                        </div>
+                        <div class="single">
+                            <label><img src="/Content/assets/images/icn_pulmonary.png" alt="">Pulmonary</label>
+                            <ul>
+                                <li id="pulmonaryli"><a href="~/pulmonary/Index" id="pulmonaryeve" ng-click="UpdateUserProgress('pulmonaryeve')">Pulmonary Evaluation</a></li>
+                                <li id="sleepstudyli"><a href="~/pulmonary/Sleep" ng-click="UpdateUserProgress('sleep')">Sleep study</a></li>
+                                <li id="pulmonaryfunctionli"><a href="~/pulmonary/functiontest" ng-click="UpdateUserProgress('function')">Pulmonary function test</a></li>
+                                <li id="chestxryli"><a href="~/pulmonary/chestxray" id="chestxry" ng-click="UpdateUserProgress(chestxry)"> Chest x-ray</a></li>
+                                <li id="pulmonologistclrli"><a href="~/pulmonary/clearance" ng-click="UpdateUserProgress('clearance')">Pulmonologist Clearance</a></li>
+                            </ul>
+
+                        </div>
+                        <div class="single">
+                            <label><img src="/Content/assets/images/icn_gastrointestinal.png" alt="">Gastrointestinal</label>
+                            <ul>
+                                <li><a href="~/pulmonary/Index">Pulmonary Evaluation</a></li>
+                                <li><a href="~/pulmonary/Sleep">Sleep study</a></li>
+                                <li><a href="#">Pulmonary function test</a></li>
+                                <li><a href="~/pulmonary/chestxray">Chest x-ray</a></li>
+                                <li><a href="#">Pulmonologist Clearance</a></li>
+                            </ul>
+                        </div>
+                        <div class="single">
+                            <label><img src="/Content/assets/images/icn_cardiology.png" alt="">Pulmonary</label>
+                            <ul>
+                                <li id="cardiologyli"><a href="~/cardiology/Index" ng-click="UpdateUserProgress('cardiology')">Cardiology Evalution</a></li>
+                                <li id="upperli"><a href="~/UpperEndoscopy/Index" ng-click="UpdateUserProgress('upper')">Upper Endoscopy</a></li>
+                                <li id="psycologicalli"><a href="~/PsycologicalEvalution/Index" ng-click="UpdateUserProgress('psycological')">Psycological Evalution</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="single">
+                            <label><img src="/Content/assets/images/icn_phycological.png" alt="">Pulmonary</label>
+                            <ul>
+                                <li><a href="#">Pulmonary Evaluation</a></li>
+                                <li><a href="#">Sleep study</a></li>
+                                <li><a href="#">Pulmonary function test</a></li>
+                                <li><a href="#">Chest x-ray</a></li>
+                                <li><a href="#">Pulmonologist Clearance</a></li>
+                            </ul>
+                        </div>
+                        <div class="single">
+                            <label><img src="/Content/assets/images/icn_blood_work.png" alt="">Pulmonary</label>
+                            <ul>
+                                <li><a href="#">Pulmonary Evaluation</a></li>
+                                <li><a href="#">Sleep study</a></li>
+                                <li><a href="#">Pulmonary function test</a></li>
+                                <li><a href="#">Chest x-ray</a></li>
+                                <li><a href="#">Pulmonologist Clearance</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div style="margin-top:30px;margin-bottom:30px;" class="col-sm-8 col-md-9">
+                    @*<div class=" text-center">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h4 class="bold"><span class="border-bottom">YOUR ROAD MAP FOR GETTING TO SURGERY</span>  (all clearances should be faxed to: 267-330-0859) </h4>
+
+                                <p>
+                                    Below are steps you should follow to secure your clearances. Failure to complete the clearance process in this recommended order will likely result in your
+                                    surgery being delayed.<span>STEPS 3, 4, 5 & 6 CAN BE DONE SIMULTANEOUSLY.</span>
+                                    <span class="bold">* 30 NOT SCHEDULE THE PSYCH EVAL UNTIL STEPS 3-S HAVE BEEN COMPLETED. *</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="box">
+
+                                    <h3 class="heading">STEP 1</h3>
+                                    <h5 class="bold">GET YOUR BLOOD WORK DONE NEXT WEEK</h5>
+                                    <h6 class="bold">Script sent electronically & YOU MUST FAST</h6>
+
+
+                                    <div class="row form-group">
+                                        <div class="col-md-3"></div>
+                                        <input type="checkbox" class="col-md-1">
+                                        <label class="col-md-2" style="padding-left:0;">Quest</label>
+                                        <input type="text" class="col-md-3 " />
+                                        <div class="col-md-3"></div>
+
+
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col-md-3"></div>
+                                        <input type="checkbox" class="col-md-1">
+                                        <label class="col-md-2" style="padding-left:0;">Quest</label>
+                                        <input type="text" class="col-md-3 " />
+                                        <div class="col-md-3"></div>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="box">
+
+                                    <h3 class="heading">STEP 2</h3>
+                                    <h5 class="bold">GET A CHEST X-RAY</h5>
+                                    <h6 class="bold">
+                                        No appointment/referral nedded Admissions Dept:230 N Broad Street,
+                                        1st floor
+                                    </h6>
+
+
+
+                                    <div class="row form-group">
+                                        <div class="col-md-2"></div>
+
+                                        <label class="col-md-5">Date completed</label>
+                                        <input type="text" class="col-md-3 " />
+                                        <div class="col-md-2"></div>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="box">
+
+                                    <h3 class="heading">STEP 3</h3>
+                                    <h5 class="bold">BEGIN NUTRITION COUNSELING</h5>
+                                    <h6 class="bold">
+                                        *You MUST have monthly consecutive meetings with the nutritionist until
+                                        she clears you for surgery.*
+                                    </h6>
+
+
+                                    <div class="row form-group">
+
+
+                                        <label class="col-md-3">1st appt:</label>
+                                        <input type="text" class="col-md-3 " />
+
+
+                                        <label class="col-md-3">2nd appt:</label>
+                                        <input type="text" class="col-md-3 " />
+
+                                    </div>
+
+                                    <div class="row form-group">
+
+                                        <label class="col-md-3">3rd appt:</label>
+                                        <input type="text" class="col-md-3 " />
+
+
+                                        <label class="col-md-3">4th appt:</label>
+                                        <input type="text" class="col-md-3 " />
+                                    </div>
+
+                                    <div class="row form-group">
+
+                                        <label class="col-md-3">5th appt:</label>
+                                        <input type="text" class="col-md-3 " />
+
+
+                                        <label class="col-md-3">6th appt:</label>
+                                        <input type="text" class="col-md-3 " />
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-3"></div>
+                                        <label class="col-md-3">7th appt:</label>
+                                        <input type="text" class="col-md-3 " />
+                                        <div class="col-md-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="box">
+
+                                    <h3 class="heading">STEP 4</h3>
+                                    <h5 class="bold">BEGIN ATTENDING SUPPORT GROUP MEETINGS </h5>
+                                    <h6 class="bold">(the schedule is in your yellow folder)</h6>
+                                    <h6 class="bold">NO APPOINTMENT NECESSARY</h6>
+                                    <ul>
+                                        <li>Must attend a minimum of 2 meetings to be approved for surgery</li>
+                                    </ul>
+                                    <p>
+                                        * We recommend that you attend as many
+                                        meetings as possible *
+                                    </p>
+                                    <div class="row form-group">
+
+
+                                        <label class="col-md-3">1st meeting:</label>
+                                        <input type="text" class="col-md-3 ">
+
+
+                                        <label class="col-md-3">2nd meeting:</label>
+                                        <input type="text" class="col-md-3 ">
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="box">
+
+                                    <h3 class="heading">STEP 5</h3>
+                                    <h5 class="bold">BEGIN THE PULMONARY EVALUATION PROCESS</h5>
+                                    <ul>
+                                        <li>Schedule an appointment with one of the Puknonology providers from the PROVIDER LIST</li>
+                                        <li>The provider will schedule pulmonary function testis for you</li>
+                                        <li>The provider wil order a sleep study (a second steep study may be required)</li>
+                                        <li>
+                                            If you are diagnosed with sleep apnea, you will be
+                                            required to wear a CPAP or BI-PAP device to assist you with breathing while sleeping
+                                        </li>
+                                        <li>Only after you have undergone ALL testing, and have been compliant with use of the breathing device, this PULMONOLOGIST will write a clearance letter, whict will be sent to our office.</li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="box">
+
+                                    <h3 class="heading">STEP 6a</h3>
+                                    <h5 class="bold">BEGIN THE CARDIOLOGY EVALUATION PROCESS</h5>
+                                    <h6 class="bold">
+                                        *You MUST have monthly consecutive meetings with the nutritionist until
+                                        she clears you for surgery.*
+                                    </h6>
+                                    <ul>
+                                        <li>Schedule an appointment with one of the CARDIOLOGY providers from the PROVIDER UST </li>
+                                        <li>Additional testing may be required after the initial evaluation</li>
+                                        <li>After you have undergone ALL testing, the cardiologist has deemed necessary, she/he will write a clearance letter, which will be sent to our office</li>
+                                    </ul>
+
+
+                                    <div class="row form-group">
+
+                                        <label class="col-md-4">Date Completed</label>
+                                        <input type="text" class="col-md-5" />
+                                        <div class="col-md-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="box">
+
+                                    <h3 class="heading">STEP 6b</h3>
+
+                                    <h6 class="bold">Make an appointment w/Drexel GI for an upper endoscopy.</h6>
+                                    <h6 class="bold">Call 215-7624220 </h6>
+
+                                    <p>
+                                        * Script is included in folder *
+                                    </p>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-8">
+                                <div class="box">
+
+                                    <h3 class="heading">STEP 7</h3>
+                                    <h5 class="bold">SCHEDULE YOUR PSYCHOLOGICAL EVALUATION LAST</h5>
+                                    <ul>
+                                        <li>
+                                            DO NOT schedule your psychological evaluation until you have
+                                            had 2 nutrition appointments and attended at least 1 support gaup meeting.
+                                        </li>
+                                        <li>The psychologist will access your knowledge about the surgical procedure you will undergo and the associated rids</li>
+                                        <li>YOU WILL NOT RECEIVE A PSYCHOLOGICAL CLEARANCE UNLESS YOU ARE ALOE TO ARTICULATE THESE THINGS!</li>
+
+                                    </ul>
+
+                                    <div class="row form-group">
+
+                                        <label class="col-md-4">Date Completed</label>
+                                        <input type="text" class="col-md-5" />
+                                        <div class="col-md-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>*@
+                   
+                        <div style="background-color:#232eac;height:50px;color:white;font-size:2em;text-align:center;">Find X-ray Locations </div>
+                        <div style="height:10px;"></div>
+                        <div class="form-group col-sm-12 ">
+                            <input type="text" name="patient-portal-zip-code" value="" size="40" style="float:left; width:20%;"
+                                   class="form-control" placeholder="Zipcode" id="PharmacyZipcode" />
+                            <button type="button" class="btn locationbtn col-sm-7 col-xs-12  btn-primary" data-ng-click="fetchPharmasies()" style="width:30%;">
+                                X-RAY Locator
+                                <img src="/Content/assets/images/icn_location.png" alt="">
+                            </button>
+
+                        </div>
+                        <div class="form-group col-sm-4 ">
+                            <table id="tblPharmacy" style="display:none;">
+                                <tr style="display:none;">
+                                    <th rowspan="3" style="border-right: 1px solid rgba(51, 51, 51, 0.1); width:150px;">
+                                        <img src="/Content/img/MapFlag.png" />
+                                    </th>
+                                    <th style="border: none;"><label id="lblPharmacy"></label></th>
+                                </tr>
+                                <tr style="display:none;">
+                                    <th style="border: none;"><label id="lblPhone"></label></th>
+                                </tr>
+                                <tr style="display:none;">
+                                    <th style="border: none;"><label id="lblAddress"></label></th>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="form-group col-sm-4 " style="clear:both;"></div>
+
+                        <div id="dialog-confirm" class="modal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- dialog body -->
+                                    <div class="modal-body">
+                                        <div class="modal-header">X-RAY Locations Search Result</div>
+                                        <div id="modal-background"></div>
+                                        <div id="modal-content" name="modal-content">
+                                            <h4> <span id="nearZip" name="nearZip"></span> <small></small></h4>
+                                            <div id="map-canvas" name="map-canvas" style="width:550px; height:400px;"></div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- dialog buttons -->
+                                    <div class="modal-footer">
+
+                                        <input type="button" class="btn btn-default" id="btncancel" value="Close" data-ng-click="Cancl()" />
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+
+         
+
+
+
+
+
+
+       
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+    @*<div id="dialog-confirm" title="X-RAY Locations Search Result" >
+        <div class="modal-header">X-RAY Locations Search Result</div>
+        <div id="modal-background"></div>
+        <div id="modal-content" name="modal-content">
+            <h4> <span id="nearZip" name="nearZip"></span> <small></small></h4>
+            <div id="map-canvas" name="map-canvas" style="width:700px; height:500px;"></div>
+        </div>
+    </div>*@
+
+</div>

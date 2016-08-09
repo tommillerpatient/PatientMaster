@@ -8,6 +8,24 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     // Fetching records from the factory created at the bottom of the script file
     ///get all record
 
+
+    var value = window.location.href;
+   
+  if (value.search('decline')>-1)
+  {
+
+      $('#title').text('Decline Request');
+      $('#comment').show();
+
+  }
+  else
+  {
+     
+      $('#caregiverreg').show();
+
+
+  }
+
     personService.GetAllRecords().then(function (d) {
         $scope.personData = d.data; // Success
         document.getElementById('diverror').style.display = "block";
@@ -45,7 +63,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
             Email: $scope.personData[0].email,
             Error: false,
             Success: false,
-
+            caregivercomment:'',
         };
         if ($scope.person.ZipCode == '0') {
             $scope.person.ZipCode = '';
@@ -95,7 +113,20 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
 
 
+    //$scope.Decline =function()
+    //    {
+    //    $('#caregiverreg').slideToggle("slow");
+    //    $('#comment').slideToggle("slow");
 
+    //    }
+
+
+    //$scope.Cancel = function () {
+    //    $('#comment').slideToggle("slow");
+    //    $('#caregiverreg').slideToggle("slow");
+    //    $scope.person.caregivercomment = '';
+
+    //}
 
 
     $scope.person = {
@@ -137,6 +168,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         Error: false,
         Success: false,
         CareGiver: 0,
+        caregivercomment: '',
     };
 
 
@@ -176,6 +208,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         $scope.person.PharmacyCity = '';
         $scope.person.PharmacyState = '';
         $scope.person.CareGiver = 0;
+        $scope.person.caregivercomment = '';
     }
 
     //Add New Item
@@ -219,6 +252,43 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         }
 
     };
+
+
+    //Add New Item
+    $scope.DeclineComment = function () {
+       
+        $scope.person.Error = false;
+        if ($scope.person.caregivercomment != "") {
+
+            $('#Comentbtn').addClass('submitLoader');
+
+            $http({
+                method: 'POST',
+                url: '/Account/SignUpCareGiverDecline/',
+                data: $scope.person
+            }).then(function successCallback(response) {
+
+
+            
+                    $('#Comentbtn').removeClass('submitLoader');
+
+                    $('divsuces').show();
+                    window.location.href = "/Account/ThankYou";
+
+            }, function errorCallback(response) {
+                $('#Comentbtn').removeClass('submitLoader');
+            });
+        }
+        else {
+
+            $scope.person.MessageError = + "<br>  -Please fix validations.";
+            $scope.person.Error = true;
+           
+
+        }
+
+    };
+
 
     //Forgot Password
     $scope.GetPassword = function () {

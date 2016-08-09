@@ -115,7 +115,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         $scope.person.Error = false;
         if (CheckValidation()) {
 
-            $('#signupbtn').addClass('submitLoader');
+            $('#Comentbtn').addClass('submitLoader');
 
             $http({
                 method: 'POST',
@@ -123,19 +123,11 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
                 data: $scope.person
             }).then(function successCallback(response) {
 
-                if (response.data == "") {
-
-                    $scope.person.MessageError = "<br/> -This email address is already registered with us.";
-                    $scope.person.Error = true;
-                    //document.location.href = "#Profile1";
-                    $('#errorStrong').hide();
-                    $('#signupbtn').removeClass('submitLoader');
-                }
-                else {
+            
                     $scope.clear();
                     //alert("../Account/MyCareGivers?msg=CareGiver");
                     window.location.href = "../Account/MyCareGivers?msg=CareGiver";
-                }
+                
 
             }, function errorCallback(response) {
                 $('#signupbtn').removeClass('submitLoader');
@@ -150,6 +142,8 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         }
 
     };
+
+    
 
 
     function checkValidPass() {

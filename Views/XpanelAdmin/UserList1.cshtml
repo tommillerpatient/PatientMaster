@@ -1,0 +1,447 @@
+﻿@{
+    ViewBag.PageHead = "Patients";
+    Layout = "~/Views/Shared/MyMaster.cshtml";
+    //Layout = "~/Views/Shared/InnerHomeLayout.cshtml";
+}
+
+<script src="http://code.angularjs.org/1.4.8/angular.js"></script>
+<script src="http://code.angularjs.org/1.4.8/angular-resource.js"></script>
+<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+@*<script src="~/Scripts/dirPagination.js"></script>*@
+@*<script src="http://code.angularjs.org/1.4.8/angular.js"></script>
+<script src="http://code.angularjs.org/1.4.8/angular-resource.js"></script>
+<link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>*@
+@*<script src="/Scripts/jquery-1.10.2.js"></script>*@
+
+
+<script src="https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js" type="text/javascript"></script>
+<script src="~/Content/js/alasql.min.js"></script>
+<script src="~/Content/js/xlsx.core.min.js"></script>
+
+<style>
+    #dialog-confirm {
+      
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .activelbl, .inactivelbl {font-size:40px;cursor:pointer;}
+.activelbl, .inactivelbl {font-size:40px;cursor:pointer;}
+i.activelbl { color: #5cb85c}
+i.inactivelbl {color: #d9534f}
+</style>
+
+<script>
+    var app = angular.module('MyForm', ['ui.bootstrap', 'ngResource']);
+    app.controller('myCtrl', function ($scope, $http, personService) {
+        $scope.personData = null;
+
+
+        personService.GetAllRecords().then(function (d) {
+
+
+
+            $scope.personData = d.data; // Success
+
+            setTimeout(function () {
+                var i = 0;
+                for (i ; i < parseInt(d.data.length) ; i++) {
+
+                    if (i >= 10) {
+                        $('#example tr:eq(' + i + ')').hide();
+                    }
+                }
+            }, 2000);
+
+            $('.dataTables_empty').hide();
+
+
+
+            // Delete product details
+            $scope.delete = function () {
+
+                var index = document.getElementById('hiddenVal').value;
+                var id = document.getElementById('hiddenValId').value;
+
+                $http({
+                    method: 'Post',
+                    url: '/XpanelAdmin/Delete/' + id,
+                }).then(function successCallback(response) {
+
+
+                    $scope.personData.splice(index, 1);
+
+
+
+
+                    document.getElementById('success').style.display = "block";
+                    $("#dialog-confirm").dialog("close");
+                }, function errorCallback(response) {
+                    alert("Error : " + response.data.ExceptionMessage);
+                });
+
+
+            };
+
+            $scope.deletepopup = function (index, id) {
+
+                $('#hiddenVal').val(index);
+
+                $('#hiddenValId').val(id);
+
+
+
+                $("#dialog-confirm").dialog("open");
+            }
+            $scope.cancel = function (index) {
+
+
+                $("#dialog-confirm").dialog("close");
+            }
+
+
+            $scope.person = {
+                Id: 0,
+                firstname: '',
+                lastname: '',
+                emailid: '',
+                gender: '',
+                address1: '',
+                address2: '',
+                city: '',
+                state: '',
+                zipcode: '',
+                passwordhash: '',
+                index: true,
+                VisibleInsert: false,
+                MessageError: '',
+                MessageSuccess: '',
+                Error: '',
+                Success: ''
+            }
+            $scope.Edit = function (index, id) {
+
+                var myindex = 0;
+                for (var i = 0; i < $scope.personData.length; i++) {
+                    if (id == $scope.personData[i].id) {
+                        myindex = i;
+                    }
+                }
+                $scope.person = {
+                    Id: $scope.personData[myindex].id,
+                    firstname: $scope.personData[myindex].firstname,
+                    lastname: $scope.personData[myindex].lastname,
+                    email: $scope.personData[myindex].email,
+                    gender: "" + $scope.personData[myindex].gender,
+                    dateofbirth: new Date(parseInt($scope.personData[myindex].dateofbirth.replace(/(^.*\()|([+-].*$)/g, ''))).toLocaleDateString(),
+                    phone1: $scope.personData[myindex].phone1,
+                    address: $scope.personData[myindex].address,
+                    address1: $scope.personData[myindex].address1,
+                    city: $scope.personData[myindex].city,
+                    state: $scope.personData[myindex].state,
+                    zipcode: $scope.personData[myindex].zipcode
+                };
+
+                //$scope.staff.Updatebutton = true;
+                //$scope.staff.Insertbutton = false;
+                //$scope.staff.createstaff = false;
+                //$scope.staff.Editstaff = true;
+                $scope.person.VisibleInsert = true;
+
+
+            }
+
+
+            function CheckValidationforsave() {
+
+                var IsError = true;
+                $scope.person.MessageError = '';
+                if ($scope.person.firstname == "") {
+                    IsError = false;
+
+
+                }
+                if ($scope.person.lastname == "") {
+                    IsError = false;
+
+
+                } if ($('#DateOfBirth').val() == "") {
+                    IsError = false;
+
+
+                } if ($scope.person.phone1 == "0") {
+                    IsError = false;
+
+
+                }
+                if ($('#Gender').val() == "") {
+                    IsError = false;
+
+
+                }
+                if ($scope.person.address == "") {
+                    IsError = false;
+
+
+                }
+
+                if ($scope.person.city == "") {
+                    IsError = false;
+                }
+                if ($('#State').val() == "") {
+                    IsError = false;
+
+
+                }
+                if ($scope.person.zipcode == "0") {
+                    IsError = false;
+
+
+                }
+
+
+                return IsError;
+
+
+            }
+
+            $scope.Cancel = function () {
+
+
+                $scope.person.index = true;
+                $scope.person.VisibleInsert = false;
+
+            }
+
+
+            $scope.Update = function () {
+                $scope.person.Error = false;
+                if (CheckValidationforsave()) {
+
+                    $http({
+
+                        method: 'POST',
+                        url: '/XpanelAdmin/UpdatePerson',
+                        data: $scope.person
+                    }).then(function successCallback(response) {
+                        personService.GetAllRecords().then(function (d) {
+                            $scope.personData = d.data;
+                        });
+                        $scope.person.MessageSuccess = "  Record Update Successfully.";
+                        $scope.person.Success = true;
+                        $scope.person.index = true;
+                        $scope.person.VisibleInsert = false;
+
+
+                    },
+                    function errorCallback(response) {
+
+                        alert("Error : " + response.data.ExceptionMessage);
+                    });
+
+                }
+                else {
+
+                    $scope.person.MessageError = $scope.person.MessageError + "  Please Fix Validations.";
+                    $scope.person.Error = true;
+
+                }
+
+
+            }
+            $scope.exporttoexcel = function () {
+                alasql.fn.datetime = function (dateStr) {
+                    var date = new Date(parseInt(dateStr.replace(/(^.*\()|([+-].*$)/g, ''))).toLocaleDateString();
+                    if (date.toLocaleString() == 'Invalid Date') {
+                        return '';
+                    }
+                    return date.toLocaleString();
+                };
+                alasql.fn.validGender = function (genderStr) {
+                    var retVal = '';
+                    if (genderStr == '1') {
+                        retVal = 'Male';
+                    } else if (genderStr == '2') {
+                        retVal = 'Female';
+                    } else {
+                        retVal = 'Transgender';
+                    }
+                    return retVal;
+                };
+                alasql('SELECT firstname as FirstName,lastname as LastName,datetime(dateofbirth) as [Date OF Birth],validGender(gender) as Gender,email as Email,phone1 as Phone1,active as Active,address as [Address1],address1 as [Address2],zipcode as ZipCode,state as State,city as City INTO XLSX("PatientList.xlsx",{headers:true}) FROM ?', [$scope.personData]);
+            };
+
+
+
+
+            $scope.Cancel = function () {
+                $scope.person.index = true;
+                $scope.person.VisibleInsert = false;
+            }
+
+
+
+            $scope.ChangeStatus = function (id, status) {
+
+
+                $http
+                    ({
+                        method: 'Post',
+                        url: '/XpanelAdmin/ChangeStatus?id=' + id + "&status=" + status,
+                    }).then(function successCallback(response) {
+                        personService.GetAllRecords().then(function (d) {
+                            $scope.personData = d.data;
+                        });
+
+
+                        document.getElementById('success').style.display = "block";
+                        document.getElementById('success').innerHTML = "  Record Updated Successfully."
+
+                    }, function errorCallback(response) {
+                        alert("Error : " + response.data.ExceptionMessage);
+                    });
+
+
+            }
+
+
+
+
+
+        }
+    );
+    });
+    app.factory('personService', function ($http) {
+        var fac = {};
+        fac.GetAllRecords = function () {
+
+            return $http.get('/XpanelAdmin/GetAll');
+        }
+        return fac;
+    });
+</script>
+
+
+
+<div class="row">
+    <div class="col-md-12  m_bottom_20">
+
+        <button type="button" class="form-group  btn btn-default btn_gray m_right_20 ">Dashboard</button>
+        <button type="button" class="form-group  btn btn-default btn_gray active m_right_20">Content</button>
+        <button type="button" class="form-group btn btn-default btn_gray active m_right_20">Messaging</button>
+
+
+
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="panel my_panel" ng-app="MyForm">
+
+    <div class="panel-heading">Patient Profile Summery Manager</div>
+    <div class="panel-body" style="padding:0px !important;" ng-controller="myCtrl">
+        <table class="table-condensed table_p" id="example">
+            <thead>
+                <tr>
+                    <th data-field="state" data-sortable="true">Patient Title & Summary</th>
+                    <th data-field="id" data-sortable="false">Activate For Patients</th>
+                    <th data-field="name" data-sortable="false">1.Blood Work</th>
+                    <th data-field="name" data-sortable="false">2.Cheast X-Ray</th>
+                    <th data-field="name" data-sortable="false">3.Nutrition Counseling</th>
+                    <th data-field="name" data-sortable="false">4.Support Group Mettings</th>
+                    <th data-field="name" data-sortable="false">5.Pulmonary Evaluation</th>
+                    <th data-field="name" data-sortable="false">6.Cardiology Evaluation</th>
+                    <th data-field="name" data-sortable="false">7.Upper Endoscopy</th>
+                    <th data-field="name" data-sortable="false">8.Psychological Evaluation</th>
+                    <th data-field="name" data-sortable="false">Overall Progress</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr ng-repeat="user in personData" id="duplicate">
+                   @*<span style="display:none;">{{user.id}}</span>*@
+                    <td>
+
+                        {{user.firstname}}<br /> <span>{{user.lastname}}</span>
+                        <br />
+                        <span>Procedure date:{{user.proceduredatestr}}</span>
+                    </td>
+                    <td>
+                        
+                        <i class="fa fa-toggle-on activelbl"
+                           ng-if="user.active == true"
+                           ng-click="ChangeStatus(user.id,user.active);">
+                        </i>
+                        <i class="fa fa-toggle-on fa-rotate-180 inactivelbl"
+                           ng-if="user.active == false"
+                           ng-click="ChangeStatus(user.id,user.active);">
+                        </i>
+                    </td>
+                    <td>
+                        <img src="~/Content/assets/images/dot_green2.png" style=" height: 20px;">
+                    </td>
+                    <td><img src="~/Content/assets/images/dot_green2.png" style=" height: 20px;"></td>
+                    <td>
+                        <div class="visit">
+                            <img src="~/Content/assets/images/dot_yellow2.png" style="height: 20px;"><select id="example1">
+                                <option>visit 4 of 7</option>
+                                <option>visit 4 of 7</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="visit">
+                            <img src="~/Content/assets/images/dot_green2.png" style="height: 20px;"><select id="example1">
+                                <option>visit 4 of 7</option>
+
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="visit">
+                            <img src="~/Content/assets/images/dot_yellow2.png" style="height: 20px;"><select id="example1">
+                                <option>visit 4 of 7</option>
+
+                            </select>
+                        </div>
+                    </td>
+                    <td><img src="~/Content/assets/images/dot_red2.png" style="height: 20px;"></td>
+                    <td><img src="~/Content/assets/images/dot_red2.png" style="height: 20px;"></td>
+                    <td><img src="~/Content/assets/images/dot_red2.png" style="height: 20px;"></td>
+                    <td>57%</td>
+                </tr>
+
+            </tbody>
+
+
+
+
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+         
+
+
+
+
+@*<div class="col-md-12 text-center">
+    <ul class="pagination pagination-lg pager"></ul>
+</div>*@
+
+
+@*<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>*@

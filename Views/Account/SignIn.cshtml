@@ -23,6 +23,7 @@
 
     <script src="/Scripts/jquery-1.10.2.js"></script>
     <script src="/Scripts/angular.js"></script>
+
     <script src="/Scripts/PersonAngular.js"></script>
     <script src="/Scripts/angular-sanitize.js"></script>
 
@@ -171,7 +172,7 @@
                             <!--<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">-->
                         </div>
 
-                        <input type="submit" class="btn btn-block btn-primary" name="login" value="Login" data-ng-click="SignIn()" />
+                        <input type="submit" class="btn btn-block btn-primary" name="login" id="loginbtn" value="Login" data-ng-click="SignIn()" />
                         <!--<button type="submit" class="btn  btn-block btn-primary">login</button>-->
                         <button type="button" class="btn btn-block btn-default" data-ng-click="GoRegister()">Register</button>
                         <div class="lost_password">
@@ -188,6 +189,7 @@
                         </p>
                     </div>
                     <div class="img col-sm-4"> <img src="/Content/assets/images/paraimg.png" alt=""> </div>
+
                     <button type="submit" class="btn paraimgbtn btn-default">Login Now</button>
                 </div>
             </div>
@@ -334,3 +336,9 @@
     <script src="/Content/assets/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/Content/assets/js/bootstrap.min.js"></script>
+<style>
+
+       .submitLoader {
+        background: url("/content/assets/loader2.gif") no-repeat scroll 0% 0% !important;
+    }
+</style>

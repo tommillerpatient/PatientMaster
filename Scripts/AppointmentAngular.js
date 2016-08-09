@@ -1,9 +1,11 @@
 ﻿//var app = angular.module('demoModule', ['ngSanitize']);
-var app = angular.module('demoModule', ['ui.bootstrap', 'ngResource']);
+var app = angular.module('demoModule', ['ui.bootstrap', 'ngResource', 'ngSanitize']);
 // Defining angularjs Controller and injecting personService
 app.controller('demoCtrl', function ($scope, $http, personService) {
 
     $scope.appointmentData = null;
+
+
     personService.GetAllRecords().then(function (d) {
 
         $scope.appointmentData = d.data; // Success
@@ -50,6 +52,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     };
 
     $scope.Add = function () {
+        $scope.clear();
         $scope.appointment.VisibleInsert = true;
         $scope.appointment.createAppointment = true;
         $scope.appointment.Insertbutton = true;
@@ -62,17 +65,21 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
     $scope.Edit = function (index, id) {
         var myindex = 0;
+
+
         for (var i = 0; i < $scope.appointmentData.length; i++) {
-            if (id == $scope.appointmentData[i].id) {
+            if (id == $scope.appointmentData[i].appointmentid) {
                 myindex = i;
             }
         }
         $scope.appointment = {
-            Id: $scope.appointmentData[myindex].id,
-            FirstName: $scope.appointmentData[myindex].firstname,
-            LastName: $scope.appointmentData[myindex].lastname,
-            EmailId: $scope.appointmentData[myindex].emailid,
-            Password: $scope.appointmentData[myindex].password
+            appointmentid: $scope.appointmentData[myindex].appointmentid,
+            appointmentname: $scope.appointmentData[myindex].appointmentname,
+            appointmentdesc: $scope.appointmentData[myindex].appointmentdesc,
+            appointmentdate: new Date(parseInt($scope.appointmentData[myindex].appointmentdate.replace(/(^.*\()|([+-].*$)/g, ''))).toLocaleDateString(),
+            staffid: $scope.appointmentData[myindex].staffid,
+            attendid: $scope.appointmentData[myindex].attendid,
+            patientid: $scope.appointmentData[myindex].patientid
         };
         $scope.appointment.Updatebutton = true;
         $scope.appointment.Insertbutton = false;
@@ -84,6 +91,11 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     $scope.Cancel = function () {
         $scope.appointment.VisibleIndex = true;
         $scope.appointment.VisibleInsert = false;
+        $scope.clear();
+        $scope.appointment.MessageError = '';
+        $scope.appointment.MessageSuccess = '';
+        $scope.appointment.Success = false;
+        $scope.appointment.Error = false;
     }
 
 
@@ -109,6 +121,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
     function CheckValidationforsave() 
     {
+  
 
         var IsError = true;
 
@@ -116,7 +129,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
         if ($scope.appointment.appointmentname == "") 
         {
-          
+        
             IsError = false;
 
         }
@@ -126,29 +139,29 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
             IsError = false;
 
         }
-        if ($scope.appointment.appointmentdate == "") 
+        if ($('#appointmentdate').val() == "")
         {
-
+           
            
             IsError = false;
         }
      
 
-        if($scope.appointment.patientid == "") 
+        if ($('#patientid').val() == "")
             {
-               
+           
                 IsError = false;
             }
 
 
         
 
-    if ($scope.appointment.staffid == "") 
-    {
+    //if ($scope.appointment.staffid == "") 
+    //{
            
-            IsError = false;
+    //        IsError = false;
 
-    }
+    //}
 
 
         return IsError;
@@ -160,14 +173,17 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         $scope.appointment.Error = false;
 
         if (CheckValidationforsave()) {
-
-            $http({
-
+           
+            $.ajax({
                 method: 'POST',
                 url: '/XpanelAppointment/Insert',
                 data: $scope.appointment
             }).then(function successCallback(response) {
-                $scope.appointment.MessageSuccess = "Record Inserted Successfully.";
+
+                personService.GetAllRecords().then(function (d) {
+                    $scope.appointmentData = d.data;
+                });
+                $scope.appointment.MessageSuccess = " Record Inserted Successfully.";
                 $scope.appointment.Success = true;
                 $scope.clear();
             },
@@ -179,7 +195,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         }
         else {
 
-            $scope.appointment.MessageError = "Please Fix Validations.";
+            $scope.appointment.MessageError = $scope.appointment.MessageError+"<br> -Please Fix Validations.";
             $scope.appointment.Error = true;
             $scope.clear();
 
@@ -198,13 +214,15 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
                 url: '/XpanelAppointment/Update',
                 data: $scope.appointment
             }).then(function successCallback(response) {
-
-                $scope.appointment.MessageSuccess = "Record Update Successfully.";
+                personService.GetAllRecords().then(function (d) {
+                    $scope.appointmentData = d.data;
+                });
+                $scope.appointment.MessageSuccess = " Record Update Successfully.";
                 $scope.appointment.Success = true;
                 $scope.appointment.VisibleIndex = true;
                 $scope.appointment.VisibleInsert = false;
                 $scope.clear();
-                alert($scope.appointment.MessageSuccess);
+                
             },
             function errorCallback(response) {
 
@@ -214,9 +232,9 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         }
         else {
 
-            $scope.appointment.MessageError = "Please Fix Validations.";
+            $scope.appointment.MessageError =   $scope.appointment.MessageError+"<br> -Please Fix Validations.";
             $scope.appointment.Error = true;
-            $scope.clear();
+          
 
         }
 
@@ -240,7 +258,8 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
             $scope.appointmentData.splice(index, 1);
             document.getElementById('success').style.display = "block";
-            $("#dialog-confirm").dialog("close");
+
+            $('#dialog-confirm').css("display", "none");
         }, function errorCallback(response) {
             alert("Error : " + response.data.ExceptionMessage);
         });
@@ -256,14 +275,28 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
 
 
-        $("#dialog-confirm").dialog("open");
+        $('#dialog-confirm').css("display", "block");
     }
     $scope.cancel = function (index) {
 
 
-        $("#dialog-confirm").dialog("close");
+        $('#dialog-confirm').css("display", "none");
     }
+    $scope.FillPersonList = function () {
+        $scope.PersonList = null;
+        $http({
+            method: 'Get',
+            url: '/XpanelAppointment/PersonList',
+            data: {}
+        }).success(function (result) {
+          
+            $scope.PersonList = result;
 
+        });
+    };
+
+
+    $scope.FillPersonList();
 });
 
 // Here I have created a factory which is a populer way to create and configure services. You may also create the factories in another script file which is best practice.

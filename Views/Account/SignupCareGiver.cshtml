@@ -93,289 +93,334 @@
             <div class="sentence" ng-controller="demoCtrl">
                 <div class="row" style="background-color:#E8E8E8">
 
-                    <h1>Create Your Caregiver Profile</h1>
+                    <h1 id="title">Create Your Caregiver Profile</h1>
 
                     <div class="alert alert-danger" id="diverror" ng-show="person.Error">
                         <strong id="errorStrong">Error!</strong><span ng-bind-html="person.MessageError"></span>
                     </div>
+                    <div class="alert alert-success" id="divsuces" style="display:none;" >
+                        <strong >Success!</strong><span>Decline Successfully.</span>
+                    </div>
 
-                    <div class="col-md-10 col-md-offset-2">
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" class="sr-only">First Name</label>
-                                <input type="text" name="first-name"
-                                       ng-maxlength="20" ng-minlength="1" ng-required="true" required
-                                       ng-model="person.FirstName" size="40"
-                                       class="form-control input text-primary" placeholder="First Name" id="FirstName" tabindex=1 autofocus />
-                                <!--<input type="email" class="form-control input text-primary" placeholder="E-mail">-->
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" class="sr-only">Password</label>
-                                <input type="password"
-                                       required name="patient-portal-emailrm-confi" ng-model="person.PasswordHash"
-                                       size="40" class="form-control input text-primary" placeholder="Password" id="PasswordHash" tabindex=8 />
-                                <!--<input type="password" class="form-control input text-primary" placeholder="Password">-->
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" class="sr-only">Address 1</label>
-                                <input type="text" name="street" value=""
-                                       ng-maxlength="20" ng-minlength="1" required
-                                       ng-model="person.Address"
-                                       size="40" class="form-control input text-primary" placeholder="Address1" id="Address" tabindex=10 />
-                                <!--<input type="password" class="form-control input text-primary" placeholder="Password">-->
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" class="sr-only">State</label>
-                                <div class="dropdown ">
-                                    <select name="sex" class="btn btn-primary fromdropdown dropdown-toggle" style="text-align:left;" data-toggle="dropdown" required ng-model="person.State" id="State" tabindex=12>
-                                        <option value="">State</option>
-                                        <option value="AL">Alabama</option>
-                                        <option value="AK">Alaska</option>
-                                        <option value="AZ">Arizona</option>
-                                        <option value="AR">Arkansas</option>
-                                        <option value="CA">California</option>
-                                        <option value="CO">Colorado</option>
-                                        <option value="CT">Connecticut</option>
-                                        <option value="DE">Delaware</option>
-                                        <option value="DC">District Of Columbia</option>
-                                        <option value="FL">Florida</option>
-                                        <option value="GA">Georgia</option>
-                                        <option value="HI">Hawaii</option>
-                                        <option value="ID">Idaho</option>
-                                        <option value="IL">Illinois</option>
-                                        <option value="IN">Indiana</option>
-                                        <option value="IA">Iowa</option>
-                                        <option value="KS">Kansas</option>
-                                        <option value="KY">Kentucky</option>
-                                        <option value="LA">Louisiana</option>
-                                        <option value="ME">Maine</option>
-                                        <option value="MD">Maryland</option>
-                                        <option value="MA">Massachusetts</option>
-                                        <option value="MI">Michigan</option>
-                                        <option value="MN">Minnesota</option>
-                                        <option value="MS">Mississippi</option>
-                                        <option value="MO">Missouri</option>
-                                        <option value="MT">Montana</option>
-                                        <option value="NE">Nebraska</option>
-                                        <option value="NV">Nevada</option>
-                                        <option value="NH">New Hampshire</option>
-                                        <option value="NJ">New Jersey</option>
-                                        <option value="NM">New Mexico</option>
-                                        <option value="NY">New York</option>
-                                        <option value="NC">North Carolina</option>
-                                        <option value="ND">North Dakota</option>
-                                        <option value="OH">Ohio</option>
-                                        <option value="OK">Oklahoma</option>
-                                        <option value="OR">Oregon</option>
-                                        <option value="PA">Pennsylvania</option>
-                                        <option value="RI">Rhode Island</option>
-                                        <option value="SC">South Carolina</option>
-                                        <option value="SD">South Dakota</option>
-                                        <option value="TN">Tennessee</option>
-                                        <option value="TX">Texas</option>
-                                        <option value="UT">Utah</option>
-                                        <option value="VT">Vermont</option>
-                                        <option value="VA">Virginia</option>
-                                        <option value="WA">Washington</option>
-                                        <option value="WV">West Virginia</option>
-                                        <option value="WI">Wisconsin</option>
-                                        <option value="WY">Wyoming</option>
-                                    </select>
+                    <div id="caregiverreg" style="display:none;">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="sr-only">First Name</label>
+                                    <input type="text" name="first-name"
+                                           ng-maxlength="20" ng-minlength="1" ng-required="true" required
+                                           ng-model="person.FirstName" size="40"
+                                           class="form-control input text-primary" placeholder="First Name" id="FirstName" tabindex=1 autofocus />
+                                    <!--<input type="email" class="form-control input text-primary" placeholder="E-mail">-->
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="sr-only">Password</label>
+                                    <input type="password"
+                                           required name="patient-portal-emailrm-confi" ng-model="person.PasswordHash"
+                                           size="40" class="form-control input text-primary" placeholder="Password" id="PasswordHash" tabindex=8 />
                                     <!--<input type="password" class="form-control input text-primary" placeholder="Password">-->
                                 </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="sr-only">Address 1</label>
+                                    <input type="text" name="street" value=""
+                                           ng-maxlength="20" ng-minlength="1" required
+                                           ng-model="person.Address"
+                                           size="40" class="form-control input text-primary" placeholder="Address1" id="Address" tabindex=10 />
+                                    <!--<input type="password" class="form-control input text-primary" placeholder="Password">-->
+                                </div>
+                                <div class="form-group">
+                                    @*<label for="exampleInputEmail1" class="sr-only">State</label>*@
+                                    <div class=" dropdown ">
+                                        <select name="sex" class="btn btn-oval fromdropdown dropdown-toggle dropdown-blue" style="text-align:left;" data-toggle="dropdown" required ng-model="person.State" id="State" tabindex=12>
+                                            <option value="">State</option>
+                                            <option value="AL">Alabama</option>
+                                            <option value="AK">Alaska</option>
+                                            <option value="AZ">Arizona</option>
+                                            <option value="AR">Arkansas</option>
+                                            <option value="CA">California</option>
+                                            <option value="CO">Colorado</option>
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="DC">District Of Columbia</option>
+                                            <option value="FL">Florida</option>
+                                            <option value="GA">Georgia</option>
+                                            <option value="HI">Hawaii</option>
+                                            <option value="ID">Idaho</option>
+                                            <option value="IL">Illinois</option>
+                                            <option value="IN">Indiana</option>
+                                            <option value="IA">Iowa</option>
+                                            <option value="KS">Kansas</option>
+                                            <option value="KY">Kentucky</option>
+                                            <option value="LA">Louisiana</option>
+                                            <option value="ME">Maine</option>
+                                            <option value="MD">Maryland</option>
+                                            <option value="MA">Massachusetts</option>
+                                            <option value="MI">Michigan</option>
+                                            <option value="MN">Minnesota</option>
+                                            <option value="MS">Mississippi</option>
+                                            <option value="MO">Missouri</option>
+                                            <option value="MT">Montana</option>
+                                            <option value="NE">Nebraska</option>
+                                            <option value="NV">Nevada</option>
+                                            <option value="NH">New Hampshire</option>
+                                            <option value="NJ">New Jersey</option>
+                                            <option value="NM">New Mexico</option>
+                                            <option value="NY">New York</option>
+                                            <option value="NC">North Carolina</option>
+                                            <option value="ND">North Dakota</option>
+                                            <option value="OH">Ohio</option>
+                                            <option value="OK">Oklahoma</option>
+                                            <option value="OR">Oregon</option>
+                                            <option value="PA">Pennsylvania</option>
+                                            <option value="RI">Rhode Island</option>
+                                            <option value="SC">South Carolina</option>
+                                            <option value="SD">South Dakota</option>
+                                            <option value="TN">Tennessee</option>
+                                            <option value="TX">Texas</option>
+                                            <option value="UT">Utah</option>
+                                            <option value="VT">Vermont</option>
+                                            <option value="VA">Virginia</option>
+                                            <option value="WA">Washington</option>
+                                            <option value="WV">West Virginia</option>
+                                            <option value="WI">Wisconsin</option>
+                                            <option value="WY">Wyoming</option>
+                                        </select>
+                                        <!--<input type="password" class="form-control input text-primary" placeholder="Password">-->
+                                    </div>
+                                </div>
                             </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="sr-only">Password</label>
+                                    <input type="text"
+                                           ng-maxlength="20" ng-minlength="1" required
+                                           name="last-name" ng-model="person.LastName"
+                                           size="40" class="form-control input text-primary" placeholder="Last Name" id="LastName" tabindex=2 />
+                                    <!--<input type="email" class="form-control input text-primary" placeholder="Confirm Email Address">-->
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="sr-only">Confirm Password</label>
+                                    <input type="password"
+                                           ng-maxlength="30" ng-minlength="1" required
+                                           ng-model="person.ConfirmPassword"
+                                           name="patient-portal-emailrm-confi"
+                                           size="40" class="form-control input text-primary" placeholder="Confirm Password" id="ConfirmPassword" tabindex=9 />
+                                    <!--<input type="password" class="form-control input text-primary" placeholder="Confirm-Password">-->
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="sr-only">City</label>
+                                    <input type="text" name="cityperson" value=""
+                                           ng-maxlength="20" ng-minlength="1" required
+                                           ng-model="person.City"
+                                           size="40" class="form-control input text-primary" placeholder="City" id="City" tabindex=11 />
+                                    <!--<input type="password" class="form-control input text-primary" placeholder="Confirm-Password">-->
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="sr-only">Zipcode</label>
+                                    <input type="text" name="patient-portal-zip-code" value="" size="40"
+                                           class="form-control input text-primary" placeholder="Zip Code"
+                                           ng-maxlength="20" ng-minlength="1" required
+                                           ng-model="person.ZipCode" id="ZipCode" tabindex=13 />
+                                    <!--<input type="password" class="form-control input text-primary" placeholder="Confirm-Password">-->
+                                </div>
+                            </div>
+
+
                         </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" class="sr-only">Password</label>
-                                <input type="text"
-                                       ng-maxlength="20" ng-minlength="1" required
-                                       name="last-name" ng-model="person.LastName"
-                                       size="40" class="form-control input text-primary" placeholder="Last Name" id="LastName" tabindex=2 />
-                                <!--<input type="email" class="form-control input text-primary" placeholder="Confirm Email Address">-->
+                        @*<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-lg-offset-4 col-sm-offset-4 col-md-offset-4">
+                <div class="form-group">
+                    <input type="button" value="SUBMIT" id="signupbtn"
+                           class="btn btn-lg btn-block btn-oval"
+                           data-ng-click="SignUp()" tabindex=27 />
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-lg-offset-4 col-sm-offset-4 col-md-offset-4">
+                <div class="form-group">
+                    <input type="button" value="Decline" id="Declinebtn"
+                           class="btn btn-lg btn-block btn-oval"
+                           data-ng-click="Decline()" tabindex=28 />
+
+                </div>
+            </div>*@
+
+
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <input type="button" value="SUBMIT" id="signupbtn"
+                                           class="btn btn-lg btn-block btn-oval"
+                                           data-ng-click="SignUp()" tabindex=27 />
+                                </div>
+
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" class="sr-only">Confirm Password</label>
-                                <input type="password"
-                                       ng-maxlength="30" ng-minlength="1" required
-                                       ng-model="person.ConfirmPassword"
-                                       name="patient-portal-emailrm-confi"
-                                       size="40" class="form-control input text-primary" placeholder="Confirm Password" id="ConfirmPassword" tabindex=9 />
-                                <!--<input type="password" class="form-control input text-primary" placeholder="Confirm-Password">-->
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" class="sr-only">City</label>
-                                <input type="text" name="cityperson" value=""
-                                       ng-maxlength="20" ng-minlength="1" required
-                                       ng-model="person.City"
-                                       size="40" class="form-control input text-primary" placeholder="City" id="City" tabindex=11 />
-                                <!--<input type="password" class="form-control input text-primary" placeholder="Confirm-Password">-->
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" class="sr-only">Zipcode</label>
-                                <input type="text" name="patient-portal-zip-code" value="" size="40"
-                                       class="form-control input text-primary" placeholder="Zip Code"
-                                       ng-maxlength="20" ng-minlength="1" required
-                                       ng-model="person.ZipCode" id="ZipCode" tabindex=13 />
-                                <!--<input type="password" class="form-control input text-primary" placeholder="Confirm-Password">-->
-                            </div>
+                         
+                            <div class="col-md-2"></div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-lg-offset-4 col-sm-offset-4 col-md-offset-4">
-                        <div class="form-group">
-                            <input type="button" value="SUBMIT" id="signupbtn"
-                                   class="btn btn-lg btn-block btn-oval"
-                                   data-ng-click="SignUp()" tabindex=27 />
-                            <!--<button type="submit" class="btn btn-lg btn-block btn-oval">Continue</button>-->
+                    <div id="comment" style="display:none;">
+                        <div class="col-md-10 col-md-offset-2">
+                           
+                            <div class="col-md-10">
+                                <textarea class="form-control" placeholder="Comment here..." style="height:100px;" ng-model="person.caregivercomment"></textarea>
+                            </div>
+                            
+                           
+                            </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-3">
+                                <input type="button" value="SUBMIT" id="Comentbtn"
+                                       class=" btn btn-lg btn-block btn-oval"
+                                       data-ng-click="DeclineComment()" tabindex=28 style="margin-top:20px !important;" />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="button" value="CANCEL" id="cancl" 
+                                       class=" btn btn-lg btn-block btn-oval"
+                                       data-ng-click="Cancel()" tabindex=28 style="margin-top:20px !important;" />
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        </div>
+                    @*<div class="gallery"> style="display:none;"
+        <h1 class="text-center">Sergical <span>Weight Loss</span> Gallery</h1>
+        <img src="/Content/assets/images/section_bg.png" alt="">
+    </div>*@
+                    <div class="sep col-sm-12"></div>
+                    @*<div class="container">
+                <h1 class="text-center">Join a <span>Community and </span> Stay <span>Connect</span></h1>
+                <p class="centerpara">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+                <div class="socialmedia">
+                    <div class=" col-xs-4">
+                        <a href="#">
+                            <span> <img src="/Content/assets/images/icn_facebook.png" alt=""> </span>
+                            <label>Link us on facebook</label>
+                        </a>
+                    </div>
+                    <div class=" col-xs-4">
+                        <a href="#">
+                            <span> <img src="/Content/assets/images/icn_youtube.png" alt=""> </span>
+                            <label>Watch us on You Tube</label>
+                        </a>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="#">
+                            <span> <img src="/Content/assets/images/icn_twitter.png" alt=""> </span>
+                            <label>Connect on Twitter</label>
+                        </a>
+                    </div>
+                </div>
+            </div>*@
+                    <!-- Page Conetnt End -->
+                    <!-- Footer Start -->
+                    @*<footer class="container">
+                <div class="bluesep"></div>
+                <div class="ftr ">
+                    <div class="footermenus">
+                        <div class="col-sm-2">
+                            <span>Our Services</span>
+                            <ul>
+                                <li><a href="#">Find A Phsiciyn</a></li>
+                                <li><a href="#">Bariatrics</a></li>
+                                <li><a href="#">Behaviour health Services</a></li>
+                                <li><a href="#">Bloodless Medicine and Sergery</a></li>
+                                <li><a href="#">Cancer Care</a></li>
+                                <li><a href="#">Dermatology</a></li>
+                                <li><a href="#">Emergency & Truma</a></li>
+                                <li><a href="#">Heart & Vasclar Care</a></li>
+                                <li><a href="#">Imaging & Radiology</a></li>
+                                <li><a href="#">Neurological Services</a></li>
+                                <li><a href="#">Orthopaedics</a></li>
+                                <li><a href="#">Pain Management</a></li>
+                                <li><a href="#">Plastic, Cosmetic and Hand Surgery</a></li>
+                                <li><a href="#">Primary Care</a></li>
+                                <li><a href="#">Transplant Servces</a></li>
+                                <li><a href="#">Urology</a></li>
+                                <li><a href="#">Womens Health</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>Our Location</span>
+                            <ul>
+                                <li><a href="#">Hahmann University 	Hospital</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>Our Stories</span>
+                            <ul>
+                                <li><a href="#">Devon's Story</a></li>
+                                <li><a href="#">Ivy's Story</a></li>
+                                <li><a href="#">Scott and Dwight: A transplant Story</a></li>
+                                <li><a href="#">Share Your Story</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>For Patients</span>
+                            <ul>
+                                <li><a href="#">health Risk Assesments</a></li>
+                                <li><a href="#">Insurance and Financial Support</a></li>
+                                <li><a href="#">Legal and Ethical Decisions</a></li>
+                                <li><a href="#">Maps & Directions</a></li>
+                                <li><a href="#">Mobile App</a></li>
+                                <li><a href="#">Online Bill Pay</a></li>
+                                <li><a href="#">Patient Portal</a></li>
+                                <li><a href="#">Registration</a></li>
+                                <li><a href="#">Request Madical Records</a></li>
+                                <li><a href="#">Share Your Story</a></li>
+                                <li><a href="#">Staff Recognition</a></li>
+                                <li><a href="#">Support Groups</a></li>
+                                <li><a href="#">What to Bring/What not to Bring</a></li>
+                                <li><a href="#">What to Export</a></li>
+                                <li><a href="#">Your Patient Rights</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>For Family & Visitors</span>
+                            <ul>
+                                <li><a href="#">Gifts & Support</a></li>
+                                <li><a href="#">Maps & Directions</a></li>
+                                <li><a href="#">Nearby Hotels & Restaurants</a></li>
+                                <li><a href="#">Share Your Story</a></li>
+                                <li><a href="#">Staff Recognition</a></li>
+                                <li><a href="#">Visitation Rights</a></li>
+                                <li><a href="#">What to Bring/What not to Bring</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2">
+                            <span>For Health Professional</span>
+                            <ul>
+                                <li><a href="#">Education & Trainning</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Physical Portal</a></li>
+                            </ul>
                         </div>
                     </div>
-
-
-                </div>
-
-            </div>
-            <div class="form-group ">
-                <img src="/Content/assets/images/boxshadow.png">
-            </div>
-        </div>
-
-        @*<div class="gallery">
-            <h1 class="text-center">Sergical <span>Weight Loss</span> Gallery</h1>
-            <img src="/Content/assets/images/section_bg.png" alt="">
-        </div>*@
-        <div class="sep col-sm-12"></div>
-        @*<div class="container">
-            <h1 class="text-center">Join a <span>Community and </span> Stay <span>Connect</span></h1>
-            <p class="centerpara">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-            <div class="socialmedia">
-                <div class=" col-xs-4">
-                    <a href="#">
-                        <span> <img src="/Content/assets/images/icn_facebook.png" alt=""> </span>
-                        <label>Link us on facebook</label>
-                    </a>
-                </div>
-                <div class=" col-xs-4">
-                    <a href="#">
-                        <span> <img src="/Content/assets/images/icn_youtube.png" alt=""> </span>
-                        <label>Watch us on You Tube</label>
-                    </a>
-                </div>
-                <div class="col-xs-4">
-                    <a href="#">
-                        <span> <img src="/Content/assets/images/icn_twitter.png" alt=""> </span>
-                        <label>Connect on Twitter</label>
-                    </a>
-                </div>
-            </div>
-        </div>*@
-        <!-- Page Conetnt End -->
-        <!-- Footer Start -->
-        @*<footer class="container">
-            <div class="bluesep"></div>
-            <div class="ftr ">
-                <div class="footermenus">
-                    <div class="col-sm-2">
-                        <span>Our Services</span>
-                        <ul>
-                            <li><a href="#">Find A Phsiciyn</a></li>
-                            <li><a href="#">Bariatrics</a></li>
-                            <li><a href="#">Behaviour health Services</a></li>
-                            <li><a href="#">Bloodless Medicine and Sergery</a></li>
-                            <li><a href="#">Cancer Care</a></li>
-                            <li><a href="#">Dermatology</a></li>
-                            <li><a href="#">Emergency & Truma</a></li>
-                            <li><a href="#">Heart & Vasclar Care</a></li>
-                            <li><a href="#">Imaging & Radiology</a></li>
-                            <li><a href="#">Neurological Services</a></li>
-                            <li><a href="#">Orthopaedics</a></li>
-                            <li><a href="#">Pain Management</a></li>
-                            <li><a href="#">Plastic, Cosmetic and Hand Surgery</a></li>
-                            <li><a href="#">Primary Care</a></li>
-                            <li><a href="#">Transplant Servces</a></li>
-                            <li><a href="#">Urology</a></li>
-                            <li><a href="#">Womens Health</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-2">
-                        <span>Our Location</span>
-                        <ul>
-                            <li><a href="#">Hahmann University 	Hospital</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-2">
-                        <span>Our Stories</span>
-                        <ul>
-                            <li><a href="#">Devon's Story</a></li>
-                            <li><a href="#">Ivy's Story</a></li>
-                            <li><a href="#">Scott and Dwight: A transplant Story</a></li>
-                            <li><a href="#">Share Your Story</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-2">
-                        <span>For Patients</span>
-                        <ul>
-                            <li><a href="#">health Risk Assesments</a></li>
-                            <li><a href="#">Insurance and Financial Support</a></li>
-                            <li><a href="#">Legal and Ethical Decisions</a></li>
-                            <li><a href="#">Maps & Directions</a></li>
-                            <li><a href="#">Mobile App</a></li>
-                            <li><a href="#">Online Bill Pay</a></li>
-                            <li><a href="#">Patient Portal</a></li>
-                            <li><a href="#">Registration</a></li>
-                            <li><a href="#">Request Madical Records</a></li>
-                            <li><a href="#">Share Your Story</a></li>
-                            <li><a href="#">Staff Recognition</a></li>
-                            <li><a href="#">Support Groups</a></li>
-                            <li><a href="#">What to Bring/What not to Bring</a></li>
-                            <li><a href="#">What to Export</a></li>
-                            <li><a href="#">Your Patient Rights</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-2">
-                        <span>For Family & Visitors</span>
-                        <ul>
-                            <li><a href="#">Gifts & Support</a></li>
-                            <li><a href="#">Maps & Directions</a></li>
-                            <li><a href="#">Nearby Hotels & Restaurants</a></li>
-                            <li><a href="#">Share Your Story</a></li>
-                            <li><a href="#">Staff Recognition</a></li>
-                            <li><a href="#">Visitation Rights</a></li>
-                            <li><a href="#">What to Bring/What not to Bring</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-2">
-                        <span>For Health Professional</span>
-                        <ul>
-                            <li><a href="#">Education & Trainning</a></li>
-                            <li><a href="#">Careers</a></li>
-                            <li><a href="#">Physical Portal</a></li>
-                        </ul>
+                    <div class="links">
+                        <div class="pull-left"> <a href="#">Disclaimers</a>&nbsp; | &nbsp;<a href="#">Sitemap</a> <span>&copy; Hahnemann University Hospital 2016, All rights Reserved</span> </div>
+                        <div class="pull-right">
+                            <p>
+                                <span class="phone">(215) 762-7000</span> <span class="add">
+                                    230 N Broad St<br>
+                                    Philadelphia, PA 19102
+                                </span>
+                            </p>
+                            <a href="#"><img src="/Content/assets/images/footer_logo.png" alt=""></a>
+                        </div>
                     </div>
                 </div>
-                <div class="links">
-                    <div class="pull-left"> <a href="#">Disclaimers</a>&nbsp; | &nbsp;<a href="#">Sitemap</a> <span>&copy; Hahnemann University Hospital 2016, All rights Reserved</span> </div>
-                    <div class="pull-right">
-                        <p>
-                            <span class="phone">(215) 762-7000</span> <span class="add">
-                                230 N Broad St<br>
-                                Philadelphia, PA 19102
-                            </span>
-                        </p>
-                        <a href="#"><img src="/Content/assets/images/footer_logo.png" alt=""></a>
-                    </div>
+            </footer>
+            <div class="sidebar" style="display:none;">
+                <a href="#"><img src="/Content/assets/images/icn_fb_sidebar.png" alt=""></a>
+                <a href="#"><img src="/Content/assets/images/icn_twitter_sidebar.png" alt=""></a>
+                <a href="#"><img src="/Content/assets/images/icn_msg_sidebar.png" alt=""></a>
+                <a href="#"><img src="/Content/assets/images/icn_print_sidebar.png" alt=""></a>
+                <a href="#"><img src="/Content/assets/images/icn_add_sidebar.png" alt=""></a><br>
+                <a href="#"><img src="/Content/assets/images/plus.png" alt=""></a>
+            </div>*@
+                    <!-- Footer End -->
                 </div>
-            </div>
-        </footer>
-        <div class="sidebar" style="display:none;">
-            <a href="#"><img src="/Content/assets/images/icn_fb_sidebar.png" alt=""></a>
-            <a href="#"><img src="/Content/assets/images/icn_twitter_sidebar.png" alt=""></a>
-            <a href="#"><img src="/Content/assets/images/icn_msg_sidebar.png" alt=""></a>
-            <a href="#"><img src="/Content/assets/images/icn_print_sidebar.png" alt=""></a>
-            <a href="#"><img src="/Content/assets/images/icn_add_sidebar.png" alt=""></a><br>
-            <a href="#"><img src="/Content/assets/images/plus.png" alt=""></a>
-        </div>*@
-        <!-- Footer End -->
-    </div>
 </div>
 
 
@@ -391,8 +436,6 @@
 
 
 
-</body>
-</html>
 
 <style>
     .validateField {

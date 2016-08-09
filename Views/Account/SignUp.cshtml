@@ -11,7 +11,9 @@
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <!-- Stylesheet -->
     <link href="/Content/assets/css/bootstrap.min2.css" rel="stylesheet">
+<link href="/Content/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/Content/assets/css/custome2.css" rel="stylesheet">
+
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,67 +25,17 @@
     <script src="/Scripts/angular.js"></script>
     <script src="/Scripts/PersonAngular.js"></script>
     <script src="/Scripts/angular-sanitize.js"></script>
-
+<style>
+    .m_top_0{
+        margin-top:0px;
+    }
+      .m_bottom_0{
+        margin-bottom:0px;
+    }
+</style>
 
     <div class="page-wrapper" ng-app="demoModule">
-    <!-- Header Start -->
-    <header>
-        @*<div class="container">
-            <div class="topbar">
-                <label>Attend A free <span>seminars Today!</span></label>
-                <div class="topbtn">
-                    <a href="#"><img src="/Content/assets/images/icn_bariatics.png" alt="">My Health Rec</a>
-                    <a href="/Account/SignUp"><img src="/Content/assets/images/icn_register.png" alt="">Register</a>
-                    <a href="/Account/SignIn"><img src="/Content/assets/images/icn_login.png" alt="">Login</a>
-                </div>
-            </div>
-            <a href="#" class="logo"><img src="/Content/assets/images/logo.png" alt=""></a>
-            <div class="info">
-                <p>
-                    <span class="phone">(215) 762-7000</span><br class="visible-xs">
-                    &nbsp;| &nbsp;<span class="add">230 N Broad St Philadelphia, PA 19102</span>
-                </p>
-                <div class="input-group hidden-xs">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><img src="/Content/assets/images/icn_search.png" alt=""></button>
-                    </span>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <div class="input-group visible-xs">
-                            <input type="text" class="form-control" placeholder="Search for...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><img src="/Content/assets/images/icn_search.png" alt=""></button>
-                            </span>
-                        </div>
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="/Account/Home">Home <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">Health Library</a></li>
-                            <li><a href="#">Community</a></li>
-                            <li><a href="http://virtualvisitwebapp-qa.azurewebsites.net">Virtual Visit</a></li>
-                            <li><a href="#">Success Stories</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Contact Physician</a></li>
-                        </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
-                </div>
-                <!-- /.container-fluid -->
-            </nav>
-        </div>*@
-
-    </header>
-    <!-- Header End -->
-    <!-- Page Conetnt Start -->
+  
     <div class="content-wrapper">
         <div class="banner">
             <div class="container"> <img src="/Content/assets/images/banner_1.png" alt=""> </div>
@@ -99,13 +51,52 @@
                         <div class="alert alert-danger" id="diverror" ng-show="person.Error" style="display:none;">
                             <strong id="errorStrong">Error!</strong><span ng-bind-html="person.MessageError"></span>
                         </div>
-
                         <div class="col-md-10 col-md-offset-2">
+
+
+                            <div class="form-group col-md-5">
+                                <label for="exampleInputEmail1" class="sr-only">Email address</label>
+                                <input type="email" name="patient-portal-email"
+                                       ng-maxlength="30" ng-minlength="6" required ng-model="person.Email"
+                                       size="40" class="form-control input text-primary m_bottom_0" placeholder="Email" id="Email" />
+                                <!--<input type="email" class="form-control input text-primary" placeholder="E-mail">-->
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="exampleInputEmail1" class="sr-only">Confirm email address</label>
+                                <input type="email" name="patient-portal-emailrm-confi" ng-model="person.ConfirmEmail"
+                                       ng-maxlength="30" ng-minlength="6" required
+                                       size="40" class="form-control input text-primary m_bottom_0" placeholder="Confirm Email" id="ConfirmEmail" />
+                                <!--<input type="email" class="form-control input text-primary" placeholder="Confirm Email Address">-->
+                            </div>
+
+                        </div>
+                        <div class="col-md-10 col-md-offset-2 m_top_0">
+
+
+                            <div class="col-md-5 form-group">
+                                <label for="exampleInputEmail1" class="sr-only">Password</label>
+                                <input type="password" required placeholder="Password"
+                                       name="patient-portal-emailrm-confi" ng-model="person.PasswordHash"
+                                       size="40" class="form-control input text-primary m_bottom_0" id="PasswordHash" />
+                                <!--<input type="password" class="form-control input text-primary" placeholder="Password">-->
+
+                            </div>
+
+                            <div class=" col-md-5 form-group">
+                                <label for="exampleInputEmail1" class="sr-only">Password</label>
+                                <input type="password" ng-maxlength="30" ng-minlength="2" required
+                                       ng-model="person.ConfirmPassword"
+                                       name="patient-portal-emailrm-confi"
+                                       size="40" class="form-control input text-primary m_bottom_0" placeholder="Confirm Password" id="ConfirmPassword" />
+                                <!--<input type="password" class="form-control input text-primary" placeholder="Confirm-Password">-->
+                            </div>
+                        </div>
+                        @*<div class="col-md-10 col-md-offset-2">
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1" class="sr-only">Email address</label>
                                     <input type="email" name="patient-portal-email"
-                                           ng-maxlength="30" ng-minlength="6" required ng-model="person.Email"
+                                           ng-maxlength="30" ng-minlength="6" required ng-model="person.Email"  autofocus
                                            size="40" class="form-control input text-primary" placeholder="Email" id="Email" />
                                     <!--<input type="email" class="form-control input text-primary" placeholder="E-mail">-->
                                 </div>
@@ -113,7 +104,7 @@
                                     <label for="exampleInputEmail1" class="sr-only">Password</label>
                                     <input type="password" required placeholder="Password"
                                            name="patient-portal-emailrm-confi" ng-model="person.PasswordHash"
-                                           size="40" class="form-control input text-primary" id="PasswordHash" tabindex=8 />
+                                           size="40" class="form-control input text-primary" id="PasswordHash"  />
                                     <!--<input type="password" class="form-control input text-primary" placeholder="Password">-->
                                 </div>
                             </div>
@@ -121,7 +112,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1" class="sr-only">Confirm email address</label>
                                     <input type="email" name="patient-portal-emailrm-confi" ng-model="person.ConfirmEmail"
-                                           ng-maxlength="30" ng-minlength="6" required
+                                           ng-maxlength="30" ng-minlength="6" required 
                                            size="40" class="form-control input text-primary" placeholder="Confirm Email" id="ConfirmEmail" />
                                     <!--<input type="email" class="form-control input text-primary" placeholder="Confirm Email Address">-->
                                 </div>
@@ -129,16 +120,16 @@
                                     <label for="exampleInputEmail1" class="sr-only">Password</label>
                                     <input type="password" ng-maxlength="30" ng-minlength="2" required
                                            ng-model="person.ConfirmPassword"
-                                           name="patient-portal-emailrm-confi"
+                                           name="patient-portal-emailrm-confi" 
                                            size="40" class="form-control input text-primary" placeholder="Confirm Password" id="ConfirmPassword" />
                                     <!--<input type="password" class="form-control input text-primary" placeholder="Confirm-Password">-->
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-lg-offset-4 col-sm-offset-4 col-md-offset-4">
                             <div class="form-group">
                                 <input type="button" value="SUBMIT" id="signupbtn"
-                                       class="btn btn-lg btn-block btn-oval"
+                                       class="btn btn-lg btn-block btn-oval btn-gray"
                                        data-ng-click="SignUp()" />
                                 <!--<button type="submit" class="btn btn-lg btn-block btn-oval">Continue</button>-->
                             </div>
@@ -330,8 +321,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/Content/assets/js/bootstrap.min.js"></script>
 
-</body>
-</html>
+
 
 <style>
     .validateField {

@@ -1,0 +1,181 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>page8</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="assets/css/custome6.css" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/Scripts/angular.js"></script>
+<script src="/Scripts/PersonCareGiver.js"></script>
+<script src="/Scripts/angular-sanitize.js"></script>
+<div class="content-wrapper" ng-app="demoModule">
+
+    <div ng-controller="demoCtrl">
+        <div class="banner">
+            <div class="container"> <img src="/Content/assets/images/banner_3.png" alt="" /> </div>
+        </div>
+        <div class="container">
+            <div class="col-sm-4 col-md-3">
+                <div class="sidebarsection">
+                    <div class="headerimg">MY Journey</div>
+
+                    <div class="single">
+                        <label><img src="/Content/assets/images/icn_program.png" alt="">Program</label>
+                        <ul>
+
+                            <li id="bloodworkli"><a href="~/bloodwork/Index" id="bloodwork" ng-click="UpdateUserProgress('bloodwork')">Blood Work</a></li>
+                            <li id="nutritionli"><a href="~/nutritioncounseling/Index" id="nutrition" ng-click="UpdateUserProgress('nutrition')">Nutrition Counseling</a></li>
+                            <li id="suprtgroupli"><a href="~/supportgroup/index" id="suprtgroup" ng-click="UpdateUserProgress('suprtgroup')">Support Group( 2 mandatory)</a></li>
+                        </ul>
+                    </div>
+                    <div class="single">
+                        <label><img src="/Content/assets/images/icn_pulmonary.png" alt="">Pulmonary</label>
+                        <ul>
+                            <li id="pulmonaryli"><a href="~/pulmonary/Index" id="pulmonaryeve" ng-click="UpdateUserProgress('pulmonaryeve')">Pulmonary Evaluation</a></li>
+                            <li id="sleepstudyli"><a href="~/pulmonary/Sleep" ng-click="UpdateUserProgress('sleep')">Sleep study</a></li>
+                            <li id="pulmonaryfunctionli"><a href="~/pulmonary/functiontest" ng-click="UpdateUserProgress('function')">Pulmonary function test</a></li>
+                            <li id="chestxryli"><a href="~/pulmonary/chestxray" id="chestxry" ng-click="UpdateUserProgress(chestxry)"> Chest x-ray</a></li>
+                            <li id="pulmonologistclrli"><a href="~/pulmonary/clearance" ng-click="UpdateUserProgress('clearance')">Pulmonologist Clearance</a></li>
+                        </ul>
+
+                    </div>
+                    <div class="single">
+                        <label><img src="/Content/assets/images/icn_gastrointestinal.png" alt="">Gastrointestinal</label>
+                        <ul>
+                            <li><a href="~/pulmonary/Index">Pulmonary Evaluation</a></li>
+                            <li><a href="~/pulmonary/Sleep">Sleep study</a></li>
+                            <li><a href="#">Pulmonary function test</a></li>
+                            <li><a href="~/pulmonary/chestxray">Chest x-ray</a></li>
+                            <li><a href="#">Pulmonologist Clearance</a></li>
+                        </ul>
+                    </div>
+                    <div class="single">
+                        <label><img src="/Content/assets/images/icn_cardiology.png" alt="">Pulmonary</label>
+                        <ul>
+                            <li id="cardiologyli"><a href="~/cardiology/Index" ng-click="UpdateUserProgress('cardiology')">Cardiology Evalution</a></li>
+                            <li id="upperli"><a href="~/UpperEndoscopy/Index" ng-click="UpdateUserProgress('upper')">Upper Endoscopy</a></li>
+                            <li id="psycologicalli"><a href="~/PsycologicalEvalution/Index" ng-click="UpdateUserProgress('psycological')">Psycological Evalution</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="single">
+                        <label><img src="/Content/assets/images/icn_phycological.png" alt="">Pulmonary</label>
+                        <ul>
+                            <li><a href="#">Pulmonary Evaluation</a></li>
+                            <li><a href="#">Sleep study</a></li>
+                            <li><a href="#">Pulmonary function test</a></li>
+                            <li><a href="#">Chest x-ray</a></li>
+                            <li><a href="#">Pulmonologist Clearance</a></li>
+                        </ul>
+                    </div>
+                    <div class="single">
+                        <label><img src="/Content/assets/images/icn_blood_work.png" alt="">Pulmonary</label>
+                        <ul>
+                            <li><a href="#">Pulmonary Evaluation</a></li>
+                            <li><a href="#">Sleep study</a></li>
+                            <li><a href="#">Pulmonary function test</a></li>
+                            <li><a href="#">Chest x-ray</a></li>
+                            <li><a href="#">Pulmonologist Clearance</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-sm-8 col-md-9 text-center">
+
+                <h1 style="line-height:1.5;">
+                    CARDIOLOGY <br />
+                    STEP 6a
+                </h1>
+                <p style="letter-spacing: 0.5px;">*schedule this appointment right away *</p>
+                <h3>Select any <u>one</u> of the cardiology providers below</h3>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <h4>
+                                William G. Kussmaul, M.D.<br />
+                                Sahil Banka, M.D.
+                            </h4>
+                            <p>
+                                216 N. Broad Street/2nd Floor<br />
+                                Philadelphia, PA 19102<br />
+                                215-762-3333<br />
+                            </p>
+                        </div>
+
+                        <div class="row">
+                            <h4>William G. Kussmaul, M.D.</h4>
+                            <p>
+                                2424 York Street<br />
+                                Philadelphia, PA 19125<br />
+                                215-762-3333<br>
+                                *2nd & 4th Tuesday of each month*
+                            </p>
+                        </div>
+
+                        <div class="row">
+                            <h4>Sahil Banka, M.D.</h4>
+                            <p>
+                                2101 Brighton Street<br />
+                                Philadelphia, PA 19149<br />
+                                215-762-3333<br />
+
+                                *1st & 3rd Tuesday of each month*
+
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <h4>Drexel Cardiology</h4>
+                            <p>
+                                The Arnold T. Berman, M.D. Building<br />
+                                219 N. Broad Street/2nd Floor<br />
+                                Philadelphia, PA 19107<br />
+                                215-762-5080
+                            </p><br />
+                        </div>
+
+                        <div class="row">
+                            <h4>
+                                Jeffrey Kegel, M.D. & <br />
+                                Mitul Afiniwala, M.D.
+                            </h4>
+                            <p>
+                                5000 Frankford Avenue/Suite 1B<br />
+                                Philadelphia, PA 19124<br />
+                                215-831-2218<br />
+                                *DOES NOT ACCEPT ABH, UHC-CP*
+                            </p><br />
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+

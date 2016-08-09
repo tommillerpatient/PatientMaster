@@ -25,6 +25,8 @@ Preloader - CSS
   margin-left: -75px;
 
 }
+
+
 .loader {
   font-size: 20px;
   margin: 100px auto;
@@ -93,3 +95,18 @@ Preloader - CSS
     box-shadow: 0em -3em 0 0 #1493f8, 2em -2em 0 -1em #1493f8, 3em 0 0 -1em #1493f8, 2em 2em 0 -1em #1493f8, 0 3em 0 -1em #1493f8, -2em 2em 0 0 #1493f8, -3em 0em 0 0 #1493f8, -2em -2em 0 0.2em #1493f8;
   }
 }
+/*.loaderfront {
+  font-size: 20px;
+  margin: 100px auto;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-animation: load4 1.3s infinite linear;
+  animation: load4 1.3s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  background:url(/Content/images/loader.gif) center no-repeat;
+}*/

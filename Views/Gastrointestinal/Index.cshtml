@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>page8</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <link href="assets/css/custome6.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div class="content-wrapper">
+    <div class="banner">
+        <div class="container"> <img src="/Content/assets/images/banner_3.png" alt="" /> </div>
+    </div>
+    <div class="container">
+        <div class="col-sm-4 col-md-3">
+            <div class="sidebarsection">
+                <div class="headerimg">MY Journey</div>
+                <div class="single">
+                    <label><img src="/Content/assets/images/icn_program.png" alt="" />Program</label>
+                    <ul>
+                        @if (Convert.ToString(Session["IsCareGiver"]) == "0" || string.IsNullOrEmpty(Convert.ToString(Session["IsCareGiver"])))
+                        {
+                            <li><a href="../Account/UserProfile">My Account</a></li>
+                            <li><a href="../Account/MyCareGivers">My Caregivers</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="../Account/CareGiverProfile">My Account</a></li>
+                            <li><a href="../Account/MyPatientProfile">My Patients</a></li>
+                        }
+                        <li><a href="../Account/Settings">Change Password</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="../Account/SignOut">SignOut</a></li>
+
+                        <li><a href="#">Nutrition Counseling</a></li>
+                        <li><a href="#">Support Group( 2 mandatory)</a></li>
+                    </ul>
+                </div>
+                <div class="single">
+                    <label><img src="/Content/assets/images/icn_pulmonary.png" alt="" />Pulmonary</label>
+                    <ul>
+                        <li><a href="#">Pulmonary Evaluation</a></li>
+                        <li><a href="#">Sleep study</a></li>
+                        <li><a href="#">Pulmonary function test</a></li>
+                        <li><a href="#">Chest x-ray</a></li>
+                        <li><a href="#">Pulmonologist Clearance</a></li>
+                    </ul>
+                </div>
+                <div class="single">
+                    <label><img src="/Content/assets/images/icn_gastrointestinal.png" alt="" />Gastrointestinal</label>
+                    <ul>
+                        <li><a href="~/Gastrointestinal/Index">Pulmonary Evaluation</a></li>
+                        <li><a href="~/Gastrointestinal/Index">Sleep study</a></li>
+                        <li><a href="~/Gastrointestinal/Index">Pulmonary function test</a></li>
+                        <li><a href="~/Gastrointestinal/Index">Chest x-ray</a></li>
+                        <li><a href="~/Gastrointestinal/Index">Pulmonologist Clearance</a></li>
+                    </ul>
+                </div>
+                <div class="single">
+                    <label><img src="/Content/assets/images/icn_cardiology.png" alt="" />Pulmonary</label>
+                    <ul>
+                        <li><a href="#">Pulmonary Evaluation</a></li>
+                        <li><a href="#">Sleep study</a></li>
+                        <li><a href="#">Pulmonary function test</a></li>
+                        <li><a href="#">Chest x-ray</a></li>
+                        <li><a href="#">Pulmonologist Clearance</a></li>
+                    </ul>
+                </div>
+                <div class="single">
+                    <label><img src="/Content/assets/images/icn_phycological.png" alt="" />Pulmonary</label>
+                    <ul>
+                        <li><a href="#">Pulmonary Evaluation</a></li>
+                        <li><a href="#">Sleep study</a></li>
+                        <li><a href="#">Pulmonary function test</a></li>
+                        <li><a href="#">Chest x-ray</a></li>
+                        <li><a href="#">Pulmonologist Clearance</a></li>
+                    </ul>
+                </div>
+                <div class="single">
+                    <label><img src="/Content/assets/images/icn_blood_work.png" alt="" />Pulmonary</label>
+                    <ul>
+                        <li><a href="#">Pulmonary Evaluation</a></li>
+                        <li><a href="#">Sleep study</a></li>
+                        <li><a href="#">Pulmonary function test</a></li>
+                        <li><a href="#">Chest x-ray</a></li>
+                        <li><a href="#">Pulmonologist Clearance</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+   
+
+        <div class="col-sm-8 col-md-9 text-center">
+            <h1 style="line-height:1.5;">
+                GASTROENTEROLOGIST <br />
+                STEP 6b
+            </h1>
+            <p style="letter-spacing: 0.5px;">
+                *schedule this appointment <u>after</u> completing the pulmonary evaluation and necessary<br />
+                pulmonary testing*.
+            </p>
+            <h3>Select any <u>one</u> of the gastroenterology providers below</h3>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>Drexel Gastroenterology</h4>
+                    <p>
+                        219 N Broad Street<br />
+                        Philadelphia, PA 19102<br />
+                        215-762-6220
+                    </p>
+                </div>
+                <div class="col-sm-6">
+                    <h4 style="text-decoration: underline; font-style:italic;">Maya Spodik, M.D.</h4>
+                    <p>
+                        Bustleton Gastroenterology Associates<br />
+                        2000 Grant Ave #102<br />
+                        Philadelphia, PA 19115<br />
+                        215-464-7222<br />
+                        *does not accept UNCCP*
+                    </p>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+  
+</div>
+
+    
+
+
+

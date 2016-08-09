@@ -10,14 +10,12 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
     personService.GetAllRecords().then(function (d) {
         $scope.personData = d.data; // Success
-       
-        document.getElementById('diverror').style.display  = "block";
-        //$('#diverror').show();
+
         $scope.person = {
             Id: $scope.personData[0].id,
             FirstName: $scope.personData[0].firstname,
             LastName: $scope.personData[0].lastname,
-             DateOfBirth: new Date(parseInt($scope.personData[0].dateofbirth.replace(/(^.*\()|([+-].*$)/g, ''))),
+            DateOfBirth: new Date(parseInt($scope.personData[0].dateofbirth.replace(/(^.*\()|([+-].*$)/g, ''))),
             Gender: "" + $scope.personData[0].gender,
             Phone1: $scope.personData[0].phone1,
             Address: $scope.personData[0].address,
@@ -39,15 +37,47 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
             PharmacyCity: $scope.personData[0].pharmacycity,
             PharmacyState: $scope.personData[0].pharmacystate,
             CareGiver: $scope.personData[0].CareGiver,
+            Email: $scope.personData[0].email,
+            ProfileImage: $scope.personData[0].profileimage,
+            MaritalStatus: $scope.personData[0].maritalstatus,
+            Weight: $scope.personData[0].weight,
+            Mobile: $scope.personData[0].mobile,
+            PreferredCommunication: $scope.personData[0].preferredcommunication,
+            SocialNetworks: $scope.personData[0].socialnetworks,
+            Language: $scope.personData[0].language,
+            Country: $scope.personData[0].Country,
             Error: false,
             Success: false,
-
-
+            PersonalDetailView:true,
+            CommunicationDetailView: true,
+            CommunicationDetailEdit: false,
+            AddressDetailView: true,
+            AddressDetailEdit: false,
+            PasswordHash:'',
         };
-       
+
+        if ($scope.person.Gender=="1")
+        {
+           
+            $scope.person.Gender = "Male";
+
+        }
+
+        if ($scope.person.Gender == "2")
+        {
+            $scope.person.Gender ="Female";
+
+        }
+  
+        if ($scope.person.Gender == "3") {
+        
+            $scope.person.Gender = "Transgender";
+        }
+    
         if ($scope.person.ZipCode == '0') {
             $scope.person.ZipCode = '';
         }
+
         if ($scope.person.phone1 == '0') {
             $scope.person.phone1 = '';
         }
@@ -60,27 +90,19 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         if ($scope.person.Phone3 == '0') {
             $scope.person.Phone3 = '';
         }
-        //if ($scope.person.DateOfBirth.indexOf("01/01/1900") < 1) {
-        //    $scope.person.DateOfBirth = '';
-        //}
-        //if ($scope.person.InsuranceEffectiveDate.indexOf("01/01/1900") < 1) {
-        //    $scope.person.InsuranceEffectiveDate = '';
-        //}
+     
         if ($("#DateOfBirth").attr('type') == 'text') {
             if ($scope.personData[0].dateofbirth.replace(/(^.*\()|([+-].*$)/g, '') == '') {
-                $scope.person.DateOfBirth = null;// new Date('01/01/1900').toLocaleDateString();
+                $scope.person.DateOfBirth = null;
             } else
                 $scope.person.DateOfBirth = new Date($scope.person.DateOfBirth).toLocaleDateString();
         } else
             $scope.person.DateOfBirth = new Date($scope.person.DateOfBirth).toLocaleDateString();
 
-        //if ($("#DateOfBirth").attr('type') == 'text') {
-        //    $scope.person.DateOfBirth = new Date($scope.person.DateOfBirth).toLocaleDateString();           
-        //}
         
         if ($("#ProcedureDate").attr('type') == 'text') {            
             if ($scope.personData[0].proceduredate.replace(/(^.*\()|([+-].*$)/g, '') == '') {            
-                $scope.person.ProcedureDate = null;// new Date('01/01/1900').toLocaleDateString();
+                $scope.person.ProcedureDate = null;
             }else
                 $scope.person.ProcedureDate = new Date($scope.person.ProcedureDate).toLocaleDateString();
         } else
@@ -88,7 +110,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
         if ($("#InsuranceEffectiveDate").attr('type') == 'text') {
             if ($scope.personData[0].insuranceeffectivedate.replace(/(^.*\()|([+-].*$)/g, '') == '') {            
-                $scope.person.InsuranceEffectiveDate = null;// new Date('01/01/1900').toLocaleDateString();
+                $scope.person.InsuranceEffectiveDate = null;
             }else
                 $scope.person.InsuranceEffectiveDate = new Date($scope.person.InsuranceEffectiveDate).toLocaleDateString();
         } else
@@ -96,12 +118,9 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
             $scope.person.InsuranceEffectiveDate = new Date($scope.person.InsuranceEffectiveDate).toLocaleDateString();
         }
 
-        //$('#PreferredPharmacy').val(pharm);
-        //$('#PharmacyAddress1').val(addr.split(',')[0]);
-        //$('#PharmacyCity').val(addr.split(',')[1]);
-        //$('#PharmacyState').val(addr.split(',')[2].trim().split(' ')[0]);
-        $('#PharmacyPhone').val($scope.personData[0].pharmacyphone.trim());//$scope.personData[0].pharmacyphone.trim().replace('(', '').replace(')', '').replace('-', '').replace(' ', '')
-       // alert($scope.personData[0].pharmacyphone + ' == ' + $('#PharmacyPhone').val() + '  == ' + $scope.person.PharmacyPhone);
+      
+        $('#PharmacyPhone').val($scope.personData[0].pharmacyphone.trim());
+
         $('#lblPharmacy').text($scope.personData[0].preferredpharmacy);
         $('#lblPhone').text($scope.personData[0].pharmacyphone.trim());
         $('#lblAddress').text($scope.person.PharmacyAddress1 + ', ' + $scope.person.PharmacyCity + ', ' + $scope.person.PharmacyState);
@@ -112,23 +131,17 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
             $('#tblPharmacy').show();
         }
 
-        //$('#Procedure').removeClass('ng-empty');
-        //$('#Procedure').removeClass('ng-invalid');
-        //$('#Procedure').removeClass('ng-invalid-required');
-
-        //$('#Procedure').addClass('ng-not-empty')
-        //$('#Procedure').addClass('ng-dirty')
-        //$('#Procedure').addClass('ng-valid-parse')
-        //$('#Procedure').addClass('ng-valid ')
-        //$('#Procedure').addClass('ng-valid-required')
         $('#Procedure').removeAttr('required');
        
-        //alert($scope.person.DateOfBirth + ' - ' + $scope.person.dateofbirth + ' - ' + $scope.personData[0].dateofbirth);
+    
         
     }, function () {
-        //alert('Error Occured !!!'); // Failed
+      
     });
     
+
+
+
     $scope.person = {
         Id: '',
         UserName: '',
@@ -168,8 +181,28 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     Error: false,
     Success: false,
     CareGiver: 0,
-        ActiveCode:'',
+    ActiveCode: '',
+    ProfileImage: '',
+    PersonalDetailView: true,
+    PersonalDetailEdit: false,
+  CommunicationDetailView : true,
+  CommunicationDetailEdit: false,
+  AddressDetailView:true,
+  AddressDetailEdit: false,
+        MaritalStatus:'',
+  Weight: '',
+  Mobile:'',
+  PreferredCommunication:'',
+  SocialNetworks: '',
+  Language: '',
+  Country: '',
+       
     };
+
+
+
+
+
 
 
     $scope.keydown = function () {
@@ -198,6 +231,41 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
         $('#ProcedureDate').removeClass('ng-invalid');
         $('#ProcedureDate').removeClass('ng-invalid-date');
+
+    }
+
+
+    $scope.PersonalCancelEditing = function () {
+
+        $scope.person.PersonalDetailEdit = false;
+        $scope.person.PersonalDetailView = true;
+        if ($scope.person.Gender = "1") {
+            $scope.person.Gender = "Male";
+
+        }
+        if ($scope.person.Gender = "2") {
+            $scope.person.Gender = "Female";
+
+        }
+        if ($scope.person.Gender = "3") {
+
+            $scope.person.Gender = "Transgender";
+        }
+
+    }
+
+    $scope.CommunicationCancelEditing = function () {
+
+        $scope.person.CommunicationDetailView = true;
+        $scope.person.CommunicationDetailEdit = false;
+
+
+    }
+    $scope.AddressCancelEditing = function () {
+
+        $scope.person.AddressDetailEdit = false;
+        $scope.person.AddressDetailView = true;
+
 
     }
 
@@ -252,7 +320,74 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
          $scope.person.PharmacyCity= '';
          $scope.person.PharmacyState = '';
          $scope.person.CareGiver = 0;
+         $scope.person.profileimage = '';
+         $scope.person.UnitApt = '';
+      
     }
+
+    $scope.EditPersonDet=function()
+    {
+
+        $scope.person.PersonalDetailView = false;
+        $scope.person.PersonalDetailEdit = true;
+        if ($scope.person.Gender = "Male") {
+            $scope.person.Gender = "1";
+
+        }
+        if ($scope.person.Gender = "Female") {
+            $scope.person.Gender = "2";
+
+        }
+        if ($scope.person.Gender = "Transgender") {
+
+            $scope.person.Gender = "3";
+        }
+    }
+
+    $scope.EditCommDet=function()
+    {
+
+        $scope.person.CommunicationDetailView = false;
+        $scope.person.CommunicationDetailEdit = true;
+
+    }
+    $scope.EditAddDet = function ()
+    {
+
+        $scope.person.AddressDetailView = false;
+        $scope.person.AddressDetailEdit = true;
+
+    }
+    
+    $scope.CareGiverEdit = function (index, id)
+    {
+
+        $('#caregiverdiv div.divMyCateGivers:eq(' + index + ')>div.forLabel').hide();
+        $('#caregiverdiv div.divMyCateGivers:eq('+index+')>div.forEdit').show();
+
+     
+    }
+    $scope.CareGiverEditCancel = function (index) {
+
+        $('#caregiverdiv div.divMyCateGivers:eq(' + index + ')>div.forLabel').show();
+        $('#caregiverdiv div.divMyCateGivers:eq(' + index + ')>div.forEdit').hide();
+
+
+    }
+    $scope.CareGiver = {
+
+        Id: 0,
+        firstname:'',
+        lastname: '',
+        email: '',
+        gender: '',
+        genderVal:'',
+        CareGiverDetailView:true,
+    CareGiverDetailEdit:false,
+
+    }
+  
+
 
     //Add New Item
     $scope.SignUp = function () {
@@ -294,11 +429,15 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     $scope.SignIn = function () {
 
         $scope.person.Error = false;
+        $('#loginbtn').addClass('submitLoader');
+        $('#loginbtn1').addClass('submitLoader');
         $('#mesegid').hide();
         $('#PasswordSendid').hide();
         $('#ResetPassMesegid').hide();
+       
         if ($scope.person.Email != "" && $scope.person.PasswordHash != "")
         {
+            
             $http({
 
                 method: 'POST',
@@ -306,38 +445,62 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
                 data: $scope.person
             }).then(function successCallback(response) {
 
-                if (response.data.toLowerCase().indexOf('false') != -1)
+               
+                if (response.data != "")
                 {
-                    $scope.person.MessageError = "<br/> -You are not authorized for login.";
-                    $scope.person.Error = true;
+                   
+                    if (response.data.toString().includes("false"))
+                    {
+                        $('#loginbtn').removeClass('submitLoader');
+                        $('#loginbtn1').removeClass('submitLoader');
+                        $scope.person.MessageError = "<br/> -You are not authorized for login.";
+                        $scope.person.Error = true;
+                        $('#diverror').show();
+                        $scope.clear();
+                        return;
+                    }
+                    else
+                    {
+                      
+                 
+                    var myid = (response.data.split(',')[1]).trim();
+                   
+                 
+                        if (myid == "1" || myid == "5")
+                        {
+                       
+                            window.location.href = "../XpanelAdmin/UserList";
+                        }
+                        else
+                        {
+                          
+                            window.location.href = "../Account/WelcomeBack";
 
-                    $scope.clear();
-                    return;
+                        }
+                 
+
+                    }
+                    
+
                 }
-                else if (response.data == "") {
-
-
+               
+                if (response.data == "")
+                {
+                    $('#loginbtn').removeClass('submitLoader');
+                    $('#loginbtn1').removeClass('submitLoader');
                     $scope.person.MessageError = "<br/> -Email-Id or Password is incorrect.";
                     $scope.person.Error = true;
-
+                   $('#diverror').show();
                     $scope.clear();
                     return;
                 }
-                else if (parseInt(response.data.indexOf('Not Active')) >= 0) {
-                    var myid = (response.data.split(',')[1]).trim();
-                    window.location.href = '/Account/ActivateAccount/';
-                    //$scope.person.MessageError = "<br/> -Please active your account from registered email.";
-                    //$scope.person.Error = true;
-                    $scope.clear();
-                    return;
-                }
-                else {
-                    window.location.href = "../Account/WelcomeBack";
-                }
+               
+               
 
 
             }, function errorCallback(response) {
-
+                $('#loginbtn').removeClass('submitLoader');
+                $('#loginbtn1').removeClass('submitLoader');
                 alert("Error : " + response.data.ExceptionMessage);
             });
 
@@ -345,10 +508,13 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
         else
 
         {
+            
             $scope.person.MessageError =  "<br/> -Email-Id or Password is required.";
             $scope.person.Error = true;
+            $('#diverror').show();
             $scope.clear();
-
+            $('#loginbtn').removeClass('submitLoader');
+            $('#loginbtn1').removeClass('submitLoader');
         }
             
         
@@ -361,29 +527,31 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     }
 
     $scope.ActivateAccount = function () {
-
+      
         $scope.person.Error = false;
         $('#mesegid').hide();
         $('#PasswordSendid').hide();
         $('#ResetPassMesegid').hide();
+     
         if ($scope.person.ActiveCode != "" ) {
             $('#activatebtn').addClass('submitLoader');
-            $http({
+            $.ajax({
                 method: 'POST',
                 url: '/Account/ActiveUser',
                 data: $scope.person
             }).then(function successCallback(response) {
+      
                 $('#activatebtn').removeClass('submitLoader');
-                if (parseInt(response.data.indexOf('Exception')) >= 0) {
+                if (parseInt(response.indexOf('Exception')) >= 0) {
                     $scope.person.MessageError = "<br/> - "+response.data;
                     $scope.person.Error = true;
                     $scope.clear();
                     return;
                 }
-                else if (parseInt(response.data.indexOf('Success')) >= 0) {
-                    window.location.href = "/Account/UserProfile";
+                else if (parseInt(response.indexOf('Success')) >= 0) {
+                    window.location.href = "/Account/UserProfile1";
                 }
-                else if (parseInt(response.data.indexOf('Invalie code')) >= 0) {
+                else if (parseInt(response.indexOf('Invalie code')) >= 0) {
                     $scope.person.MessageError = "<br/> - " + response.data;
                     $scope.person.Error = true;
                     $scope.clear();
@@ -403,48 +571,81 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
     //Update  Item
     $scope.Update = function () {
+       $scope.person.Phone1 = $('#Phone1').val();
 
-        $scope.person.Phone1 = $('#Phone1').val();
-        //alert($scope.person.Phone1);
-        $scope.person.DateOfBirth = $('#DateOfBirth').val();
 
-        $scope.person.PreferredPharmacy = $('#PreferredPharmacy').val();
-        $scope.person.PharmacyAddress1 = $('#PharmacyAddress1').val();
-        $scope.person.PharmacyCity = $('#PharmacyCity').val();
-        $scope.person.PharmacyState = $('#PharmacyState').val();
-        $scope.person.PharmacyPhone = $('#PharmacyPhone').val().trim(); //($('#PharmacyPhone').val().trim().replace('(', '').replace(')', '').replace('-', '').replace(' ', ''));
-        //alert($scope.person.PharmacyPhone);
+       $scope.person.DateOfBirth = $('#DateOfBirth').val();
 
-        $scope.person.ProcedureDate = $('#ProcedureDate').val();
-        $scope.person.InsuranceEffectiveDate = $('#InsuranceEffectiveDate').val();
-        //alert($('#ProcedureDate').val());
-        //alert($scope.person.ProcedureDate);
-        $scope.person.Error = false;
-        //var valFlag = CheckValidation();
-        if (CheckValidation()) {
+       $("#imgprof").attr('src', $('#area').val());
+     
+       
+      //$scope.person.PreferredPharmacy = $('#PreferredPharmacy').val();
+        //$scope.person.PharmacyAddress1 = $('#PharmacyAddress1').val();
+        //$scope.person.PharmacyCity = $('#PharmacyCity').val();
+        //$scope.person.PharmacyState = $('#PharmacyState').val();
+        //$scope.person.PharmacyPhone = $('#PharmacyPhone').val().trim();
+        
+
+        //$scope.person.ProcedureDate = $('#ProcedureDate').val();
+        //$scope.person.InsuranceEffectiveDate = $('#InsuranceEffectiveDate').val();
+
+       $scope.person.Error = false;
+       if ($('#area').val()!="")
+       {
+
+              $scope.person.ProfileImage = $('#area').val();
+       }
+         else
+        {
+       $scope.person.ProfileImage =  $scope.person.ProfileImage;
+
+         }
+     
+      
+       if (CheckValidation()) {
+           $scope.PersonalCancelEditing();
+           $scope.AddressCancelEditing();
+           $scope.CommunicationCancelEditing();
             $.ajax({
                 method: 'POST',
                 url: '/Account/Update/',
-                data: $scope.person
+                data: $scope.person,
             }).then(function successCallback(response) {
 
-                $scope.clear();
+                var myElem = document.getElementById('userprofReg');
+                if (myElem !== null) {
 
-                window.location.href = "../Account/WelcomeBack";
+                    window.location.href = '/Account/Welcomeback';
+
+                }
+                document.getElementById('diverror').style.display  = "none";
+                document.getElementById('divsuccess').style.display = "block";
+                $scope.person.MessageSuccess =  "<br> -Your profile updated successfully.";
+                $scope.person.Success = true;
+
+
+                    
+
+
+       
+
             }, function errorCallback(response) {
-
+                alert(response);
             });
         }
         else {
-
+        
             $scope.person.MessageError = $scope.person.MessageError + "<br> -Please fix validations.";
             $scope.person.Error = true;
-            //document.getElementById('diverror').style.display  = "block";
+
             $('#diverror').show();
             document.location.href = "#UpdateProfile1";
         }
 
     };
+   
+
+
 
     //Forgot Password
     $scope.GetPassword = function () {
@@ -515,7 +716,7 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     
     $scope.fetchPharmasies = function () {
         getLatLng();
-
+      
 
     }
 
@@ -585,11 +786,12 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
     }
 
     function CheckValidation()
-    {       
+    {
+      
         var IsError = true;
         var ErrorForMap = true;
         $scope.person.MessageError = '';
-        //alert(parseInt(window.location.href.toLowerCase().indexOf("/userprofile")));
+
         if (parseInt(window.location.href.toLowerCase().indexOf("/userprofile")) > 0) {
             if ($scope.person.FirstName == "") {
                 $('#FirstName').addClass('ng-dirty');
@@ -648,38 +850,38 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
                 $('#ZipCode').addClass('ng-invalid');
                 IsError = false;
             }
-            if ($scope.person.PreferredPharmacy == "") {
-                $('#PreferredPharmacy').addClass('ng-dirty');
-                $('#PreferredPharmacy').addClass('ng-invalid');
-                IsError = false;
-                ErrorForMap = false;
-            }
+            //if ($scope.person.PreferredPharmacy == "") {
+            //    $('#PreferredPharmacy').addClass('ng-dirty');
+            //    $('#PreferredPharmacy').addClass('ng-invalid');
+            //    IsError = false;
+            //    ErrorForMap = false;
+            //}
 
-            if ($scope.person.PharmacyAddress1 == "") {
-                $('#PharmacyAddress1').addClass('ng-dirty');
-                $('#PharmacyAddress1').addClass('ng-invalid');
-                ErrorForMap = false;
-                IsError = false;
-            }
+            //if ($scope.person.PharmacyAddress1 == "") {
+            //    $('#PharmacyAddress1').addClass('ng-dirty');
+            //    $('#PharmacyAddress1').addClass('ng-invalid');
+            //    ErrorForMap = false;
+            //    IsError = false;
+            //}
 
-            if ($scope.person.PharmacyCity == "") {
-                $('#PharmacyCity').addClass('ng-dirty');
-                $('#PharmacyCity').addClass('ng-invalid');
-                ErrorForMap = false;
-                IsError = false;
-            }
-            if ($scope.person.PharmacyPhone == "") {
-                $('#PharmacyPhone').addClass('ng-dirty');
-                $('#PharmacyPhone').addClass('ng-invalid');
-                ErrorForMap = false;
-                IsError = false;
-            }
-            if ($scope.person.PharmacyState == "") {
-                $('#PharmacyState').addClass('ng-dirty');
-                $('#PharmacyState').addClass('ng-invalid');
-                ErrorForMap = false;
-                IsError = false;
-            }
+            //if ($scope.person.PharmacyCity == "") {
+            //    $('#PharmacyCity').addClass('ng-dirty');
+            //    $('#PharmacyCity').addClass('ng-invalid');
+            //    ErrorForMap = false;
+            //    IsError = false;
+            //}
+            //if ($scope.person.PharmacyPhone == "") {
+            //    $('#PharmacyPhone').addClass('ng-dirty');
+            //    $('#PharmacyPhone').addClass('ng-invalid');
+            //    ErrorForMap = false;
+            //    IsError = false;
+            //}
+            //if ($scope.person.PharmacyState == "") {
+            //    $('#PharmacyState').addClass('ng-dirty');
+            //    $('#PharmacyState').addClass('ng-invalid');
+            //    ErrorForMap = false;
+            //    IsError = false;
+            //}
         }
      
         if (parseInt(window.location.href.toLowerCase().indexOf("/userprofile")) == -1) {
@@ -809,6 +1011,209 @@ app.controller('demoCtrl', function ($scope, $http, personService) {
 
     }
 
+    function GetMyCareGivers()
+    {
+        $scope.CareGiverData = null;
+
+            $http({
+                method: 'POST',
+                url: '/Account/GetMyCareGivers/',
+                data: {}
+            }).then(function successCallback(response) {
+                $scope.CareGiverData = response.data;
+                $scope.CareGiver.CareGiverDetailView = true;
+                $scope.CareGiver.CareGiverDetailEdit = true;
+
+
+
+
+
+            }, function errorCallback(response) {
+
+            });
+    }
+
+    $scope.UpdateCareGiver = function () {
+
+        $scope.person.Error = false;
+        if (CheckValidation()) {
+
+            $http({
+                method: 'POST',
+                url: '/Account/CareGiverProfileUpdate/',
+                data: $scope.CareGiverData
+            }).then(function successCallback(response) {
+
+                $scope.clear();
+
+                window.location.href = "../Account/WelcomeBack";
+            }, function errorCallback(response) {
+
+            });
+        }
+        else {
+
+            $scope.person.MessageError = $scope.person.MessageError + "<br> -Please fix validations.";
+            $scope.person.Error = true;
+          
+        }
+
+    };
+    $scope.Cancl=function()
+
+    {
+
+        $('#dialog-confirm').css("display", "none");
+
+    }
+
+    function GetUserProgress() {
+
+
+        $scope.UserProgressData = null;
+
+        $http({
+            method: 'POST',
+            url: '/Account/GetUserProgress/',
+            data: {}
+        }).then(function successCallback(response) {
+            $scope.UserProgressData = response.data;
+            for (var i = 0; i < response.data.length; i++) {
+                if ($scope.UserProgressData[i].contentid == 7) {
+
+                    $('#pulmonaryli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+                else if ($scope.UserProgressData[i].contentid == 8) {
+
+                    $('#cardiologyli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+                else if ($scope.UserProgressData[i].contentid == 9) {
+
+                    $('#upperli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+                else if ($scope.UserProgressData[i].contentid == 10) {
+
+                    $('#psycologicalli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+                else if ($scope.UserProgressData[i].contentid == 12) {
+
+                    $('#sleepstudyli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+                else if ($scope.UserProgressData[i].contentid == 14) {
+
+                    $('#pulmonaryfunctionli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+                else if ($scope.UserProgressData[i].contentid == 15) {
+
+                    $('#pulmonologistclrli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+
+                else if ($scope.UserProgressData[i].contentid == 3) {
+
+                    $('#bloodworkli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+                else if ($scope.UserProgressData[i].contentid == 4) {
+
+                    $('#chestxryli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+                else if ($scope.UserProgressData[i].contentid == 5) {
+
+                    $('#nutritionli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+                else if ($scope.UserProgressData[i].contentid == 6) {
+                    $('#suprtgroupli').css('list-style-image', 'url(/Content/assets/images/dot_green.png)');
+                }
+
+
+            }
+
+
+            var per = response.data.length;
+            var percentage = (per * 8) / 100;
+            var percentg = (percentage * 100);
+            $('#per').text(percentg + "% OF JOURNEY COMPLETED");
+            $('#progr').css('width', percentg + '%');
+        }, function errorCallback(response) {
+
+        });
+    }
+
+
+
+    $scope.UpdateUserProgress = function (str) {
+        contentid = '';
+        if (str == 'pulmonaryeve') {
+
+            contentid = 7;
+        }
+        else if (str == 'chestxry') {
+            contentid = 4;
+
+        }
+        else if (str == 'nutrition') {
+
+            contentid = 5;
+        }
+        else if (str == 'suprtgroup') {
+            contentid = 6;
+
+        }
+        else if (str == 'bloodwork') {
+            contentid = 3;
+
+        }
+        else if (str == 'cardiology') {
+
+            contentid = 8;
+        }
+
+        else if (str == 'upper') {
+            contentid = 9;
+
+        }
+        else if (str == 'psycological') {
+            contentid = 10;
+
+        }
+        else if (str == 'sleep') {
+            contentid = 12;
+
+        }
+        else if (str == 'function') {
+            contentid = 14;
+
+        }
+        else if (str == 'clearance') {
+            contentid = 15;
+
+        }
+        $http({
+            method: 'POST',
+            url: '/Account/UpdateUserProgress/' + contentid,
+            data: {}
+        }).then(function successCallback(response) {
+
+        }, function errorCallback(response) {
+
+        });
+
+    }
+
+
+
+
+    GetUserProgress()
+
+
+
+
+
+        GetMyCareGivers();
+    
+
+
+   
+
 
 
 
@@ -895,7 +1300,7 @@ function getLatLng() {
 
 function initialize() {
     $("#dialog-confirm").parent().css('z-index', '99999');
-    $("#dialog-confirm").dialog("open");
+    $('#dialog-confirm').css("display", "block");
 
     var myLatlng = new google.maps.LatLng(lat, lng);
     //alert(myLatlng);
@@ -1015,18 +1420,13 @@ function showInfo(pharm, phone, addr, result) {
     $('#lblAddress').text(addr);
     //$('#divPharmacy').hide();
     infoWindow.close();
-    $("#dialog-confirm").dialog("close");
+    $('#dialog-confirm').css("display", "none");
 
     $('#tblPharmacy').show();
 
-    //$('#PharmacyName').text(pharm);
-    //$('#PharmacyNumber').text(phone);
-    //$('#PharmacyAddress').text(addr);
-    //$('#preferred-pharmacy-information').show('slow');
-    //$("#modal-content, #modal-background").toggleClass("active");
+ 
 }
-// Here I have created a factory which is a populer way to create and configure services. You may also create the factories in another script file which is best practice.
-// You can also write above codes for POST,PUT,DELETE in this factory instead of controller, so that our controller will look clean and exhibits proper Separation of Concern.
+
 
 app.factory('personService', function ($http) {
     var fac = {};
